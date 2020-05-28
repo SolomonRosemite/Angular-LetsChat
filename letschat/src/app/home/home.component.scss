@@ -1,0 +1,20 @@
+@import "../../theme.scss";
+
+div.colored {
+  background-color: map-get($primary, 500);
+  color: white;
+}
+
+div.spacer {
+  padding-top: 50px;
+}
+
+div.toplevel {
+  padding-top: 8%;
+  padding-left: 25%;
+}
+
+div.lowerlevel {
+  padding-top: 8%;
+  padding-left: 65%;
+}
