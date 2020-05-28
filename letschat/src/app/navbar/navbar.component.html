@@ -1,17 +1,20 @@
-<mat-toolbar
-  class="mat-elevation-z8"
-  style="justify-content: space-between;"
-  color="primary"
->
+<mat-toolbar class="mat-elevation-z8" style="justify-content: space-between;">
   <span>
     <mat-icon aria-hidden="false" aria-label="message icon">eco</mat-icon>
+    <span style="padding-left: 10px;">Let's Chat</span>
   </span>
 
-  <span style="padding-left: 10%;">Let's Chat</span>
-
   <span>
-    <a mat-button>Home</a>
-    <a mat-button>Settings</a>
+    <mat-menu #appMenu="matMenu">
+      <button mat-menu-item>GitHub</button>
+      <button mat-menu-item>Settings</button>
+      <button mat-menu-item>Help</button>
+    </mat-menu>
+
+    <button mat-icon-button [matMenuTriggerFor]="appMenu">
+      <a>About</a>
+    </button>
+    <a mat-button>Login</a>
     <a mat-raised-button color="accent">Sign In</a>
   </span>
 </mat-toolbar>

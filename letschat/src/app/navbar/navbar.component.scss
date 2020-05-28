@@ -1,5 +1,12 @@
+@import "../../theme.scss";
+
 .mat-icon {
   vertical-align: middle;
+}
+
+.mat-toolbar {
+  color: white;
+  background-color: map-get($primary, 500);
 }
 
 .spacer {
