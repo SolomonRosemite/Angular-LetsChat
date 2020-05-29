@@ -1,7 +1,15 @@
 <mat-toolbar class="mat-elevation-z8" style="justify-content: space-between;">
   <span>
-    <mat-icon aria-hidden="false" aria-label="message icon">eco</mat-icon>
-    <span style="padding-left: 10px;">Let's Chat</span>
+    <button mat-icon-button [matMenuTriggerFor]="appMenu">
+      <mat-icon aria-hidden="false" aria-label="message icon">eco</mat-icon>
+    </button>
+    <mat-menu #appMenu="matMenu">
+      <button mat-menu-item>GitHub</button>
+      <button mat-menu-item>Settings</button>
+      <button mat-menu-item>Help</button>
+    </mat-menu>
+
+    <button mat-button>Get started</button>
   </span>
 
   <span>
