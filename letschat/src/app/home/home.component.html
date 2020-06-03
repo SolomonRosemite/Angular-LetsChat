@@ -10,7 +10,9 @@
 
     <div style="padding-top: 50px;"></div>
 
-    <button mat-raised-button color="white">Get started</button>
+    <button mat-raised-button color="white" (click)="openBottomSheet()">
+      Get started
+    </button>
   </div>
 </div>
 
@@ -22,9 +24,12 @@
       <h2 style="font-weight: normal; color: gray;">
         Chat with your Friends and Groups. Cool Right?
         <br />
-        <a href="">Try it Out!</a>
-        <!-- Add Login url here -->
+        <!-- <a href="">Try it Out!</a> -->
       </h2>
+      <!-- Add Login url here -->
+      <button mat-raised-button color="primary">
+        Try it Out!
+      </button>
     </div>
 
     <div class="center" style="width: 50%; left: 70%; float: right;">

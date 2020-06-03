@@ -1,4 +1,4 @@
-// import { HomeComponent } from './../home.component';
+import { EventEmitterService } from 'src/app/event-emitter.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,13 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bottom-popup.component.scss'],
 })
 export class BottomPopupComponent implements OnInit {
-  // constructor(private homeComponent: HomeComponent) {}
-  constructor() {}
+  constructor(private eventEmitterService: EventEmitterService) {}
 
   ngOnInit(): void {}
 
-  openLink(event: MouseEvent): void {
-    // this.homeComponent.print();
-    console.log('yes sir');
+  openLink(event: MouseEvent): void {}
+
+  close(): void {
+    this.eventEmitterService.onBottomBarClickClose();
   }
 }

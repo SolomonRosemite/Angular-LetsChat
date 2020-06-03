@@ -1,15 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { BottomPopupComponent } from './bottom-popup/bottom-popup.component';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { EventEmitterService } from '../event-emitter.service';
+import {
+  MatBottomSheet,
+  MatBottomSheetRef,
+} from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  @Output() myEvent = new EventEmitter();
+  constructor(
+    private buttomSheet: MatBottomSheet,
+    private eventEmitterService: EventEmitterService
+  ) {}
 
   ngOnInit(): void {
+    if (this.eventEmitterService.subsVar === undefined) {
+      this.eventEmitterService.subsVar = this.eventEmitterService.invokeBottomBarOpenFunction.subscribe(
+        () => {
+          this.openBottomSheet();
+        }
+      );
+
+      this.eventEmitterService.subsVar = this.eventEmitterService.invokeBottomBarCloseFunction.subscribe(
+        () => {
+          this.closeBottomSheet();
+        }
+      );
+    }
   }
 
+  public closeBottomSheet(): void {
+    console.log('Close Popup');
+    this.buttomSheet.dismiss(BottomPopupComponent);
+  }
+
+  public openBottomSheet(): void {
+    this.buttomSheet.open(BottomPopupComponent);
+  }
 }

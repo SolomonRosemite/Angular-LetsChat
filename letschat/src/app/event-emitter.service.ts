@@ -5,12 +5,17 @@ import { Subscription } from 'rxjs/internal/Subscription';
   providedIn: 'root',
 })
 export class EventEmitterService {
-  invokeFirstComponentFunction = new EventEmitter();
+  invokeBottomBarOpenFunction = new EventEmitter();
+  invokeBottomBarCloseFunction = new EventEmitter();
   subsVar: Subscription;
 
   constructor() {}
 
-  onFirstComponentButtonClick() {
-    this.invokeFirstComponentFunction.emit();
+  onBottomBarClickClose(): void {
+    this.invokeBottomBarCloseFunction.emit();
+  }
+
+  onBottomBarClickOpen(): void {
+    this.invokeBottomBarOpenFunction.emit();
   }
 }

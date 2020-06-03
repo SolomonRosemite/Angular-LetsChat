@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 
+import { EventEmitterService } from './event-emitter.service';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NavbarComponent } from './navbar/navbar.component';
@@ -18,7 +20,12 @@ import { AppComponent } from './app.component';
 import { BottomPopupComponent } from './home/bottom-popup/bottom-popup.component';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, HomeComponent, BottomPopupComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    HomeComponent,
+    BottomPopupComponent,
+  ],
   imports: [
     BrowserAnimationsModule,
     MatButtonToggleModule,
@@ -31,8 +38,7 @@ import { BottomPopupComponent } from './home/bottom-popup/bottom-popup.component
     MatMenuModule,
     MatListModule,
   ],
-  providers: [],
-  // entryComponents: [],
+  providers: [EventEmitterService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
