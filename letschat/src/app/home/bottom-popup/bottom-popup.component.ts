@@ -11,8 +11,6 @@ export class BottomPopupComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  openLink(event: MouseEvent): void {}
-
   close(): void {
     this.eventEmitterService.onBottomBarClickClose();
   }

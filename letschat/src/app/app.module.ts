@@ -18,6 +18,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { AppComponent } from './app.component';
 import { BottomPopupComponent } from './home/bottom-popup/bottom-popup.component';
+import { LoginComponent } from './home/login/login.component';
+import { SignupComponent } from './home/signup/signup.component';
+import { UserSettingsComponent } from './home/user-settings/user-settings.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { BottomPopupComponent } from './home/bottom-popup/bottom-popup.component
     NavbarComponent,
     HomeComponent,
     BottomPopupComponent,
+    LoginComponent,
+    SignupComponent,
+    UserSettingsComponent,
   ],
   imports: [
     BrowserAnimationsModule,

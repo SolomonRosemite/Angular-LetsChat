@@ -11,6 +11,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  goToLink(url: string): void {
+    window.open(url);
+  }
+
   openBottomSheet(): void {
     this.eventEmitterService.onBottomBarClickOpen();
   }
