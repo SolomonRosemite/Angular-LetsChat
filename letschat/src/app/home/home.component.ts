@@ -12,7 +12,6 @@ import {
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  @Output() myEvent = new EventEmitter();
   constructor(
     private buttomSheet: MatBottomSheet,
     private eventEmitterService: EventEmitterService

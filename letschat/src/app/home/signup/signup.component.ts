@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Data } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -6,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./../AuthPage/authpage.component.scss'],
 })
 export class SignupComponent implements OnInit {
-  constructor() {}
+  constructor(private route: ActivatedRoute) {
+    const data: Data = this.route.snapshot.data;
+    console.log(data);
+  }
 
-  ngOnInit(): void {}
+  ngOnInit() {}
 }
