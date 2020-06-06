@@ -6,6 +6,7 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -31,6 +32,7 @@ import { SignupHtmlTemplateComponent } from './home/signup-html-template/signup-
 import { LoginHtmlTemplateComponent } from './home/login-html-template/login-html-template.component';
 import { ChatComponent } from './chat/chat.component';
 import { InfoDialogComponent } from './common/info-dialog/info-dialog.component';
+import { PopupDialogComponent } from './common/info-dialog/popup-dialog/popup-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { InfoDialogComponent } from './common/info-dialog/info-dialog.component'
     LoginHtmlTemplateComponent,
     ChatComponent,
     InfoDialogComponent,
+    PopupDialogComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -54,6 +57,7 @@ import { InfoDialogComponent } from './common/info-dialog/info-dialog.component'
     MatCheckboxModule,
     AppRoutingModule,
     MatToolbarModule,
+    MatDialogModule,
     MatButtonModule,
     BrowserModule,
     MatIconModule,

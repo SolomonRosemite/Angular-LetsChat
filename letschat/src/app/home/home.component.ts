@@ -1,5 +1,5 @@
 import { BottomPopupComponent } from './bottom-popup/bottom-popup.component';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EventEmitterService } from '../event-emitter.service';
 import {
   MatBottomSheet,

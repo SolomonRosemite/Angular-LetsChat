@@ -7,6 +7,8 @@ import { Subscription } from 'rxjs/internal/Subscription';
 export class EventEmitterService {
   invokeBottomBarOpenFunction = new EventEmitter();
   invokeBottomBarCloseFunction = new EventEmitter();
+  invokeOpenPopupDialogFunction = new EventEmitter<any>();
+  invokeClosePopupDialogFunction = new EventEmitter();
   subsVar: Subscription;
 
   constructor() {}
@@ -17,5 +19,14 @@ export class EventEmitterService {
 
   onBottomBarClickOpen(): void {
     this.invokeBottomBarOpenFunction.emit();
+  }
+
+  showDialog(title: string, text: string): void {
+    const data = [title, text];
+    this.invokeOpenPopupDialogFunction.emit(data);
+  }
+
+  closeDialog(): void {
+    this.invokeClosePopupDialogFunction.emit();
   }
 }

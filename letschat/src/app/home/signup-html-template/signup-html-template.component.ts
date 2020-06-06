@@ -1,4 +1,6 @@
+import { EventEmitterService } from 'src/app/event-emitter.service';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-signup-html-template',
@@ -6,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./../AuthPage/authpage.component.scss'],
 })
 export class SignupHtmlTemplateComponent implements OnInit {
-  constructor() {}
+  constructor(public eventEmitterService: EventEmitterService) {}
 
   validData = false;
 
@@ -62,18 +64,20 @@ export class SignupHtmlTemplateComponent implements OnInit {
   }
 
   summit(): void {
-    console.log(
-      `
-        Username: ${this.username}\nEmail: ${this.email}\nPassword: ${this.password}\nPassword Confirm: ${this.passwordConfirm}
-      `
-    );
+    if (this.validData) {
+      // SignUp User
+    } else {
+      // Show Dialog
+      // this.dialog.open(DialogElementsExampleDialogComponent);
+      this.eventEmitterService.showDialog('Invalid Data', ValidateData.reason);
+    }
   }
 }
 
 class ValidateData {
   constructor() {}
 
-  static reason = '';
+  static reason = 'Please fill the form to proceed.';
 
   static dataIsValid(
     username: string,
@@ -83,16 +87,16 @@ class ValidateData {
   ): boolean {
     // Username Validation
     if (username.length < 2) {
-      this.reason = `The Username ${username} is too short.`;
+      this.reason = `The Username "${username}" is too short.`;
       return false;
     } else if (username.length > 20) {
-      this.reason = `The Username ${username} is too long.`;
+      this.reason = `The Username "${username}" is too long.`;
       return false;
     }
 
     // Email Validation
     if (!email.includes('@') || !email.includes('.')) {
-      this.reason = `The Email ${email} is not valid.`;
+      this.reason = `The Email "${email}" is not valid.`;
       return false;
     }
 
