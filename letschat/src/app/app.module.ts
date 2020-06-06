@@ -29,6 +29,8 @@ import { HomeComponent } from './home/home.component';
 import { AppComponent } from './app.component';
 import { SignupHtmlTemplateComponent } from './home/signup-html-template/signup-html-template.component';
 import { LoginHtmlTemplateComponent } from './home/login-html-template/login-html-template.component';
+import { ChatComponent } from './chat/chat.component';
+import { InfoDialogComponent } from './common/info-dialog/info-dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { LoginHtmlTemplateComponent } from './home/login-html-template/login-htm
     UserSettingsComponent,
     SignupHtmlTemplateComponent,
     LoginHtmlTemplateComponent,
+    ChatComponent,
+    InfoDialogComponent,
   ],
   imports: [
     BrowserAnimationsModule,

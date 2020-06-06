@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { UserSettingsComponent } from './home/user-settings/user-settings.component';
 import { SignupComponent } from './home/signup/signup.component';
 import { LoginComponent } from './home/login/login.component';
+import { ChatComponent } from './chat/chat.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'settings',
     component: UserSettingsComponent,
+  },
+  {
+    path: 'chat',
+    component: ChatComponent,
   },
 ];
 

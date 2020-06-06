@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,10 +6,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./../AuthPage/authpage.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private localrouter: Router) {
-    this.router = localrouter.url;
-  }
-  router: string;
+  constructor() {}
 
   ngOnInit(): void {}
 }

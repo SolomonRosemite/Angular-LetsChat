@@ -2,11 +2,12 @@
   <mat-form-field>
     <input
       matInput
-      placeholder="User Name"
+      placeholder="Username"
       required
       name="username"
       ngModel
       #username="ngModel"
+      (keyup)="setUsername($event)"
     />
     <mat-icon matSuffix>perm_identity</mat-icon>
     <mat-error *ngIf="username.invalid">
@@ -21,6 +22,7 @@
       name="email"
       ngModel
       #email="ngModel"
+      (keyup)="setEmail($event)"
     />
     <mat-error *ngIf="email.invalid">Email is required</mat-error>
     <mat-icon matSuffix>email</mat-icon>
@@ -35,6 +37,7 @@
       name="password"
       ngModel
       #password="ngModel"
+      (keyup)="setPassword($event)"
     />
     <mat-error *ngIf="password.errors && password.errors.required">
       Password is required
@@ -54,13 +57,19 @@
       name="repassword"
       ngModel
       #repassword="ngModel"
+      (keyup)="setPasswordConfirm($event)"
     />
     <mat-error *ngIf="repassword.errors && repassword.errors.required">
       Re-Enter Password is required
     </mat-error>
     <mat-icon matSuffix>lock</mat-icon>
   </mat-form-field>
-  <button mat-raised-button color="primary" class="login-button">
+  <button
+    mat-raised-button
+    [ngStyle]="{ backgroundColor: getColor() }"
+    (click)="summit()"
+    class="login-button"
+  >
     Sign Up
   </button>
 </form>
