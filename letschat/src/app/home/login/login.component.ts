@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Data } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './../AuthPage/authpage.component.html',
+  templateUrl: './../AuthPage/signinauthpage.component.html',
   styleUrls: ['./../AuthPage/authpage.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private route: ActivatedRoute) {
-    const data: Data = this.route.snapshot.data;
-    console.log(data);
+  constructor(private localrouter: Router) {
+    this.router = localrouter.url;
   }
+  router: string;
 
   ngOnInit(): void {}
 }

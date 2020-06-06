@@ -27,6 +27,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { AppComponent } from './app.component';
+import { SignupHtmlTemplateComponent } from './home/signup-html-template/signup-html-template.component';
+import { LoginHtmlTemplateComponent } from './home/login-html-template/login-html-template.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { AppComponent } from './app.component';
     LoginComponent,
     SignupComponent,
     UserSettingsComponent,
+    SignupHtmlTemplateComponent,
+    LoginHtmlTemplateComponent,
   ],
   imports: [
     BrowserAnimationsModule,

@@ -3,14 +3,11 @@ import { ActivatedRoute, Data } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
-  templateUrl: './../AuthPage/authpage.component.html',
+  templateUrl: './../AuthPage/signupauthpage.component.html',
   styleUrls: ['./../AuthPage/authpage.component.scss'],
 })
 export class SignupComponent implements OnInit {
-  constructor(private route: ActivatedRoute) {
-    const data: Data = this.route.snapshot.data;
-    console.log(data);
-  }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {}
 }
