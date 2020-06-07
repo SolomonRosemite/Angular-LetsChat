@@ -1,6 +1,8 @@
+import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,9 +18,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { FormsModule } from '@angular/forms';
 
+import { BackendServiceService } from './services/backend/backend-service.service';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { EventEmitterService } from './event-emitter.service';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireModule } from 'angularfire2';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { UserSettingsComponent } from './home/user-settings/user-settings.component';
 import { BottomPopupComponent } from './home/bottom-popup/bottom-popup.component';
@@ -36,6 +43,7 @@ import { PopupDialogComponent } from './common/info-dialog/popup-dialog/popup-di
 
 @NgModule({
   declarations: [
+    SignupHtmlTemplateComponent,
     AppComponent,
     NavbarComponent,
     HomeComponent,
@@ -43,14 +51,17 @@ import { PopupDialogComponent } from './common/info-dialog/popup-dialog/popup-di
     LoginComponent,
     SignupComponent,
     UserSettingsComponent,
-    SignupHtmlTemplateComponent,
     LoginHtmlTemplateComponent,
     ChatComponent,
     InfoDialogComponent,
     PopupDialogComponent,
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
     BrowserAnimationsModule,
+    AngularFirestoreModule,
+    AngularFireAuthModule,
     MatButtonToggleModule,
     MatBottomSheetModule,
     MatFormFieldModule,
@@ -59,16 +70,16 @@ import { PopupDialogComponent } from './common/info-dialog/popup-dialog/popup-di
     MatToolbarModule,
     MatDialogModule,
     MatButtonModule,
+    MatInputModule,
     BrowserModule,
     MatIconModule,
     MatMenuModule,
     MatListModule,
-    FormsModule,
     MatCardModule,
     MatTabsModule,
-    MatInputModule,
+    FormsModule,
   ],
-  providers: [EventEmitterService],
+  providers: [EventEmitterService, BackendServiceService, AngularFirestore],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

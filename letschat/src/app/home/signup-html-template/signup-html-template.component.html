@@ -1,4 +1,4 @@
-<form action="">
+<!-- <form action="">
   <mat-form-field>
     <input
       matInput
@@ -72,5 +72,35 @@
   >
     Sign Up
   </button>
+  <button
+    mat-raised-button
+    style="background-color: white;"
+    (click)="googleLogin()"
+    class="login-button"
+  >
+    Login with Google
+  </button>
   <app-info-dialog></app-info-dialog>
-</form>
+</form> -->
+<div *ngIf="auth.user$ | async; then authenticated; else guest">
+  <!-- template will replace this div -->
+</div>
+
+<!-- User NOT logged in -->
+<ng-template #guest>
+  <h3>Howdy, GUEST</h3>
+  <p>Login to get started...</p>
+
+  <button (click)="auth.googleSignin()">
+    <i class="fa fa-google"></i> Connect Google
+  </button>
+</ng-template>
+
+<!-- User logged in -->
+<ng-template #authenticated>
+  <div *ngIf="auth.user$ | async as user">
+    <h3>Howdy, {{ user.email }}</h3>
+    <p>UID: {{ user.uid }}</p>
+    <button (click)="auth.signOut()">Logout</button>
+  </div>
+</ng-template>

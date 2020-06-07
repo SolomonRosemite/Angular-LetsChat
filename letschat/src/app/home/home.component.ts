@@ -34,7 +34,6 @@ export class HomeComponent implements OnInit {
   }
 
   public closeBottomSheet(): void {
-    console.log('Close Popup');
     this.buttomSheet.dismiss(BottomPopupComponent);
   }
 

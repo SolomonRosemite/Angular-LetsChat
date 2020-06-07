@@ -1,5 +1,8 @@
+import { BackendServiceService } from './../../services/backend/backend-service.service';
 import { EventEmitterService } from 'src/app/event-emitter.service';
 import { Component, OnInit } from '@angular/core';
+
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-signup-html-template',
@@ -7,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./../AuthPage/authpage.component.scss'],
 })
 export class SignupHtmlTemplateComponent implements OnInit {
-  constructor(private eventEmitterService: EventEmitterService) {}
+  constructor(
+    private eventEmitterService: EventEmitterService,
+    private backend: BackendServiceService,
+    public auth: AuthService
+  ) {}
 
   validData = false;
 
@@ -73,6 +80,9 @@ export class SignupHtmlTemplateComponent implements OnInit {
       )
     ) {
       // SignUp User
+      this.backend.getData('users').subscribe((item) => {
+        console.log(item);
+      });
     } else {
       // Show Dialog
       this.eventEmitterService.showDialog('Invalid Data', ValidateData.reason);
@@ -87,6 +97,8 @@ export class SignupHtmlTemplateComponent implements OnInit {
   ): boolean {
     return true;
   }
+
+  googleLogin(): void {}
 }
 
 class ValidateData {

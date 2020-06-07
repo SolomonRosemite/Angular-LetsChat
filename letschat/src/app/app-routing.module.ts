@@ -7,6 +7,8 @@ import { LoginComponent } from './home/login/login.component';
 import { ChatComponent } from './chat/chat.component';
 import { HomeComponent } from './home/home.component';
 
+import { AuthGuard } from './auth.guard';
+
 const routes: Routes = [
   {
     path: '',
@@ -15,10 +17,12 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    // canActivate: [AuthGuard],
   },
   {
     path: 'signup',
     component: SignupComponent,
+    // canActivate: [AuthGuard],
   },
   {
     path: 'settings',
