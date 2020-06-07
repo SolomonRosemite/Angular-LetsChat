@@ -3,6 +3,7 @@ import { EventEmitterService } from 'src/app/event-emitter.service';
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../../services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup-html-template',
@@ -13,6 +14,7 @@ export class SignupHtmlTemplateComponent implements OnInit {
   constructor(
     private eventEmitterService: EventEmitterService,
     private backend: BackendServiceService,
+    private router: Router,
     public auth: AuthService
   ) {}
 
@@ -23,7 +25,16 @@ export class SignupHtmlTemplateComponent implements OnInit {
   password = '';
   passwordConfirm = '';
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    let isLoggedIn: boolean;
+    this.auth.user$.subscribe((user) => {
+      isLoggedIn = user !== null;
+
+      if (isLoggedIn) {
+        this.router.navigate(['/chat']);
+      }
+    });
+  }
 
   getColor(): string {
     return this.validData ? '#27AE60' : '#CD6155';
@@ -97,8 +108,6 @@ export class SignupHtmlTemplateComponent implements OnInit {
   ): boolean {
     return true;
   }
-
-  googleLogin(): void {}
 }
 
 class ValidateData {

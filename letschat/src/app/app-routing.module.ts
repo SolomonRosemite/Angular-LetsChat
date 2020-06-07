@@ -17,12 +17,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    // canActivate: [AuthGuard],
   },
   {
     path: 'signup',
     component: SignupComponent,
-    // canActivate: [AuthGuard],
   },
   {
     path: 'settings',
@@ -31,6 +29,7 @@ const routes: Routes = [
   {
     path: 'chat',
     component: ChatComponent,
+    canActivate: [AuthGuard],
   },
 ];
 

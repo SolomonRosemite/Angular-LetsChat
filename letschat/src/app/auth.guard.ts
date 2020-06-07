@@ -16,16 +16,6 @@ import { tap, map, take } from 'rxjs/operators';
 })
 export class AuthGuard implements CanActivate {
   constructor(private auth: AuthService, private router: Router) {}
-  // canActivate(
-  //   next: ActivatedRouteSnapshot,
-  //   state: RouterStateSnapshot
-  // ):
-  //   | Observable<boolean | UrlTree>
-  //   | Promise<boolean | UrlTree>
-  //   | boolean
-  //   | UrlTree {
-  //   return true;
-  // }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
