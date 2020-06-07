@@ -29,8 +29,6 @@ export class InfoDialogComponent implements OnInit {
   }
 
   openDialog(items: string[]) {
-    console.log('here');
-
     const myTitle = items[0];
     const myText = items[1];
 

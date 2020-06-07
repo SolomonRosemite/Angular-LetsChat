@@ -7,6 +7,7 @@
       name="email"
       ngModel
       #email="ngModel"
+      (keyup)="setEmail($event)"
     />
     <mat-error *ngIf="email.invalid">Email is required</mat-error>
     <mat-icon matSuffix>email</mat-icon>
@@ -21,21 +22,26 @@
       name="password"
       ngModel
       #password="ngModel"
+      (keyup)="setPassword($event)"
     />
     <mat-error *ngIf="password.errors && password.errors.required">
       Password is required
     </mat-error>
-    <mat-error *ngIf="password.errors && password.errors.minlength">
-      Password must be of length 6
-    </mat-error>
     <mat-icon matSuffix>lock</mat-icon>
   </mat-form-field>
   <mat-checkbox>Remember Me!</mat-checkbox>
-  <button mat-raised-button color="primary" class="login-button">
+  <button
+    mat-raised-button
+    color="primary"
+    [ngStyle]="{ backgroundColor: buttonColor }"
+    (click)="summit()"
+    class="login-button"
+  >
     Sign In
   </button>
 
   <button mat-raised-button class="login-button">
     Login with Google
   </button>
+  <app-info-dialog></app-info-dialog>
 </form>

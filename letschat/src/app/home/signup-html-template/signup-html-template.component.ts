@@ -1,6 +1,5 @@
 import { EventEmitterService } from 'src/app/event-emitter.service';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-signup-html-template',
@@ -8,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./../AuthPage/authpage.component.scss'],
 })
 export class SignupHtmlTemplateComponent implements OnInit {
-  constructor(public eventEmitterService: EventEmitterService) {}
+  constructor(private eventEmitterService: EventEmitterService) {}
 
   validData = false;
 
@@ -64,13 +63,29 @@ export class SignupHtmlTemplateComponent implements OnInit {
   }
 
   summit(): void {
-    if (this.validData) {
+    if (
+      this.validData &&
+      this.signUp(
+        this.username,
+        this.email,
+        this.password,
+        this.passwordConfirm
+      )
+    ) {
       // SignUp User
     } else {
       // Show Dialog
-      // this.dialog.open(DialogElementsExampleDialogComponent);
       this.eventEmitterService.showDialog('Invalid Data', ValidateData.reason);
     }
+  }
+
+  signUp(
+    username: string,
+    email: string,
+    password: string,
+    passwordConfirm: string
+  ): boolean {
+    return true;
   }
 }
 
@@ -79,7 +94,7 @@ class ValidateData {
 
   static reason = 'Please fill the form to proceed.';
 
-  static dataIsValid(
+  public static dataIsValid(
     username: string,
     email: string,
     password: string,
