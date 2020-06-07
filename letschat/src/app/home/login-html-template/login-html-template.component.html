@@ -29,7 +29,6 @@
     </mat-error>
     <mat-icon matSuffix>lock</mat-icon>
   </mat-form-field>
-  <mat-checkbox>Remember Me!</mat-checkbox>
   <button
     mat-raised-button
     color="primary"
@@ -40,7 +39,12 @@
     Sign In
   </button>
 
-  <button mat-raised-button class="login-button">
+  <button
+    mat-raised-button
+    style="background-color: white;"
+    (click)="auth.googleSignin()"
+    class="login-button"
+  >
     Login with Google
   </button>
   <app-info-dialog></app-info-dialog>

@@ -1,13 +1,21 @@
 import { EventEmitterService } from 'src/app/event-emitter.service';
 import { Component, OnInit } from '@angular/core';
 
+import { BackendServiceService } from './../../services/backend/backend-service.service';
+
+import { AuthService } from '../../services/auth/auth.service';
+
 @Component({
   selector: 'app-login-html-template',
   templateUrl: './login-html-template.component.html',
   styleUrls: ['./../AuthPage/authpage.component.scss'],
 })
 export class LoginHtmlTemplateComponent implements OnInit {
-  constructor(private eventEmitterService: EventEmitterService) {}
+  constructor(
+    private eventEmitterService: EventEmitterService,
+    public auth: AuthService,
+    private backend: BackendServiceService
+  ) {}
 
   validData = false;
   buttonColor = '#27AE60';
