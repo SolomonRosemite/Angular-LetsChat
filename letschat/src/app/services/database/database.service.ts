@@ -1,7 +1,6 @@
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +8,7 @@ import { User } from '../user.model';
 export class DatabaseService {
   constructor(private firestore: AngularFirestore) {}
 
-  getData(path: string): Observable<any[]> {
-    return this.firestore.collection<any>(path).valueChanges();
+  getData<T>(path: string): Observable<T[]> {
+    return this.firestore.collection<T>(path).valueChanges();
   }
 }
