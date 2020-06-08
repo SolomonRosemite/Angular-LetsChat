@@ -81,38 +81,31 @@ export class SignupHtmlTemplateComponent implements OnInit {
   }
 
   summit(): void {
-    if (
-      this.validData &&
-      this.signUp(
-        this.username,
-        this.email,
-        this.password,
-        this.passwordConfirm
-      )
-    ) {
-      // SignUp User
-      this.backend.getData('users').subscribe((item) => {
-        console.log(item);
-      });
-    } else {
+    if (!this.validData) {
+      // Show Dialog
+      this.eventEmitterService.showDialog('Invalid Data', ValidateData.reason);
+    } else if (!this.SignupUser(this.email, this.password)) {
       // Show Dialog
       this.eventEmitterService.showDialog('Invalid Data', ValidateData.reason);
     }
   }
 
-  signUp(
-    username: string,
-    email: string,
-    password: string,
-    passwordConfirm: string
-  ): boolean {
+  async SignupUser(email: string, password: string): Promise<boolean> {
+    try {
+      const user = await this.auth.emailSignup(email, password);
+      this.auth.updateUserData(user.user);
+    } catch (e) {
+      ValidateData.reason = String(e).toLowerCase().includes('password')
+        ? `Password doesn't seem to be right.`
+        : e;
+      return false;
+    }
+
     return true;
   }
 }
 
 class ValidateData {
-  constructor() {}
-
   static reason = 'Please fill the form to proceed.';
 
   public static dataIsValid(

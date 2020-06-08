@@ -18,6 +18,7 @@ export class LoginHtmlTemplateComponent implements OnInit {
   ) {}
 
   validData = false;
+  reason: string;
   buttonColor = '#27AE60';
 
   email = '';
@@ -35,18 +36,36 @@ export class LoginHtmlTemplateComponent implements OnInit {
     this.buttonColor = '#27AE60';
   }
 
-  summit(): void {
-    if (this.loginUser(this.email, this.password)) {
-    } else {
-      this.eventEmitterService.showDialog('Invalid Data', 'Reason...');
+  async summit() {
+    if ((await this.SigninUser(this.email, this.password)) !== true) {
+      this.eventEmitterService.showDialog('Invalid Data', this.reason);
       this.buttonColor = '#CD6155';
     }
   }
 
-  loginUser(email: string, password: string): boolean {
-    console.log(email);
-    console.log(password);
+  async SigninUser(email: string, password: string): Promise<boolean> {
+    try {
+      await this.auth.emailSignin(email, password);
+    } catch (e) {
+      if (
+        String(e)
+          .toLowerCase()
+          .includes(
+            'there is no user record corresponding to this identifier.'.toLowerCase()
+          )
+      ) {
+        this.reason = 'The Email does not exist.';
+      } else if (String(e).toLowerCase().includes('password')) {
+        this.reason = String(e).toLowerCase().includes('password')
+          ? `Password doesn't seem to be right.`
+          : e;
+      } else {
+        console.log(String(e).toLowerCase());
+        this.reason = e;
+      }
+      return false;
+    }
 
-    return false;
+    return true;
   }
 }
