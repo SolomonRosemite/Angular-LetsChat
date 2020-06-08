@@ -18,7 +18,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { FormsModule } from '@angular/forms';
 
-import { BackendServiceService } from './services/backend/backend-service.service';
+import { DatabaseService } from './services/database/database.service';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { EventEmitterService } from './event-emitter.service';
 import { AngularFirestore } from 'angularfire2/firestore';
@@ -79,7 +79,7 @@ import { PopupDialogComponent } from './common/info-dialog/popup-dialog/popup-di
     MatTabsModule,
     FormsModule,
   ],
-  providers: [EventEmitterService, BackendServiceService, AngularFirestore],
+  providers: [EventEmitterService, DatabaseService, AngularFirestore],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,14 +1,15 @@
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from '../user.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class BackendServiceService {
+export class DatabaseService {
   constructor(private firestore: AngularFirestore) {}
 
-  getData(args: string): Observable<any> {
-    return this.firestore.collection(args).valueChanges();
+  getData(path: string): Observable<any[]> {
+    return this.firestore.collection<any>(path).valueChanges();
   }
 }

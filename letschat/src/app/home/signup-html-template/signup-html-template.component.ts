@@ -1,4 +1,3 @@
-import { BackendServiceService } from './../../services/backend/backend-service.service';
 import { EventEmitterService } from 'src/app/event-emitter.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -13,7 +12,6 @@ import { Router } from '@angular/router';
 export class SignupHtmlTemplateComponent implements OnInit {
   constructor(
     private eventEmitterService: EventEmitterService,
-    private backend: BackendServiceService,
     private router: Router,
     public auth: AuthService
   ) {}
