@@ -1,3 +1,5 @@
+import { AuthService } from './../services/auth/auth.service';
+import { DatabaseService } from './../services/database/database.service';
 import { BottomPopupComponent } from './bottom-popup/bottom-popup.component';
 import { Component, OnInit } from '@angular/core';
 import { EventEmitterService } from '../event-emitter.service';
@@ -14,7 +16,9 @@ import {
 export class HomeComponent implements OnInit {
   constructor(
     private buttomSheet: MatBottomSheet,
-    private eventEmitterService: EventEmitterService
+    private eventEmitterService: EventEmitterService,
+    private firestore: DatabaseService,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {

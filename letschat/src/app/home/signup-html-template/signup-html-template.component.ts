@@ -23,15 +23,13 @@ export class SignupHtmlTemplateComponent implements OnInit {
   password = '';
   passwordConfirm = '';
 
-  ngOnInit() {
+  async ngOnInit() {
     let isLoggedIn: boolean;
-    this.auth.user$.subscribe((user) => {
-      isLoggedIn = user !== null;
+    isLoggedIn = this.auth.getUser() !== null;
 
-      if (isLoggedIn) {
-        this.router.navigate(['/chat']);
-      }
-    });
+    if (isLoggedIn) {
+      this.router.navigate(['/chat']);
+    }
   }
 
   getColor(): string {
@@ -118,6 +116,11 @@ class ValidateData {
       return false;
     } else if (username.length > 20) {
       this.reason = `The Username "${username}" is too long.`;
+      return false;
+    }
+
+    if (username.includes('-')) {
+      this.reason = `The Username can't have the dash "-" Character.`;
       return false;
     }
 

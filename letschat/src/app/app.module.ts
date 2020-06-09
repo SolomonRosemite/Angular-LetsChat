@@ -19,8 +19,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { FormsModule } from '@angular/forms';
 
 import { DatabaseService } from './services/database/database.service';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { EventEmitterService } from './event-emitter.service';
+
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireModule } from 'angularfire2';
 
