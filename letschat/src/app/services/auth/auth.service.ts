@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../user.model';
+import { User } from '../Models/user.model';
 
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -14,7 +14,15 @@ import { switchMap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  user$: Observable<User>;
+  public user$: Observable<User>;
+
+  public async getUser(): Promise<User> {
+    return new Promise((resolve) => {
+      this.user$.subscribe((success) => {
+        resolve(success);
+      });
+    });
+  }
 
   constructor(
     private afAuth: AngularFireAuth,
