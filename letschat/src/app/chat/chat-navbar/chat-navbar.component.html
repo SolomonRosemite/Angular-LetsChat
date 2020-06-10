@@ -1,9 +1,14 @@
 <mat-toolbar
-  class="mat-elevation-z8"
-  style="justify-content: space-between; position: fixed;"
+  class="mat-elevation-z4"
+  style="
+    justify-content: space-between;
+    position: fixed;
+    margin: 0;
+    padding: 0;
+  "
 >
   <span>
-    <div style="display: flex;">
+    <div style="display: flex; padding-left: 10px;">
       <button mat-icon-button [matMenuTriggerFor]="appMenu">
         <mat-icon
           class="icon-display"
@@ -56,11 +61,8 @@
   </span>
 
   <span>
-    <button mat-icon-button>
-      <mat-icon
-        aria-hidden="false"
-        aria-label="settings icon"
-        (click)="openSettings()"
+    <button mat-button (click)="openSettings()">
+      <mat-icon aria-hidden="false" aria-label="settings icon"
         >settings</mat-icon
       >
     </button>

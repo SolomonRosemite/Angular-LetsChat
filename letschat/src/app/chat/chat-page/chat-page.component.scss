@@ -1,3 +1,9 @@
 .column {
   float: left;
 }
+
+div.main {
+  overflow: hidden;
+  display: flex;
+  height: 100%;
+}

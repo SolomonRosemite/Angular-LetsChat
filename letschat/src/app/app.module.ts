@@ -44,7 +44,7 @@ import { InfoDialogComponent } from './common/info-dialog/info-dialog.component'
 import { PopupDialogComponent } from './common/info-dialog/popup-dialog/popup-dialog.component';
 import { ChatPageComponent } from './chat/chat-page/chat-page.component';
 import { ChatNavbarComponent } from './chat/chat-navbar/chat-navbar.component';
-import { OpenChatsComponent } from './chat/chatPage/open-chats/open-chats.component';
+import { OpenChatsComponent } from './chat/chat-page/open-chats/open-chats.component';
 import { MyProfileComponent } from './profile/my-profile/my-profile.component';
 
 @NgModule({
