@@ -1,1 +1,10 @@
-<p>user-settings works!</p>
+<p>Displayname: {{ me.displayName }}</p>
+<p>Email: {{ me.email }}</p>
+<p>Uid: {{ me.uid }}</p>
+<button
+  mat-button
+  style="background-color: rgb(236, 53, 53); color: white;"
+  (click)="signOut()"
+>
+  Sign Out
+</button>

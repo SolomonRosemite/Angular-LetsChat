@@ -25,18 +25,18 @@ export class SignupHtmlTemplateComponent implements OnInit {
 
   async ngOnInit() {
     let isLoggedIn: boolean;
-    isLoggedIn = this.auth.getUser() !== null;
+    isLoggedIn = (await this.auth.getUser()) !== null;
 
     if (isLoggedIn) {
       this.router.navigate(['/chat']);
     }
   }
 
-  getColor(): string {
+  public getColor(): string {
     return this.validData ? '#27AE60' : '#CD6155';
   }
 
-  setUsername(event): void {
+  public setUsername(event): void {
     this.username = event.target.value;
     this.validData = ValidateData.dataIsValid(
       this.username,
@@ -46,7 +46,7 @@ export class SignupHtmlTemplateComponent implements OnInit {
     );
   }
 
-  setEmail(event): void {
+  public setEmail(event): void {
     this.email = event.target.value;
     this.validData = ValidateData.dataIsValid(
       this.username,
@@ -56,7 +56,7 @@ export class SignupHtmlTemplateComponent implements OnInit {
     );
   }
 
-  setPassword(event): void {
+  public setPassword(event): void {
     this.password = event.target.value;
     this.validData = ValidateData.dataIsValid(
       this.username,
@@ -66,7 +66,7 @@ export class SignupHtmlTemplateComponent implements OnInit {
     );
   }
 
-  setPasswordConfirm(event): void {
+  public setPasswordConfirm(event): void {
     this.passwordConfirm = event.target.value;
     this.validData = ValidateData.dataIsValid(
       this.username,
@@ -76,7 +76,7 @@ export class SignupHtmlTemplateComponent implements OnInit {
     );
   }
 
-  summit(): void {
+  public summit(): void {
     if (!this.validData) {
       // Show Dialog
       this.eventEmitterService.showDialog('Invalid Data', ValidateData.reason);
@@ -86,7 +86,7 @@ export class SignupHtmlTemplateComponent implements OnInit {
     }
   }
 
-  async SignupUser(email: string, password: string): Promise<boolean> {
+  private async SignupUser(email: string, password: string): Promise<boolean> {
     try {
       const user = await this.auth.emailSignup(email, password);
       this.auth.updateUserData(user.user);
@@ -98,6 +98,12 @@ export class SignupHtmlTemplateComponent implements OnInit {
     }
 
     return true;
+  }
+
+  public googleSignin(): void {
+    this.auth.googleSignin().then((item) => {
+      this.router.navigate(['/chat']);
+    });
   }
 }
 

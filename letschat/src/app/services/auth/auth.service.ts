@@ -54,7 +54,7 @@ export class AuthService {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.auth.signInWithPopup(provider);
 
-    return this.updateUserData(credential.user);
+    return await this.updateUserData(credential.user);
   }
 
   updateUserData(user: firebase.User) {

@@ -2,6 +2,7 @@ import { EventEmitterService } from 'src/app/event-emitter.service';
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../../services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-html-template',
@@ -11,7 +12,8 @@ import { AuthService } from '../../services/auth/auth.service';
 export class LoginHtmlTemplateComponent implements OnInit {
   constructor(
     private eventEmitterService: EventEmitterService,
-    public auth: AuthService
+    public auth: AuthService,
+    private router: Router
   ) {}
 
   validData = false;
@@ -64,5 +66,11 @@ export class LoginHtmlTemplateComponent implements OnInit {
     }
 
     return true;
+  }
+
+  public googleSignin(): void {
+    this.auth.googleSignin().then((item) => {
+      this.router.navigate(['/chat']);
+    });
   }
 }

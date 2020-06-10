@@ -1,0 +1,19 @@
+@import "../../../theme.scss";
+
+.mat-icon {
+  vertical-align: middle;
+}
+
+.mat-toolbar {
+  color: rgb(41, 41, 41);
+  background-color: white;
+  // background-color: map-get($primary, 500);
+}
+
+.icon-display {
+  vertical-align: middle;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

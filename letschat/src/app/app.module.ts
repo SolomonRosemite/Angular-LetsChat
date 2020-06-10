@@ -16,6 +16,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { DatabaseService } from './services/database/database.service';
@@ -41,6 +42,10 @@ import { LoginHtmlTemplateComponent } from './home/login-html-template/login-htm
 import { ChatComponent } from './chat/chat.component';
 import { InfoDialogComponent } from './common/info-dialog/info-dialog.component';
 import { PopupDialogComponent } from './common/info-dialog/popup-dialog/popup-dialog.component';
+import { ChatPageComponent } from './chat/chat-page/chat-page.component';
+import { ChatNavbarComponent } from './chat/chat-navbar/chat-navbar.component';
+import { OpenChatsComponent } from './chat/chatPage/open-chats/open-chats.component';
+import { MyProfileComponent } from './profile/my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +61,10 @@ import { PopupDialogComponent } from './common/info-dialog/popup-dialog/popup-di
     ChatComponent,
     InfoDialogComponent,
     PopupDialogComponent,
+    ChatPageComponent,
+    ChatNavbarComponent,
+    OpenChatsComponent,
+    MyProfileComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -78,6 +87,7 @@ import { PopupDialogComponent } from './common/info-dialog/popup-dialog/popup-di
     MatListModule,
     MatCardModule,
     MatTabsModule,
+    RouterModule,
     FormsModule,
   ],
   providers: [EventEmitterService, DatabaseService, AngularFirestore],

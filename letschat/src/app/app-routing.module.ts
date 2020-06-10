@@ -1,10 +1,11 @@
+import { MyProfileComponent } from './profile/my-profile/my-profile.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { UserSettingsComponent } from './home/user-settings/user-settings.component';
 import { SignupComponent } from './home/signup/signup.component';
 import { LoginComponent } from './home/login/login.component';
-import { ChatComponent } from './chat/chat.component';
+import { ChatPageComponent } from './chat/chat-page/chat-page.component';
 import { HomeComponent } from './home/home.component';
 
 import { AuthGuard } from './auth.guard';
@@ -25,10 +26,16 @@ const routes: Routes = [
   {
     path: 'settings',
     component: UserSettingsComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'chat',
-    component: ChatComponent,
+    component: ChatPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'profile',
+    component: MyProfileComponent,
     canActivate: [AuthGuard],
   },
 ];

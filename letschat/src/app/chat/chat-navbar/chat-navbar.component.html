@@ -1,0 +1,84 @@
+<mat-toolbar
+  class="mat-elevation-z8"
+  style="justify-content: space-between; position: fixed;"
+>
+  <span>
+    <div style="display: flex;">
+      <button mat-icon-button [matMenuTriggerFor]="appMenu">
+        <mat-icon
+          class="icon-display"
+          aria-hidden="false"
+          aria-label="leaf icon"
+          style="color: lightcoral;"
+          >eco</mat-icon
+        >
+      </button>
+      <mat-menu #appMenu="matMenu">
+        <button
+          mat-menu-item
+          (click)="
+            goToLink('https://github.com/SolomonRosemite/Angular-LetsChat')
+          "
+        >
+          GitHub
+        </button>
+        <button mat-menu-item (click)="openSettings()">Settings</button>
+        <button
+          mat-menu-item
+          (click)="
+            goToLink(
+              'https://docs.google.com/forms/d/e/1FAIpQLSfgNupcmVDMI8CHVJkCfJLslp2Sv2lT0mqkFOV_g2u-3Up6CA/viewform?usp=sf_link'
+            )
+          "
+        >
+          Feedback
+        </button>
+      </mat-menu>
+      <div style="padding-left: 10px;"></div>
+      <h2 style="text-align: center; margin-top: 3.5px; font-weight: 500;">
+        Let's Chat
+      </h2>
+    </div>
+  </span>
+
+  <span style="text-align: center; padding-left: 5%;">
+    <div *ngIf="currentUser != null; else user" style="text-align: center;">
+      <h1>{{ currentUser }}</h1>
+      <h1 style="font-size: 15px;">
+        {{ lastSeen }}
+      </h1>
+    </div>
+
+    <ng-template #user>
+      <h1>{{ me.displayName }}</h1>
+      <h1 style="font-size: 15px;">Online</h1>
+    </ng-template>
+  </span>
+
+  <span>
+    <button mat-icon-button>
+      <mat-icon
+        aria-hidden="false"
+        aria-label="settings icon"
+        (click)="openSettings()"
+        >settings</mat-icon
+      >
+    </button>
+    <button
+      mat-button
+      [routerLink]="['/profile']"
+      routerLinkActive="router-link-active"
+    >
+      {{ me.displayName }}
+      <img
+        style="
+          border-radius: 50%;
+          padding-left: 10px;
+          width: 40px;
+          height: 40px;
+        "
+        src="https://www.w3schools.com/howto/img_avatar2.png"
+      />
+    </button>
+  </span>
+</mat-toolbar>
