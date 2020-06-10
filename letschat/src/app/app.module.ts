@@ -46,6 +46,7 @@ import { ChatPageComponent } from './chat/chat-page/chat-page.component';
 import { ChatNavbarComponent } from './chat/chat-navbar/chat-navbar.component';
 import { OpenChatsComponent } from './chat/chat-page/open-chats/open-chats.component';
 import { MyProfileComponent } from './profile/my-profile/my-profile.component';
+import { ChatCardComponent } from './chat/chat-page/open-chats/chat-card/chat-card.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { MyProfileComponent } from './profile/my-profile/my-profile.component';
     ChatNavbarComponent,
     OpenChatsComponent,
     MyProfileComponent,
+    ChatCardComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

@@ -24,8 +24,7 @@ export class SignupHtmlTemplateComponent implements OnInit {
   passwordConfirm = '';
 
   async ngOnInit() {
-    let isLoggedIn: boolean;
-    isLoggedIn = (await this.auth.getUser()) !== null;
+    const isLoggedIn = (await this.auth.getUser()) !== null;
 
     if (isLoggedIn) {
       this.router.navigate(['/chat']);

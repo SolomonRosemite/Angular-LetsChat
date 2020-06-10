@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../services/auth/auth.service';
 import { DatabaseService } from './../services/database/database.service';
 import { BottomPopupComponent } from './bottom-popup/bottom-popup.component';
@@ -17,11 +18,16 @@ export class HomeComponent implements OnInit {
   constructor(
     private buttomSheet: MatBottomSheet,
     private eventEmitterService: EventEmitterService,
-    private firestore: DatabaseService,
+    private router: Router,
     private auth: AuthService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    const isLoggedIn = (await this.auth.getUser()) !== null;
+
+    if (isLoggedIn) {
+      this.router.navigate(['/chat']);
+    }
     if (this.eventEmitterService.subsVar === undefined) {
       this.eventEmitterService.subsVar = this.eventEmitterService.invokeBottomBarOpenFunction.subscribe(
         () => {
