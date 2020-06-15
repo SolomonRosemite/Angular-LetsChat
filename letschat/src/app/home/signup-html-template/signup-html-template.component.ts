@@ -23,7 +23,7 @@ export class SignupHtmlTemplateComponent implements OnInit {
   password = '';
   passwordConfirm = '';
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     const isLoggedIn = (await this.auth.getUser()) !== null;
 
     if (isLoggedIn) {

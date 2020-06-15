@@ -40,6 +40,7 @@ export class DatabaseService {
     const data = {
       displayName: newDisplayName,
       email: user.email,
+      photoURL: user.photoURL,
       uid: user.uid,
     };
 

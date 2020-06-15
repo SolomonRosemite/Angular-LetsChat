@@ -10,7 +10,12 @@ import { User } from 'src/app/services/Models/user.model';
 export class UserSettingsComponent implements OnInit {
   constructor(private auth: AuthService) {}
 
-  me = new User('Loading...', 'Loading...', 'Loading...');
+  me = new User({
+    displayName: 'Loading...',
+    photoURL: '',
+    email: 'Loading...',
+    uid: 'Loading...',
+  });
 
   async ngOnInit() {
     this.me = await this.auth.getUser();

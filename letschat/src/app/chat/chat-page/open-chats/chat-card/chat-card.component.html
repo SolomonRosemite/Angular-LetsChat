@@ -17,15 +17,23 @@
           width: 40px;
           height: 40px;
         "
-        src="https://www.w3schools.com/howto/img_avatar2.png"
+        src="https://lh3.googleusercontent.com/a-/AOh14GgOBSyBIb67E7oB9fjjVEcZ8Wggdi5_2W3fyun3"
       />
-      <div style="padding-left: 15px;">
-        <h6 class="name">Jesse</h6>
-        <h6 class="message">Hey.</h6>
+      <div
+        style="
+          padding-top: 12px;
+          padding-left: 20px;
+          display: inline-block;
+          text-align: start;
+        "
+      >
+        <h6 class="name">{{ displayname }}</h6>
+        <div style="padding-top: 5;"></div>
+        <h6 class="message">{{ message }}</h6>
       </div>
     </span>
     <span>
-      <h6 class="date">Mon</h6>
+      <h6 class="date">{{ lastSeen }}</h6>
     </span>
   </div>
 </button>
