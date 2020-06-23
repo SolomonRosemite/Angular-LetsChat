@@ -1,4 +1,4 @@
-<button mat-button type="button" class="block">
+<button (click)="downloadFile()" mat-button type="button" class="block">
   <div
     style="
       display: inline-flex;
@@ -12,7 +12,7 @@
     <span style="display: inline-flex;">
       <img
         style="padding-left: 10px; width: 40px; height: 40px;"
-        src="../../../../assets/images/file-Icon.png"
+        src="{{ imageUrl }}"
       />
       <div
         style="
