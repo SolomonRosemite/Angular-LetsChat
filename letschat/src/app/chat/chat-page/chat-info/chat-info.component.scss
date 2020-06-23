@@ -1,8 +1,3 @@
-// mat-grid-list {
-//   flex-grow: 1;
-//   border: 3px solid green;
-//   overflow: scroll;
-// }
 /* width */
 ::-webkit-scrollbar {
   width: 7px;
@@ -23,4 +18,13 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(73, 73, 73);
+}
+
+ul {
+  list-style-position: inside;
+  padding-left: 0;
+}
+
+li {
+  list-style-type: none;
 }

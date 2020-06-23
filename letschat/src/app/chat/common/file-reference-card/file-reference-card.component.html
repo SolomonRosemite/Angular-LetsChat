@@ -1,0 +1,35 @@
+<button mat-button type="button" class="block">
+  <div
+    style="
+      display: inline-flex;
+      padding-left: 10px;
+      padding-bottom: 5px;
+      margin-left: -10px;
+      justify-content: space-between;
+      width: 100%;
+    "
+  >
+    <span style="display: inline-flex;">
+      <img
+        style="padding-left: 10px; width: 40px; height: 40px;"
+        src="../../../../assets/images/file-Icon.png"
+      />
+      <div
+        style="
+          padding-top: 12px;
+          padding-left: 20px;
+          display: inline-block;
+          text-align: start;
+        "
+      >
+        <!-- TODO: If file name is to long shorten it -->
+        <h6 class="name">{{ displayFilename(fileReference.filename) }}</h6>
+        <div style="padding-top: 5;"></div>
+        <h6 class="filetype">{{ fileReference.getFileType() }}</h6>
+      </div>
+    </span>
+    <span>
+      <h6 class="date">{{ fileReference.date }}</h6>
+    </span>
+  </div>
+</button>

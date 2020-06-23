@@ -48,6 +48,7 @@ import { OpenChatsComponent } from './chat/chat-page/open-chats/open-chats.compo
 import { MyProfileComponent } from './profile/my-profile/my-profile.component';
 import { ChatCardComponent } from './chat/chat-page/open-chats/chat-card/chat-card.component';
 import { ChatInfoComponent } from './chat/chat-page/chat-info/chat-info.component';
+import { FileReferenceCardComponent } from './chat/common/file-reference-card/file-reference-card.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { ChatInfoComponent } from './chat/chat-page/chat-info/chat-info.componen
     MyProfileComponent,
     ChatCardComponent,
     ChatInfoComponent,
+    FileReferenceCardComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
