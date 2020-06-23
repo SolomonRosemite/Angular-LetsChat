@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class OpenChatsComponent implements OnInit {
   constructor() {}
 
-  search = ''; // TODO: Fix Font in the Html
+  search = '';
 
   ngOnInit(): void {}
 

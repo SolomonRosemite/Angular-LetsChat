@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class ChatNavbarComponent implements OnInit {
   constructor(public auth: AuthService, private router: Router) {}
 
-  me = new User({ displayName: '', email: '', photoURL: '', uid: '' }); // TODO: Fix photo issue
+  me = new User({ displayName: '', email: '', photoURL: '', uid: '' });
 
   currentUser: string;
   lastSeen: string;

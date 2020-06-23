@@ -1,5 +1,5 @@
 <mat-toolbar
-  class="mat-elevation-z4"
+  class="mat-elevation-z3"
   style="
     justify-content: space-between;
     position: fixed;
@@ -46,7 +46,7 @@
     </div>
   </span>
 
-  <span style="text-align: center; padding-left: 5%;">
+  <span style="text-align: center;">
     <div *ngIf="currentUser != null; else user" style="text-align: center;">
       <h1>{{ currentUser }}</h1>
       <h1 style="font-size: 15px;">

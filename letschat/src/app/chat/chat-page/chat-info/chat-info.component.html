@@ -1,0 +1,39 @@
+<div
+  class="mat-elevation-z3"
+  style="
+    margin: 0px;
+    padding: 0px;
+    padding-top: 10%;
+    text-align: center;
+    padding-bottom: 5px;
+  "
+>
+  <div>
+    <img
+      style="border-radius: 50%; width: 60px; height: 60px;"
+      src="https://images.unsplash.com/photo-1497316730643-415fac54a2af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+    />
+
+    <div style="padding-top: 20px;"></div>
+    <p style="font-size: 20px; font-weight: 500;">{{ user.displayName }}</p>
+    <p style="font-size: 15px; font-weight: normal;">Hamburg, Germany</p>
+    <div style="padding-top: 10px;"></div>
+  </div>
+</div>
+
+<div style="text-align: center; width: 100%; padding-top: 5%;">
+  <h1>Shared Files</h1>
+  <div style="overflow-y: auto; height: 600px;">
+    <div style="padding-top: 5%;">
+      <mat-grid-list cols="4" rowHeight="100px">
+        <mat-grid-tile
+          *ngFor="let tile of tiles"
+          [colspan]="tile.cols"
+          [rowspan]="tile.rows"
+        >
+          <img style="width: 150px; height: 150px;" src="{{ tile.text }}" />
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>
+</div>

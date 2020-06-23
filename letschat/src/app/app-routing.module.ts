@@ -31,7 +31,7 @@ const routes: Routes = [
   {
     path: 'chat',
     component: ChatPageComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   {
     path: 'profile',

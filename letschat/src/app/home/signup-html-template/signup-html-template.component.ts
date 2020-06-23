@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { User } from 'src/app/services/Models/user.model';
 
 @Component({
   selector: 'app-signup-html-template',
@@ -77,18 +78,41 @@ export class SignupHtmlTemplateComponent implements OnInit {
 
   public summit(): void {
     if (!this.validData) {
-      // Show Dialog
       this.eventEmitterService.showDialog('Invalid Data', ValidateData.reason);
-    } else if (!this.SignupUser(this.email, this.password)) {
-      // Show Dialog
-      this.eventEmitterService.showDialog('Invalid Data', ValidateData.reason);
+    } else {
+      this.SignupUser(this.email, this.password, this.username).then(
+        (response) => {
+          console.log(response);
+          if (response === false) {
+            this.eventEmitterService.showDialog(
+              'Invalid Data',
+              ValidateData.reason
+            );
+          } else {
+            this.router.navigate(['/chat']);
+          }
+        }
+      );
     }
   }
 
-  private async SignupUser(email: string, password: string): Promise<boolean> {
+  private async SignupUser(
+    email: string,
+    password: string,
+    displayName: string
+  ): Promise<boolean> {
     try {
-      const user = await this.auth.emailSignup(email, password);
-      this.auth.updateUserData(user.user);
+      const loggedInUser = await this.auth.emailSignup(email, password);
+
+      const user = {
+        displayName,
+        photoURL:
+          'https://2.bp.blogspot.com/-AJzdXki63Xc/UgI-8JY3uII/AAAAAAAACJk/85pnDqadUwQ/s1600/facebook-profile.jpg',
+        email: loggedInUser.user.email,
+        uid: loggedInUser.user.uid,
+      };
+
+      this.auth.updateUserData(user);
     } catch (e) {
       ValidateData.reason = String(e).toLowerCase().includes('password')
         ? `Password doesn't seem to be right.`
