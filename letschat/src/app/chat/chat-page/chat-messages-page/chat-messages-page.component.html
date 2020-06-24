@@ -1,0 +1,69 @@
+<div>
+  <div class="scrollable" style="padding-top: 1%;">
+    <ul>
+      <li class="receiver">Hey, do you have to do homework for Math?</li>
+      <li class="me">
+        Sure.
+      </li>
+      <li class="me">
+        I just send them. Check the Shared Files.
+      </li>
+      <li class="receiver">Thanks!😀</li>
+      <li class="me">
+        You're Welcome.
+      </li>
+    </ul>
+  </div>
+  <div class="main" style="background-color: white;">
+    <mat-form-field
+      class="column"
+      style="font-size: 20px; padding-left: 10px; width: 80%;"
+    >
+      <mat-label style="color: grey;">Type a Message</mat-label>
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="2"
+      ></textarea>
+    </mat-form-field>
+    <div
+      class="column"
+      style="
+        width: 20%;
+        table-layout: fixed;
+        border-spacing: 10px;
+        display: block;
+      "
+    >
+      <div class="ColumnIcons" style="padding-right: 5%; width: 100;">
+        <button
+          mat-button
+          style="background-color: #303f9f; color: white; width: 100%;"
+          aria-label="icon image button"
+        >
+          <mat-icon>image</mat-icon>
+        </button>
+      </div>
+      <div class="ColumnIcons" style="padding-right: 5%; width: 100px;">
+        <button
+          mat-button
+          style="background-color: #303f9f; color: white; width: 100%;"
+          aria-label="icon attachment button"
+        >
+          <mat-icon>attachment</mat-icon>
+        </button>
+      </div>
+      <div class="ColumnIcons" style="width: 80px;">
+        <button
+          mat-button
+          style="background-color: #69f0ae; color: white; width: 100%;"
+          aria-label="icon send button"
+        >
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

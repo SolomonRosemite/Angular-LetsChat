@@ -1,7 +1,10 @@
 <div class="main">
-  <app-chat-navbar></app-chat-navbar>
+  <app-chat-navbar style="z-index: 3;"></app-chat-navbar>
 
-  <div class="row" style="height: 100%; margin-top: 3%; width: 100%;">
+  <div
+    class="row"
+    style="height: 100%; z-index: 2; margin-top: 3%; width: 100%;"
+  >
     <div
       class="column"
       style="background-color: white; height: 100%; width: 16%;"
@@ -16,7 +19,7 @@
       style="background-color: lightblue; height: 100%; width: 67%;"
     >
       <div>
-        <h1>Main Chat</h1>
+        <app-chat-messages-page></app-chat-messages-page>
       </div>
     </div>
 

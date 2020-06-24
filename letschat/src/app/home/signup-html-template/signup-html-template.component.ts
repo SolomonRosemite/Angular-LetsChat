@@ -128,6 +128,10 @@ export class SignupHtmlTemplateComponent implements OnInit {
       this.router.navigate(['/chat']);
     });
   }
+
+  public goBack(): void {
+    this.router.navigate(['/']);
+  }
 }
 
 class ValidateData {

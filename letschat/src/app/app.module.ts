@@ -10,6 +10,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -49,6 +50,7 @@ import { MyProfileComponent } from './profile/my-profile/my-profile.component';
 import { ChatCardComponent } from './chat/chat-page/open-chats/chat-card/chat-card.component';
 import { ChatInfoComponent } from './chat/chat-page/chat-info/chat-info.component';
 import { FileReferenceCardComponent } from './chat/common/file-reference-card/file-reference-card.component';
+import { ChatMessagesPageComponent } from './chat/chat-page/chat-messages-page/chat-messages-page.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,7 @@ import { FileReferenceCardComponent } from './chat/common/file-reference-card/fi
     ChatCardComponent,
     ChatInfoComponent,
     FileReferenceCardComponent,
+    ChatMessagesPageComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -84,6 +87,7 @@ import { FileReferenceCardComponent } from './chat/common/file-reference-card/fi
     MatCheckboxModule,
     AppRoutingModule,
     MatToolbarModule,
+    TextFieldModule,
     MatDialogModule,
     MatButtonModule,
     MatInputModule,

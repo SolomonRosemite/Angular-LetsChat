@@ -1,6 +1,5 @@
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 
 import {
   AngularFirestoreDocument,
@@ -32,7 +31,7 @@ export class DatabaseService {
       .add(data);
   }
 
-  public setDisplayName(user: User, newDisplayName: string): Promise<void> {
+  public updateDisplayName(user: User, newDisplayName: string): Promise<void> {
     const userRef: AngularFirestoreDocument<User> = this.firestore.doc(
       `users/${user.uid}`
     );
