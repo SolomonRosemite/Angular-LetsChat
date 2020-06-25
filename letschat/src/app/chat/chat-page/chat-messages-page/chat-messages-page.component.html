@@ -1,16 +1,11 @@
 <div>
   <div class="scrollable" style="padding-top: 1%;">
     <ul>
-      <li class="receiver">Hey, do you have to do homework for Math?</li>
-      <li class="me">
-        Sure.
-      </li>
-      <li class="me">
-        I just send them. Check the Shared Files.
-      </li>
-      <li class="receiver">Thanks!😀</li>
-      <li class="me">
-        You're Welcome.
+      <li
+        *ngFor="let message of messages; index as i; first as isFirst"
+        class="{{ message.who }}"
+      >
+        {{ message.message }}
       </li>
     </ul>
   </div>
@@ -20,13 +15,7 @@
       style="font-size: 20px; padding-left: 10px; width: 80%;"
     >
       <mat-label style="color: grey;">Type a Message</mat-label>
-      <textarea
-        matInput
-        cdkTextareaAutosize
-        #autosize="cdkTextareaAutosize"
-        cdkAutosizeMinRows="1"
-        cdkAutosizeMaxRows="2"
-      ></textarea>
+      <input matInput (input)="message = $event.target.value" type="text" />
     </mat-form-field>
     <div
       class="column"
@@ -60,6 +49,7 @@
           mat-button
           style="background-color: #69f0ae; color: white; width: 100%;"
           aria-label="icon send button"
+          (click)="sendMessage()"
         >
           <mat-icon>send</mat-icon>
         </button>
