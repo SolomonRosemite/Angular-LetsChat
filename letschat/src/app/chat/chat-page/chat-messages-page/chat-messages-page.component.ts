@@ -34,6 +34,48 @@ export class ChatMessagesPageComponent implements OnInit {
         message: "You're Welcome.",
         who: 'me',
       },
+      {
+        message: 'Hey, do you have to do homework for Math?',
+        who: 'receiver',
+      },
+      {
+        message: 'Sure.',
+        who: 'me',
+      },
+      {
+        message: 'I just send them. Check the Shared Files.',
+        who: 'me',
+      },
+      {
+        message: 'Thanks!😀',
+        who: 'receiver',
+      },
+      {
+        // tslint:disable-next-line: quotemark
+        message: "You're Welcome.",
+        who: 'me',
+      },
+      {
+        message: 'Hey, do you have to do homework for Math?',
+        who: 'receiver',
+      },
+      {
+        message: 'Sure.',
+        who: 'me',
+      },
+      {
+        message: 'I just send them. Check the Shared Files.',
+        who: 'me',
+      },
+      {
+        message: 'Thanks!😀',
+        who: 'receiver',
+      },
+      {
+        // tslint:disable-next-line: quotemark
+        message: "You're Welcome.",
+        who: 'me',
+      },
     ];
   }
 

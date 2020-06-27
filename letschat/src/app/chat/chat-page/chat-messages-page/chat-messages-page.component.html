@@ -1,8 +1,8 @@
-<div>
+<div style="width: 100%;">
   <div class="scrollable" style="padding-top: 1%;">
     <ul>
       <li
-        *ngFor="let message of messages; index as i; first as isFirst"
+        *ngFor="let message of messages; index as i"
         class="{{ message.who }}"
       >
         {{ message.message }}
@@ -20,13 +20,35 @@
     <div
       class="column"
       style="
-        width: 20%;
+        width: 400px;
         table-layout: fixed;
+        margin-top: 20px;
         border-spacing: 10px;
         display: block;
       "
     >
-      <div class="ColumnIcons" style="padding-right: 5%; width: 100;">
+      <div
+        class="ColumnIcons"
+        style="
+          float: right;
+          padding-left: 10px;
+          padding-right: 10px;
+          width: 80px;
+        "
+      >
+        <button
+          mat-button
+          style="background-color: #69f0ae; color: white; width: 100%;"
+          aria-label="icon send button"
+          (click)="sendMessage()"
+        >
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
+      <div
+        class="ColumnIcons"
+        style="float: right; padding-left: 10px; width: 80px;"
+      >
         <button
           mat-button
           style="background-color: #303f9f; color: white; width: 100%;"
@@ -35,23 +57,16 @@
           <mat-icon>image</mat-icon>
         </button>
       </div>
-      <div class="ColumnIcons" style="padding-right: 5%; width: 100px;">
+      <div
+        class="ColumnIcons"
+        style="float: right; padding-left: 10px; width: 80px;"
+      >
         <button
           mat-button
           style="background-color: #303f9f; color: white; width: 100%;"
           aria-label="icon attachment button"
         >
           <mat-icon>attachment</mat-icon>
-        </button>
-      </div>
-      <div class="ColumnIcons" style="width: 80px;">
-        <button
-          mat-button
-          style="background-color: #69f0ae; color: white; width: 100%;"
-          aria-label="icon send button"
-          (click)="sendMessage()"
-        >
-          <mat-icon>send</mat-icon>
         </button>
       </div>
     </div>
