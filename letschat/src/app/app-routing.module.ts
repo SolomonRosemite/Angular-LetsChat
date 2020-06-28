@@ -1,4 +1,3 @@
-import { MyProfileComponent } from './profile/my-profile/my-profile.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
@@ -31,11 +30,6 @@ const routes: Routes = [
   {
     path: 'chat',
     component: ChatPageComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'profile',
-    component: MyProfileComponent,
     canActivate: [AuthGuard],
   },
 ];

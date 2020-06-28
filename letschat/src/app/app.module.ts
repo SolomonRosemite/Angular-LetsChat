@@ -46,7 +46,6 @@ import { PopupDialogComponent } from './common/info-dialog/popup-dialog/popup-di
 import { ChatPageComponent } from './chat/chat-page/chat-page.component';
 import { ChatNavbarComponent } from './chat/chat-navbar/chat-navbar.component';
 import { OpenChatsComponent } from './chat/chat-page/open-chats/open-chats.component';
-import { MyProfileComponent } from './profile/my-profile/my-profile.component';
 import { ChatCardComponent } from './chat/chat-page/open-chats/chat-card/chat-card.component';
 import { ChatInfoComponent } from './chat/chat-page/chat-info/chat-info.component';
 import { FileReferenceCardComponent } from './chat/common/file-reference-card/file-reference-card.component';
@@ -68,7 +67,6 @@ import { ChatMessagesPageComponent } from './chat/chat-page/chat-messages-page/c
     ChatPageComponent,
     ChatNavbarComponent,
     OpenChatsComponent,
-    MyProfileComponent,
     ChatCardComponent,
     ChatInfoComponent,
     FileReferenceCardComponent,
