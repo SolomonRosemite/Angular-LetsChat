@@ -1,6 +1,6 @@
 <div class="main">
   <div class="row" style="height: 100%; z-index: 2; width: 100%;">
-    <div style="padding-bottom: 3%;">
+    <div style="padding-bottom: 60px;">
       <app-chat-navbar style="z-index: 3;"></app-chat-navbar>
     </div>
     <div
@@ -18,6 +18,85 @@
     >
       <div>
         <app-chat-messages-page></app-chat-messages-page>
+      </div>
+      <div
+        style="
+          background-color: white;
+          overflow: hidden;
+          display: flex;
+          margin-top: 18px;
+          height: 100%;
+        "
+      >
+        <mat-form-field
+          class="column"
+          style="font-size: 20px; padding-left: 10px; width: 80%;"
+        >
+          <mat-label style="color: grey;">Type a Message</mat-label>
+          <input
+            matInput
+            (keydown)="sendMessage($event)"
+            (input)="message = $event.target.value"
+            type="text"
+            [value]="message"
+          />
+        </mat-form-field>
+        <div
+          class="column"
+          style="
+            width: 400px;
+            table-layout: fixed;
+            margin-top: 20px;
+            border-spacing: 10px;
+            display: block;
+          "
+        >
+          <div
+            class="ColumnIcons"
+            style="
+              float: right;
+              padding-left: 10px;
+              padding-right: 10px;
+              width: 80px;
+            "
+          >
+            <button
+              mat-button
+              style="background-color: #69f0ae; color: white; width: 100%;"
+              aria-label="icon send button"
+              (click)="sendMessage()"
+            >
+              <mat-icon>send</mat-icon>
+            </button>
+          </div>
+          <!-- TODO: Add Get and Upload Images Function -->
+          <div
+            class="ColumnIcons"
+            style="float: right; padding-left: 10px; width: 80px;"
+          >
+            <button
+              mat-button
+              style="background-color: #303f9f; color: white; width: 100%;"
+              aria-label="icon image button"
+            >
+              <mat-icon>image</mat-icon>
+            </button>
+          </div>
+          <!-- TODO: Add Get and Upload Attachments Function -->
+
+          <div
+            class="ColumnIcons"
+            style="float: right; padding-left: 10px; width: 80px;"
+          >
+            <button
+              mat-button
+              style="background-color: #303f9f; color: white; width: 100%;"
+              aria-label="icon attachment button"
+            >
+              <mat-icon>attachment</mat-icon>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 

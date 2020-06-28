@@ -1,14 +1,12 @@
-// Other
-div.main {
-  overflow: hidden;
-  display: flex;
-  height: 100%;
-}
-
 .column {
   float: left;
 }
 
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 .ColumnIcons {
   padding-top: 10px;
   display: table-cell;
@@ -43,49 +41,40 @@ div.main {
 }
 
 // Message Bubbles
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.chat {
+  list-style-type: none;
 }
 
-ul li {
-  display: inline-block;
+.chatBubble {
+  margin-bottom: 3px;
+  padding: 5px 10px;
   clear: both;
-  padding: 20px;
-  border-radius: 30px;
-  margin-bottom: 2px;
-  font-family: Helvetica, Arial, sans-serif;
+  border-radius: 10px 10px 2px 2px;
 }
 
-.receiver {
-  background: #eee;
+.chatBubble--rcvd {
+  background: #f2f2f2;
+  color: black;
   float: left;
-  display: block;
-  font-size: 18px;
-  max-width: 650px;
-  word-wrap: break-word;
+  border-bottom-right-radius: 10px;
 }
 
-.me {
+.chatBubble--sent {
+  background: #0066ff;
+  color: white;
   float: right;
-  background: #0084ff;
-  font-size: 18px;
-  color: #fff;
-  display: block;
-  max-width: 650px;
-  word-wrap: break-word;
+  border-bottom-left-radius: 10px;
 }
 
-.receiver + .me {
-  border-bottom-right-radius: 5px;
+.chatBubble--sent + .chatBubble--sent {
+  border-top-right-radius: 2px;
 }
 
-.me + .me {
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+.chatBubble--rcvd + .chatBubble--rcvd {
+  border-top-left-radius: 2px;
 }
 
-.me:last-of-type {
-  border-bottom-right-radius: 30px;
+.chatBubble--stop {
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
 }

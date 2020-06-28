@@ -31,8 +31,8 @@ export class FileReferenceCardComponent implements OnInit {
   }
 
   public displayFilename(filename: string): string {
-    if (filename.length > 10) {
-      return filename.substring(0, 10) + '...';
+    if (filename.length > 13) {
+      return filename.substring(0, 13) + '...';
     }
     return filename;
   }
