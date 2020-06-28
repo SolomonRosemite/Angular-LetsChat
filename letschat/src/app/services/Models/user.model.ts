@@ -4,7 +4,7 @@ export interface User {
   email: string;
   uid: string;
 }
-
+// TODO: Add Location Prop
 export class User {
   constructor({ displayName, email, photoURL, uid }: User) {
     this.displayName = displayName;

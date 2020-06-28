@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/services/Models/user.model';
@@ -8,7 +9,7 @@ import { User } from 'src/app/services/Models/user.model';
   styleUrls: ['./user-settings.component.scss'],
 })
 export class UserSettingsComponent implements OnInit {
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   me = new User({
     displayName: 'Loading...',
@@ -19,6 +20,15 @@ export class UserSettingsComponent implements OnInit {
 
   async ngOnInit() {
     this.me = await this.auth.getUser();
+  }
+
+  edit(): void {
+    this.router.navigate(['/settings/edit']);
+    // TODO: Create Edit Page
+  }
+
+  goBack(): void {
+    this.router.navigate(['/chat']);
   }
 
   async signOut() {

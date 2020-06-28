@@ -39,6 +39,8 @@ export class LoginHtmlTemplateComponent implements OnInit {
     if ((await this.SigninUser(this.email, this.password)) !== true) {
       this.eventEmitterService.showDialog('Invalid Data', this.reason);
       this.buttonColor = '#CD6155';
+    } else {
+      this.router.navigate(['/chat']);
     }
   }
 

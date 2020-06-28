@@ -46,7 +46,7 @@
     </div>
   </span>
 
-  <span style="text-align: center; padding-left: 6%;">
+  <span style="text-align: center; padding-left: 11%;">
     <div *ngIf="currentUser != null; else user" style="text-align: center;">
       <h1>{{ currentUser }}</h1>
       <h1 style="font-size: 15px;">
@@ -61,16 +61,33 @@
   </span>
 
   <span>
+    <!-- TODO: Add Messenger Method -->
+    <button mat-button>
+      <mat-icon aria-hidden="false" aria-label="settings icon"
+        >person_add</mat-icon
+      >
+    </button>
     <button mat-button (click)="openSettings()">
       <mat-icon aria-hidden="false" aria-label="settings icon"
         >settings</mat-icon
       >
     </button>
-    <button
-      mat-button
-      [routerLink]="['/profile']"
-      routerLinkActive="router-link-active"
-    >
+    <mat-menu #appMenu2="matMenu">
+      <!-- TODO: Add Messenger Method -->
+      <button mat-menu-item>Add Messenger</button>
+      <button mat-menu-item (click)="openSettings()">Settings</button>
+      <button
+        mat-menu-item
+        (click)="
+          goToLink(
+            'https://docs.google.com/forms/d/e/1FAIpQLSfgNupcmVDMI8CHVJkCfJLslp2Sv2lT0mqkFOV_g2u-3Up6CA/viewform?usp=sf_link'
+          )
+        "
+      >
+        Feedback
+      </button>
+    </mat-menu>
+    <button mat-button [matMenuTriggerFor]="appMenu2">
       {{ me.displayName }}
       <a style="padding-left: 12px;"></a>
       <img
