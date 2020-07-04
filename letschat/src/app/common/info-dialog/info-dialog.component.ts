@@ -15,17 +15,13 @@ export class InfoDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.eventEmitterService.subsVar = this.eventEmitterService.invokeOpenPopupDialogFunction.subscribe(
-      (item) => {
-        this.openDialog(item);
-      }
-    );
+    this.eventEmitterService.invokeOpenPopupDialogFunction.subscribe((item) => {
+      this.openDialog(item);
+    });
 
-    this.eventEmitterService.subsVar = this.eventEmitterService.invokeClosePopupDialogFunction.subscribe(
-      () => {
-        this.dialog.closeAll();
-      }
-    );
+    this.eventEmitterService.invokeClosePopupDialogFunction.subscribe(() => {
+      this.dialog.closeAll();
+    });
   }
 
   openDialog(items: string[]) {

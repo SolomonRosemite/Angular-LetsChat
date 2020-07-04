@@ -70,9 +70,9 @@ export class LoginHtmlTemplateComponent implements OnInit {
     return true;
   }
 
-  public googleSignin(): void {
-    this.auth.googleSignin().then((item) => {
-      this.router.navigate(['/chat']);
+  public googleSignin() {
+    this.auth.googleSignin().then((_) => {
+      this.router.navigate(['chat']);
     });
   }
 

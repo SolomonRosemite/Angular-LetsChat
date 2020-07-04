@@ -1,5 +1,5 @@
 import { AuthService } from './../../../services/auth/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { EventEmitterService } from 'src/app/event-emitter.service';
 import { Message } from 'src/app/services/Models/message.model';
 import { User } from 'src/app/services/Models/user.model';
@@ -12,7 +12,8 @@ import { User } from 'src/app/services/Models/user.model';
 export class ChatMessagesPageComponent implements OnInit {
   constructor(
     private eventEmitterService: EventEmitterService,
-    private auth: AuthService
+    private auth: AuthService,
+    private zone: NgZone
   ) {}
   messages: Message[] = [];
   me: User;
@@ -62,13 +63,11 @@ export class ChatMessagesPageComponent implements OnInit {
       },
     ];
 
-    if (this.eventEmitterService.subsVar === undefined) {
-      this.eventEmitterService.subsVar = this.eventEmitterService.invokeSendMessageFunction.subscribe(
-        (message: Message) => {
-          this.addMessage(message);
-        }
-      );
-    }
+    this.eventEmitterService.invokeSendMessageFunction.subscribe(
+      (message: Message) => {
+        this.addMessage(message);
+      }
+    );
   }
 
   async addMessage(message: Message): Promise<void> {

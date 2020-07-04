@@ -23,8 +23,8 @@ export class UserSettingsComponent implements OnInit {
   }
 
   edit(): void {
-    this.router.navigate(['/settings/edit']);
     // TODO: Create Edit Page
+    this.router.navigate(['/settings/edit']);
   }
 
   goBack(): void {

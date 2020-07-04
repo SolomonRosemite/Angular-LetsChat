@@ -7,6 +7,8 @@ import { Message } from './services/Models/message.model';
   providedIn: 'root',
 })
 export class EventEmitterService {
+  constructor() {}
+
   // Homepage
   invokeBottomBarOpenFunction = new EventEmitter();
   invokeBottomBarCloseFunction = new EventEmitter();
@@ -16,10 +18,6 @@ export class EventEmitterService {
 
   // ChatPage
   invokeUserSelectedOnChatPage = new EventEmitter();
-
-  subsVar: Subscription;
-
-  constructor() {}
 
   // HomePage
   onBottomBarClickClose(): void {

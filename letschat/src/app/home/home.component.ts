@@ -28,19 +28,13 @@ export class HomeComponent implements OnInit {
     if (isLoggedIn) {
       this.router.navigate(['/chat']);
     }
-    if (this.eventEmitterService.subsVar === undefined) {
-      this.eventEmitterService.subsVar = this.eventEmitterService.invokeBottomBarOpenFunction.subscribe(
-        () => {
-          this.openBottomSheet();
-        }
-      );
+    this.eventEmitterService.invokeBottomBarOpenFunction.subscribe(() => {
+      this.openBottomSheet();
+    });
 
-      this.eventEmitterService.subsVar = this.eventEmitterService.invokeBottomBarCloseFunction.subscribe(
-        () => {
-          this.closeBottomSheet();
-        }
-      );
-    }
+    this.eventEmitterService.invokeBottomBarCloseFunction.subscribe(() => {
+      this.closeBottomSheet();
+    });
   }
 
   public closeBottomSheet(): void {

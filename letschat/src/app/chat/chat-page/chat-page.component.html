@@ -38,6 +38,7 @@
             (keydown)="sendMessage($event)"
             (input)="message = $event.target.value"
             type="text"
+            autocomplete="off"
             [value]="message"
           />
         </mat-form-field>

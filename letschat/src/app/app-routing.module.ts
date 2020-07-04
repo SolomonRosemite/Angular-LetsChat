@@ -2,6 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { UserSettingsComponent } from './home/user-settings/user-settings.component';
+import { EditSettingsComponent } from './home/user-settings/edit-settings/edit-settings.component';
 import { SignupComponent } from './home/signup/signup.component';
 import { LoginComponent } from './home/login/login.component';
 import { ChatPageComponent } from './chat/chat-page/chat-page.component';
@@ -25,6 +26,11 @@ const routes: Routes = [
   {
     path: 'settings',
     component: UserSettingsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'settings/edit',
+    component: EditSettingsComponent,
     canActivate: [AuthGuard],
   },
   {

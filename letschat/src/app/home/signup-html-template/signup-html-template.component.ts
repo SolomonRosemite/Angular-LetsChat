@@ -1,5 +1,5 @@
 import { EventEmitterService } from 'src/app/event-emitter.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
@@ -96,6 +96,10 @@ export class SignupHtmlTemplateComponent implements OnInit {
     }
   }
 
+  nav() {
+    this.router.navigate(['/chat']);
+  }
+
   private async SignupUser(
     email: string,
     password: string,
@@ -124,8 +128,8 @@ export class SignupHtmlTemplateComponent implements OnInit {
   }
 
   public googleSignin(): void {
-    this.auth.googleSignin().then((item) => {
-      this.router.navigate(['/chat']);
+    this.auth.googleSignin().then(() => {
+      this.router.navigate(['chat']);
     });
   }
 
