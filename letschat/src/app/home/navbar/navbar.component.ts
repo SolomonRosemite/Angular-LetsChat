@@ -1,4 +1,4 @@
-import { EventEmitterService } from '../../services/event-emitter.service';
+import { EventEmitterService } from '../../services/event/event-emitter.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

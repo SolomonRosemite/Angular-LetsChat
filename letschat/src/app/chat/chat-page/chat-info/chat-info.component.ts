@@ -1,6 +1,6 @@
 import { AuthService } from './../../../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { EventEmitterService } from 'src/app/services/event-emitter.service';
+import { EventEmitterService } from 'src/app/services/event/event-emitter.service';
 import { User } from 'src/app/services/Models/user.model';
 import { Observable } from 'rxjs/internal/Observable';
 

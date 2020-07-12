@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { User } from './Models/user.model';
-import { Message } from './Models/message.model';
+import { User } from '../Models/user.model';
+import { Message } from '../Models/message.model';
 
 @Injectable({
   providedIn: 'root',

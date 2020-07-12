@@ -1,6 +1,6 @@
 import { Message } from './../../services/Models/message.model';
 import { Component, OnInit } from '@angular/core';
-import { EventEmitterService } from 'src/app/services/event-emitter.service';
+import { EventEmitterService } from 'src/app/services/event/event-emitter.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { DatabaseService } from 'src/app/services/database/database.service';
 

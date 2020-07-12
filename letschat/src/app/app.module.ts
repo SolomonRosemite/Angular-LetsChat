@@ -22,7 +22,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { DatabaseService } from './services/database/database.service';
-import { EventEmitterService } from './services/event-emitter.service';
+import { EventEmitterService } from './services/event/event-emitter.service';
 
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestore } from 'angularfire2/firestore';
@@ -41,8 +41,8 @@ import { HomeComponent } from './home/home.component';
 import { AppComponent } from './app.component';
 import { SignupHtmlTemplateComponent } from './home/signup-html-template/signup-html-template.component';
 import { LoginHtmlTemplateComponent } from './home/login-html-template/login-html-template.component';
-import { InfoDialogComponent } from './common/info-dialog/info-dialog.component';
-import { PopupDialogComponent } from './common/info-dialog/popup-dialog/popup-dialog.component';
+import { InfoDialogComponent } from './home/info-dialog/info-dialog.component';
+import { PopupDialogComponent } from './home/info-dialog/popup-dialog/popup-dialog.component';
 import { ChatPageComponent } from './chat/chat-page/chat-page.component';
 import { ChatNavbarComponent } from './chat/chat-navbar/chat-navbar.component';
 import { OpenChatsComponent } from './chat/chat-page/open-chats/open-chats.component';

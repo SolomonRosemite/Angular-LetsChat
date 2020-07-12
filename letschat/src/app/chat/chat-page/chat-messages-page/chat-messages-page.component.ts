@@ -1,6 +1,6 @@
 import { AuthService } from './../../../services/auth/auth.service';
 import { Component, OnInit, NgZone } from '@angular/core';
-import { EventEmitterService } from 'src/app/services/event-emitter.service';
+import { EventEmitterService } from 'src/app/services/event/event-emitter.service';
 import { Message } from 'src/app/services/Models/message.model';
 import { User } from 'src/app/services/Models/user.model';
 
