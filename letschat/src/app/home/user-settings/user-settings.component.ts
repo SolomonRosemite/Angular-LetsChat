@@ -23,8 +23,7 @@ export class UserSettingsComponent implements OnInit {
   }
 
   edit(): void {
-    console.log(this.me.photoURL);
-    // this.router.navigate(['/settings/edit']);
+    this.router.navigate(['/settings/edit']);
   }
 
   goBack(): void {

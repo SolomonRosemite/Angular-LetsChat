@@ -37,6 +37,6 @@ export class EditSettingsComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/chat']);
+    this.router.navigate(['/settings']);
   }
 }
