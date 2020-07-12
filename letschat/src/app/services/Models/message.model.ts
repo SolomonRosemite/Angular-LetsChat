@@ -1,5 +1,3 @@
-import { User } from './user.model';
-
 export class Message {
   constructor({ chatId, date, sender, receiver, message }) {
     this.chatId = chatId;
@@ -15,11 +13,4 @@ export class Message {
   public readonly receiverUid: string;
 
   public class?: string;
-
-  public who?(me: User): string {
-    if (me.uid === this.senderUid) {
-      return 'me';
-    }
-    return 'receiver';
-  }
 }

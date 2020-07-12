@@ -1,4 +1,4 @@
-import { EventEmitterService } from 'src/app/event-emitter.service';
+import { EventEmitterService } from 'src/app/services/event-emitter.service';
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../../services/auth/auth.service';

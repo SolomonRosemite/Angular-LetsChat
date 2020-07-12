@@ -76,16 +76,6 @@
       <!-- TODO: Add Messenger Method -->
       <button mat-menu-item>Add Messenger</button>
       <button mat-menu-item (click)="openSettings()">Settings</button>
-      <button
-        mat-menu-item
-        (click)="
-          goToLink(
-            'https://docs.google.com/forms/d/e/1FAIpQLSfgNupcmVDMI8CHVJkCfJLslp2Sv2lT0mqkFOV_g2u-3Up6CA/viewform?usp=sf_link'
-          )
-        "
-      >
-        Feedback
-      </button>
     </mat-menu>
     <button mat-button [matMenuTriggerFor]="appMenu2">
       {{ me.displayName }}

@@ -1,5 +1,5 @@
 import { PopupDialogComponent } from './popup-dialog/popup-dialog.component';
-import { EventEmitterService } from '../../event-emitter.service';
+import { EventEmitterService } from '../../services/event-emitter.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 

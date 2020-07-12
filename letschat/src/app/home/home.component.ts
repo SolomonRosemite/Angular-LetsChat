@@ -3,7 +3,7 @@ import { AuthService } from './../services/auth/auth.service';
 import { DatabaseService } from './../services/database/database.service';
 import { BottomPopupComponent } from './bottom-popup/bottom-popup.component';
 import { Component, OnInit } from '@angular/core';
-import { EventEmitterService } from '../event-emitter.service';
+import { EventEmitterService } from '../services/event-emitter.service';
 import {
   MatBottomSheet,
   MatBottomSheetRef,

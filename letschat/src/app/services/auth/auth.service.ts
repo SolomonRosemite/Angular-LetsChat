@@ -57,13 +57,13 @@ export class AuthService {
     return await this.updateUserData(credential.user);
   }
 
-  updateUserData(user: User) {
+  async updateUserData(user: User): Promise<void> {
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
       `users/${user.uid}`
     );
 
-    const data = {
+    const data: User = {
       displayName: user.displayName,
       photoURL: user.photoURL,
       email: user.email,

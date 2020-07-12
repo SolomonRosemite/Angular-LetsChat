@@ -18,13 +18,13 @@ export class UserSettingsComponent implements OnInit {
     uid: 'Loading...',
   });
 
-  async ngOnInit() {
-    this.me = await this.auth.getUser();
+  ngOnInit(): void {
+    this.auth.getUser().then((user) => (this.me = user));
   }
 
   edit(): void {
-    // TODO: Create Edit Page
-    this.router.navigate(['/settings/edit']);
+    console.log(this.me.photoURL);
+    // this.router.navigate(['/settings/edit']);
   }
 
   goBack(): void {

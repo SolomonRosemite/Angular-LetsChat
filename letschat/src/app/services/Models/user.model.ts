@@ -1,9 +1,3 @@
-export interface User {
-  displayName: string;
-  photoURL: string;
-  email: string;
-  uid: string;
-}
 // TODO: Add Location Prop
 export class User {
   constructor({ displayName, email, photoURL, uid }: User) {

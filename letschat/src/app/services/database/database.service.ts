@@ -23,12 +23,34 @@ export class DatabaseService {
       .get();
   }
 
-  public sendMessage(user: User, data: Message): Promise<DocumentReference> {
-    return this.firestore
-      .collection('messages')
-      .doc(user.uid)
-      .collection('chats')
-      .add(data);
+  public async sendMessage(data: Message) {
+    const docs: Promise<DocumentReference>[] = [];
+
+    const message: Message = {
+      date: data.date,
+      chatId: data.chatId,
+      message: data.message,
+      receiverUid: data.receiverUid,
+      senderUid: data.senderUid,
+    };
+
+    docs.push(
+      this.firestore
+        .collection('messages')
+        .doc(message.senderUid)
+        .collection('chats')
+        .add(message)
+    );
+
+    docs.push(
+      this.firestore
+        .collection('messages')
+        .doc(message.receiverUid)
+        .collection('chats')
+        .add(message)
+    );
+
+    return docs;
   }
 
   public updateDisplayName(user: User, newDisplayName: string): Promise<void> {

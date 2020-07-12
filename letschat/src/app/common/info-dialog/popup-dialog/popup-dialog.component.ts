@@ -1,7 +1,7 @@
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, Inject } from '@angular/core';
 
-import { EventEmitterService } from '../../../event-emitter.service';
+import { EventEmitterService } from '../../../services/event-emitter.service';
 
 @Component({
   selector: 'app-popup-dialog',
