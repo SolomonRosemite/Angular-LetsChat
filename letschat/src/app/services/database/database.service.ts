@@ -53,16 +53,17 @@ export class DatabaseService {
     return docs;
   }
 
-  public updateDisplayName(user: User, newDisplayName: string): Promise<void> {
+  public updateUser(updatedUser: User): Promise<void> {
     const userRef: AngularFirestoreDocument<User> = this.firestore.doc(
-      `users/${user.uid}`
+      `users/${updatedUser.uid}`
     );
 
     const data = {
-      displayName: newDisplayName,
-      email: user.email,
-      photoURL: user.photoURL,
-      uid: user.uid,
+      displayName: updatedUser.displayName,
+      email: updatedUser.email,
+      photoURL: updatedUser.photoURL,
+      location: updatedUser.location,
+      uid: updatedUser.uid,
     };
 
     return userRef.set(data, { merge: true });

@@ -16,21 +16,41 @@
     <span> </span>
   </mat-toolbar>
   <div class="card">
-    <img
-      src="{{ me.photoURL }}"
-      alt="John"
-      style="width: 150px; height: 150px;"
-    />
-    <h1 style="font-size: 28px; margin-top: 10px;">{{ me.displayName }}</h1>
-    <p class="title">Let's Chat User Info</p>
-    <p>Location: Hamburg, Germany</p>
+    <img src="{{ me.photoURL }}" style="width: 150px; height: 150px;" />
+    <h1 style="font-size: 28px; margin-top: 10px;">
+      {{ tempUser.displayName }}
+    </h1>
     <p>Email: {{ me.email }}</p>
-    <p>User id: {{ me.uid }}</p>
+    <p>User Id: {{ me.uid }}</p>
+    <div>
+      <form class="input-form">
+        <mat-form-field class="input-form-width">
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            (keyup)="onKeydisplayName($event)"
+            placeholder="Ex. James"
+            autocomplete="off"
+            value="{{ me.displayName }}"
+          />
+        </mat-form-field>
+        <mat-form-field class="input-form-width">
+          <mat-label>Location</mat-label>
+          <input
+            matInput
+            (keyup)="onKeyLocation($event)"
+            placeholder="Ex. Hamburg, Germany"
+            autocomplete="off"
+            value="{{ me.location }}"
+          />
+        </mat-form-field>
+      </form>
+    </div>
     <button
       mat-button
       style="
         background-color: rgb(53, 236, 53);
-        margin-top: 50px;
+        margin-top: 20px;
         color: white;
       "
       (click)="save()"
@@ -44,7 +64,7 @@
         color: white;
         margin-top: 20px;
       "
-      (click)="discard()"
+      (click)="goBack()"
     >
       Discard
     </button>

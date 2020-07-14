@@ -4,13 +4,6 @@ import { EventEmitterService } from 'src/app/services/event/event-emitter.servic
 import { User } from 'src/app/services/Models/user.model';
 import { Observable } from 'rxjs/internal/Observable';
 
-export interface Tile {
-  color: string;
-  cols: number;
-  rows: number;
-  text: string;
-}
-
 @Component({
   selector: 'app-chat-info',
   templateUrl: './chat-info.component.html',

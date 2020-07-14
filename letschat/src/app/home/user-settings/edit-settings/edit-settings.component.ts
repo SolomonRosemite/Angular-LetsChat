@@ -1,3 +1,4 @@
+import { DatabaseService } from 'src/app/services/database/database.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
@@ -9,7 +10,11 @@ import { User } from 'src/app/services/Models/user.model';
   styleUrls: ['./edit-settings.component.scss'],
 })
 export class EditSettingsComponent implements OnInit {
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private datebase: DatabaseService
+  ) {}
 
   me = new User({
     displayName: 'Loading...',
@@ -18,7 +23,12 @@ export class EditSettingsComponent implements OnInit {
     uid: 'Loading...',
   });
 
-  tempUser: User;
+  tempUser = new User({
+    displayName: 'Loading...',
+    photoURL: '',
+    email: 'Loading...',
+    uid: 'Loading...',
+  });
 
   ngOnInit(): void {
     this.auth.getUser().then((user) => {
@@ -28,15 +38,18 @@ export class EditSettingsComponent implements OnInit {
   }
 
   async save(): Promise<void> {
-    // TODO
-    await this.auth.updateUserData(this.me);
-  }
-
-  discard(): void {
+    await this.datebase.updateUser(this.tempUser);
     this.router.navigate(['/settings']);
   }
 
   goBack(): void {
     this.router.navigate(['/settings']);
+  }
+
+  onKeydisplayName(event): void {
+    this.tempUser.displayName = event.target.value;
+  }
+  onKeyLocation(event): void {
+    this.tempUser.location = event.target.value;
   }
 }

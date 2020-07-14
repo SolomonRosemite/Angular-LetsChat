@@ -16,14 +16,10 @@
     <span> </span>
   </mat-toolbar>
   <div class="card">
-    <img
-      src="{{ me.photoURL }}"
-      alt="John"
-      style="width: 150px; height: 150px;"
-    />
+    <img src="{{ me.photoURL }}" style="width: 150px; height: 150px;" />
     <h1 style="font-size: 28px; margin-top: 10px;">{{ me.displayName }}</h1>
     <p class="title">Let's Chat User Info</p>
-    <p>Location: Hamburg, Germany</p>
+    <p *ngIf="me.location">Location: {{ me.location }}</p>
     <p>Email: {{ me.email }}</p>
     <p>User id: {{ me.uid }}</p>
     <button
