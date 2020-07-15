@@ -2,7 +2,7 @@ import { DatabaseService } from 'src/app/services/database/database.service';
 import { AuthService } from './../../../services/auth/auth.service';
 import { Message } from 'src/app/services/Models/message.model';
 import { User } from 'src/app/services/Models/user.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-chat-messages-page',
@@ -10,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat-messages-page.component.scss'],
 })
 export class ChatMessagesPageComponent implements OnInit {
-  constructor(private auth: AuthService, private database: DatabaseService) {}
+  constructor(
+    private auth: AuthService,
+    private database: DatabaseService,
+    public ngZone: NgZone
+  ) {}
   messages: Message[] = [];
   me: User;
 
@@ -24,13 +28,13 @@ export class ChatMessagesPageComponent implements OnInit {
     const messages = this.database.receiveMessages(this.me).ref;
     const query = messages.orderBy('timestamp').startAt(date);
 
-    (await messages.orderBy('timestamp').get()).docs.forEach((item) => {
-      this.addMessage(item.data() as Message);
-    });
-
-    query.onSnapshot((items) => {
-      items.docChanges().forEach((element) => {
-        this.addMessage(element.doc.data() as Message);
+    this.ngZone.run(() => {
+      query.onSnapshot((items) => {
+        items.docChanges().forEach((element) => {
+          this.ngZone.run((): void => {
+            this.addMessage(element.doc.data() as Message);
+          });
+        });
       });
     });
   }
