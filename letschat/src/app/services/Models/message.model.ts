@@ -1,16 +1,16 @@
 export class Message {
-  constructor({ chatId, date, sender, receiver, message }) {
+  constructor({ chatId, sender, receiver, message, timestamp }) {
     this.chatId = chatId;
-    this.date = date;
     this.message = message;
     this.receiverUid = receiver;
     this.senderUid = sender;
+    this.timestamp = timestamp;
   }
   public readonly chatId: string;
-  public readonly date: string;
   public readonly message: string;
   public readonly senderUid: string;
   public readonly receiverUid: string;
+  public readonly timestamp: Date;
 
   public class?: string;
 }

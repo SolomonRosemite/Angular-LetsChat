@@ -14,8 +14,7 @@ export class ChatPageComponent implements OnInit {
   constructor(
     private eventEmitterService: EventEmitterService,
     private database: DatabaseService,
-    private auth: AuthService,
-    public datepipe: DatePipe
+    private auth: AuthService
   ) {}
 
   message = '';
@@ -41,10 +40,10 @@ export class ChatPageComponent implements OnInit {
     // todo: adjust here
     const message = new Message({
       chatId: '1234',
-      date: this.dateToString(Date.now()),
       message: this.message,
       receiver: myReceiver,
       sender: mySender,
+      timestamp: new Date(),
       // receiver: '0T5Tcxi2OUfXKvJdcom3psJG5uK2',
       // sender: user.uid,
     });
@@ -52,13 +51,5 @@ export class ChatPageComponent implements OnInit {
 
     this.database.sendMessage(message);
     this.eventEmitterService.sendMessage(message);
-  }
-
-  dateToString(date: number): string {
-    return this.datepipe.transform(date, 'dd.MM.yyyy HH:mm:ss:SSS');
-  }
-
-  stringToDate(date: string): Date {
-    return new Date(date);
   }
 }

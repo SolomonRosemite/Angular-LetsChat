@@ -22,15 +22,15 @@ export class DatabaseService {
       .collection<Message>('chats');
   }
 
-  public async sendMessage(data: Message) {
+  public sendMessage(data: Message) {
     const docs: Promise<DocumentReference>[] = [];
 
     const message: Message = {
-      date: data.date,
       chatId: data.chatId,
       message: data.message,
       receiverUid: data.receiverUid,
       senderUid: data.senderUid,
+      timestamp: new Date(),
     };
 
     docs.push(

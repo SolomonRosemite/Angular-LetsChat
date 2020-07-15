@@ -1,9 +1,8 @@
 import { DatabaseService } from 'src/app/services/database/database.service';
 import { AuthService } from './../../../services/auth/auth.service';
-import { Component, OnInit, NgZone } from '@angular/core';
-import { EventEmitterService } from 'src/app/services/event/event-emitter.service';
 import { Message } from 'src/app/services/Models/message.model';
 import { User } from 'src/app/services/Models/user.model';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-chat-messages-page',
@@ -13,78 +12,30 @@ import { User } from 'src/app/services/Models/user.model';
 export class ChatMessagesPageComponent implements OnInit {
   constructor(private auth: AuthService, private database: DatabaseService) {}
   messages: Message[] = [];
-  tempMessages: Message[] = [];
   me: User;
 
   firstRun = true;
 
   async ngOnInit(): Promise<void> {
     this.me = await this.auth.getUser();
-    // this.messages = [
-    //   {
-    //     message: 'Hey, do you have to do homework for Math?',
-    //     class: 'chatBubble chatBubble--rcvd chatBubble--stop',
-    //     chatId: '...',
-    //     date: new Date(),
-    //     receiverUid: 'qzBWXBualqdXzrGlQ38sEM3dXxt2',
-    //     senderUid: '1234',
-    //   },
-    //   {
-    //     message: 'Sure',
-    //     class: 'chatBubble chatBubble--sent chatBubble--stop',
-    //     chatId: '...',
-    //     date: new Date(),
-    //     receiverUid: '1234',
-    //     senderUid: 'qzBWXBualqdXzrGlQ38sEM3dXxt2',
-    //   },
-    //   {
-    //     message: 'I just send them. Check the Shared Files.',
-    //     class: 'chatBubble chatBubble--sent chatBubble--stop',
-    //     chatId: '...',
-    //     date: new Date(),
-    //     receiverUid: '1234',
-    //     senderUid: 'qzBWXBualqdXzrGlQ38sEM3dXxt2',
-    //   },
-    //   {
-    //     message: 'Thanks!😀',
-    //     class: 'chatBubble chatBubble--rcvd chatBubble--stop',
-    //     chatId: '...',
-    //     date: new Date(),
-    //     receiverUid: 'qzBWXBualqdXzrGlQ38sEM3dXxt2',
-    //     senderUid: '1234',
-    //   },
-    //   {
-    //     // tslint:disable-next-line: quotemark
-    //     message: "You're Welcome.",
-    //     class: 'chatBubble chatBubble--sent chatBubble--stop',
-    //     chatId: '...',
-    //     date: new Date(),
-    //     receiverUid: '1234',
-    //     senderUid: 'qzBWXBualqdXzrGlQ38sEM3dXxt2',
-    //   },
-    // ];
 
-    const x = this.database.receiveMessages(this.me);
-    const y = x.valueChanges();
+    const date = new Date().getTime();
 
-    y.subscribe((items) => {
-      this.tempMessages = items;
-      // todo: sort array by date
-      this.sortTempMessages();
+    const messages = this.database.receiveMessages(this.me).ref;
+    const query = messages.orderBy('timestamp').startAt(date);
 
-      // todo: add items from tempMessages to messages
-      this.tempMessages.forEach((message) => {
-        this.addMessage(message);
+    (await messages.orderBy('timestamp').get()).docs.forEach((item) => {
+      this.addMessage(item.data() as Message);
+    });
+
+    query.onSnapshot((items) => {
+      items.docChanges().forEach((element) => {
+        this.addMessage(element.doc.data() as Message);
       });
     });
   }
 
-  sortTempMessages(): void {} // todo: implement sort
-
   async addMessage(message: Message): Promise<void> {
-    if (this.me == null) {
-      this.me = await this.auth.getUser(); // todo: use then here
-    }
     const length = this.messages.length;
 
     if (length === 0) {
