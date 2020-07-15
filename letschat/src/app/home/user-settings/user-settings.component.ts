@@ -14,6 +14,7 @@ export class UserSettingsComponent implements OnInit {
   me = new User({
     displayName: 'Loading...',
     photoURL: '',
+    location: 'Loading...',
     email: 'Loading...',
     uid: 'Loading...',
   });

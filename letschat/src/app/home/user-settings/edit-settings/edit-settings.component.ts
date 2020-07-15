@@ -19,6 +19,7 @@ export class EditSettingsComponent implements OnInit {
   me = new User({
     displayName: 'Loading...',
     photoURL: '',
+    location: 'Loading...',
     email: 'Loading...',
     uid: 'Loading...',
   });
@@ -26,6 +27,7 @@ export class EditSettingsComponent implements OnInit {
   tempUser = new User({
     displayName: 'Loading...',
     photoURL: '',
+    location: 'Loading...',
     email: 'Loading...',
     uid: 'Loading...',
   });

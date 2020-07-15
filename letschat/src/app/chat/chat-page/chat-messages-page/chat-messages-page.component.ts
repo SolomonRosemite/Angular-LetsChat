@@ -11,11 +11,7 @@ import { User } from 'src/app/services/Models/user.model';
   styleUrls: ['./chat-messages-page.component.scss'],
 })
 export class ChatMessagesPageComponent implements OnInit {
-  constructor(
-    private eventEmitterService: EventEmitterService,
-    private auth: AuthService,
-    private database: DatabaseService
-  ) {}
+  constructor(private auth: AuthService, private database: DatabaseService) {}
   messages: Message[] = [];
   tempMessages: Message[] = [];
   me: User;
@@ -70,19 +66,20 @@ export class ChatMessagesPageComponent implements OnInit {
 
     const x = this.database.receiveMessages(this.me);
     const y = x.valueChanges();
-    // const z = x.snapshotChanges();
-
-    // z.subscribe((item) => {
-    //   console.log(item[0].payload.doc.data());
-    // });
 
     y.subscribe((items) => {
       this.tempMessages = items;
       // todo: sort array by date
+      this.sortTempMessages();
 
       // todo: add items from tempMessages to messages
+      this.tempMessages.forEach((message) => {
+        this.addMessage(message);
+      });
     });
   }
+
+  sortTempMessages(): void {} // todo: implement sort
 
   async addMessage(message: Message): Promise<void> {
     if (this.me == null) {

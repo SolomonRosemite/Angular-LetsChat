@@ -12,7 +12,13 @@ import { Observable } from 'rxjs/internal/Observable';
 export class ChatInfoComponent implements OnInit {
   constructor(private auth: AuthService) {}
 
-  user = new User({ displayName: '', email: '', photoURL: '', uid: '' });
+  user = new User({
+    displayName: '',
+    email: '',
+    location: '',
+    photoURL: '',
+    uid: '',
+  });
 
   ngOnInit(): void {
     if (this.user.displayName.length === 0) {
