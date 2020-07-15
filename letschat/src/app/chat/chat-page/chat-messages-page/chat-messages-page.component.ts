@@ -12,56 +12,55 @@ import { User } from 'src/app/services/Models/user.model';
 export class ChatMessagesPageComponent implements OnInit {
   constructor(
     private eventEmitterService: EventEmitterService,
-    private auth: AuthService,
-    private zone: NgZone
+    private auth: AuthService
   ) {}
   messages: Message[] = [];
   me: User;
 
   ngOnInit(): void {
-    this.messages = [
-      {
-        message: 'Hey, do you have to do homework for Math?',
-        class: 'chatBubble chatBubble--rcvd chatBubble--stop',
-        chatId: '...',
-        date: new Date(),
-        receiverUid: 'qzBWXBualqdXzrGlQ38sEM3dXxt2',
-        senderUid: '1234',
-      },
-      {
-        message: 'Sure',
-        class: 'chatBubble chatBubble--sent chatBubble--stop',
-        chatId: '...',
-        date: new Date(),
-        receiverUid: '1234',
-        senderUid: 'qzBWXBualqdXzrGlQ38sEM3dXxt2',
-      },
-      {
-        message: 'I just send them. Check the Shared Files.',
-        class: 'chatBubble chatBubble--sent chatBubble--stop',
-        chatId: '...',
-        date: new Date(),
-        receiverUid: '1234',
-        senderUid: 'qzBWXBualqdXzrGlQ38sEM3dXxt2',
-      },
-      {
-        message: 'Thanks!😀',
-        class: 'chatBubble chatBubble--rcvd chatBubble--stop',
-        chatId: '...',
-        date: new Date(),
-        receiverUid: 'qzBWXBualqdXzrGlQ38sEM3dXxt2',
-        senderUid: '1234',
-      },
-      {
-        // tslint:disable-next-line: quotemark
-        message: "You're Welcome.",
-        class: 'chatBubble chatBubble--sent chatBubble--stop',
-        chatId: '...',
-        date: new Date(),
-        receiverUid: '1234',
-        senderUid: 'qzBWXBualqdXzrGlQ38sEM3dXxt2',
-      },
-    ];
+    // this.messages = [
+    //   {
+    //     message: 'Hey, do you have to do homework for Math?',
+    //     class: 'chatBubble chatBubble--rcvd chatBubble--stop',
+    //     chatId: '...',
+    //     date: new Date(),
+    //     receiverUid: 'qzBWXBualqdXzrGlQ38sEM3dXxt2',
+    //     senderUid: '1234',
+    //   },
+    //   {
+    //     message: 'Sure',
+    //     class: 'chatBubble chatBubble--sent chatBubble--stop',
+    //     chatId: '...',
+    //     date: new Date(),
+    //     receiverUid: '1234',
+    //     senderUid: 'qzBWXBualqdXzrGlQ38sEM3dXxt2',
+    //   },
+    //   {
+    //     message: 'I just send them. Check the Shared Files.',
+    //     class: 'chatBubble chatBubble--sent chatBubble--stop',
+    //     chatId: '...',
+    //     date: new Date(),
+    //     receiverUid: '1234',
+    //     senderUid: 'qzBWXBualqdXzrGlQ38sEM3dXxt2',
+    //   },
+    //   {
+    //     message: 'Thanks!😀',
+    //     class: 'chatBubble chatBubble--rcvd chatBubble--stop',
+    //     chatId: '...',
+    //     date: new Date(),
+    //     receiverUid: 'qzBWXBualqdXzrGlQ38sEM3dXxt2',
+    //     senderUid: '1234',
+    //   },
+    //   {
+    //     // tslint:disable-next-line: quotemark
+    //     message: "You're Welcome.",
+    //     class: 'chatBubble chatBubble--sent chatBubble--stop',
+    //     chatId: '...',
+    //     date: new Date(),
+    //     receiverUid: '1234',
+    //     senderUid: 'qzBWXBualqdXzrGlQ38sEM3dXxt2',
+    //   },
+    // ];
 
     this.eventEmitterService.invokeSendMessageFunction.subscribe(
       (message: Message) => {

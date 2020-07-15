@@ -9,6 +9,6 @@ export class User {
   displayName: string;
   email: string;
   photoURL: string;
-  location?: string;
+  location: string;
   uid: string;
 }

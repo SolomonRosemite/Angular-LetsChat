@@ -17,7 +17,9 @@
   </mat-toolbar>
   <div class="card">
     <img src="{{ me.photoURL }}" style="width: 150px; height: 150px;" />
-    <h1 style="font-size: 28px; margin-top: 10px;">{{ me.displayName }}</h1>
+    <h1 style="font-size: 28px; margin-top: 10px; margin-bottom: 20px;">
+      {{ me.displayName }}
+    </h1>
     <p class="title">Let's Chat User Info</p>
     <p *ngIf="me.location">Location: {{ me.location }}</p>
     <p>Email: {{ me.email }}</p>

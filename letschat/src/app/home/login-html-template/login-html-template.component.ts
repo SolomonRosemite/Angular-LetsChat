@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login-html-template',
@@ -13,7 +14,8 @@ export class LoginHtmlTemplateComponent implements OnInit {
   constructor(
     private eventEmitterService: EventEmitterService,
     public auth: AuthService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {}
 
   validData = false;
@@ -23,7 +25,13 @@ export class LoginHtmlTemplateComponent implements OnInit {
   email = '';
   password = '';
 
-  ngOnInit(): void {}
+  userLocation = '';
+
+  ngOnInit(): void {
+    this.http.get('http://ip-api.com/json').subscribe((item: any) => {
+      this.userLocation = `${item.city} ${item.country}`;
+    });
+  }
 
   setEmail(event): void {
     this.email = event.target.value;
@@ -39,9 +47,10 @@ export class LoginHtmlTemplateComponent implements OnInit {
     if ((await this.SigninUser(this.email, this.password)) !== true) {
       this.eventEmitterService.showDialog('Invalid Data', this.reason);
       this.buttonColor = '#CD6155';
-    } else {
-      this.router.navigate(['/chat']);
+      return;
     }
+
+    this.router.navigate(['/chat']);
   }
 
   async SigninUser(email: string, password: string): Promise<boolean> {
@@ -71,7 +80,7 @@ export class LoginHtmlTemplateComponent implements OnInit {
   }
 
   public googleSignin() {
-    this.auth.googleSignin().then((_) => {
+    this.auth.googleSignin(this.userLocation).then(() => {
       this.router.navigate(['chat']);
     });
   }

@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -51,6 +52,7 @@ import { ChatInfoComponent } from './chat/chat-page/chat-info/chat-info.componen
 import { FileReferenceCardComponent } from './chat/common/file-reference-card/file-reference-card.component';
 import { ChatMessagesPageComponent } from './chat/chat-page/chat-messages-page/chat-messages-page.component';
 import { EditSettingsComponent } from './home/user-settings/edit-settings/edit-settings.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -99,8 +101,9 @@ import { EditSettingsComponent } from './home/user-settings/edit-settings/edit-s
     MatTabsModule,
     RouterModule,
     FormsModule,
+    HttpClientModule,
   ],
-  providers: [EventEmitterService, DatabaseService, AngularFirestore],
+  providers: [EventEmitterService, DatabaseService, AngularFirestore, DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

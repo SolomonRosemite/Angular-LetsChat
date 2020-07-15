@@ -7,7 +7,7 @@ export class Message {
     this.senderUid = sender;
   }
   public readonly chatId: string;
-  public readonly date: Date;
+  public readonly date: string;
   public readonly message: string;
   public readonly senderUid: string;
   public readonly receiverUid: string;

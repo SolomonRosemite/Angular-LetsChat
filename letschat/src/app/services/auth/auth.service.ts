@@ -50,14 +50,22 @@ export class AuthService {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
-  async googleSignin() {
+  async googleSignin(userLocation: string) {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.auth.signInWithPopup(provider);
 
-    return await this.setUserData(credential.user);
+    const user: User = {
+      displayName: credential.user.displayName,
+      email: credential.user.email,
+      location: userLocation,
+      photoURL: credential.user.photoURL,
+      uid: credential.user.uid,
+    };
+
+    return await this.setUserData(user);
   }
 
-  private async setUserData(user: User): Promise<void> {
+  async setUserData(user: User): Promise<void> {
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
       `users/${user.uid}`
@@ -66,6 +74,7 @@ export class AuthService {
     const data: User = {
       displayName: user.displayName,
       photoURL: user.photoURL,
+      location: user.location,
       email: user.email,
       uid: user.uid,
     };
