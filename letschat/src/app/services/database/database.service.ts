@@ -15,12 +15,11 @@ import { Message } from '../Models/message.model';
 export class DatabaseService {
   constructor(private firestore: AngularFirestore) {}
 
-  public receiveMessages(user: User): DocumentData {
+  public receiveMessages(user: User) {
     return this.firestore
       .collection('messages')
       .doc(user.uid)
-      .collection<Message>('chats')
-      .get();
+      .collection<Message>('chats');
   }
 
   public async sendMessage(data: Message) {

@@ -29,23 +29,36 @@ export class ChatPageComponent implements OnInit {
 
     const user = await this.auth.getUser();
 
+    // todo: temp data
+    if (user.uid === '0T5Tcxi2OUfXKvJdcom3psJG5uK2') {
+      var mySender = '0T5Tcxi2OUfXKvJdcom3psJG5uK2';
+      var myReceiver = 'YdydojqkxIS60B3q67hrO4KZR9i2';
+    } else {
+      var mySender = 'YdydojqkxIS60B3q67hrO4KZR9i2';
+      var myReceiver = '0T5Tcxi2OUfXKvJdcom3psJG5uK2';
+    }
+
     // todo: adjust here
     const message = new Message({
       chatId: '1234',
-      date: this.toDateTime(Date.now()),
+      date: this.dateToString(Date.now()),
       message: this.message,
-      receiver: '0T5Tcxi2OUfXKvJdcom3psJG5uK2',
-      sender: user.uid,
+      receiver: myReceiver,
+      sender: mySender,
+      // receiver: '0T5Tcxi2OUfXKvJdcom3psJG5uK2',
+      // sender: user.uid,
     });
     this.message = '';
 
     this.database.sendMessage(message);
-
     this.eventEmitterService.sendMessage(message);
   }
 
-  toDateTime(date: number): string {
-    return this.datepipe.transform(date, 'dd.MM.yyyy');
-    // todo: add hour min and sec
+  dateToString(date: number): string {
+    return this.datepipe.transform(date, 'dd.MM.yyyy HH:mm:ss:SSS');
+  }
+
+  stringToDate(date: string): Date {
+    return new Date(date);
   }
 }

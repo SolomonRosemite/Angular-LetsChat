@@ -1,3 +1,4 @@
+import { DatabaseService } from 'src/app/services/database/database.service';
 import { AuthService } from './../../../services/auth/auth.service';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { EventEmitterService } from 'src/app/services/event/event-emitter.service';
@@ -12,12 +13,17 @@ import { User } from 'src/app/services/Models/user.model';
 export class ChatMessagesPageComponent implements OnInit {
   constructor(
     private eventEmitterService: EventEmitterService,
-    private auth: AuthService
+    private auth: AuthService,
+    private database: DatabaseService
   ) {}
   messages: Message[] = [];
+  tempMessages: Message[] = [];
   me: User;
 
-  ngOnInit(): void {
+  firstRun = true;
+
+  async ngOnInit(): Promise<void> {
+    this.me = await this.auth.getUser();
     // this.messages = [
     //   {
     //     message: 'Hey, do you have to do homework for Math?',
@@ -62,16 +68,25 @@ export class ChatMessagesPageComponent implements OnInit {
     //   },
     // ];
 
-    this.eventEmitterService.invokeSendMessageFunction.subscribe(
-      (message: Message) => {
-        this.addMessage(message);
-      }
-    );
+    const x = this.database.receiveMessages(this.me);
+    const y = x.valueChanges();
+    // const z = x.snapshotChanges();
+
+    // z.subscribe((item) => {
+    //   console.log(item[0].payload.doc.data());
+    // });
+
+    y.subscribe((items) => {
+      this.tempMessages = items;
+      // todo: sort array by date
+
+      // todo: add items from tempMessages to messages
+    });
   }
 
   async addMessage(message: Message): Promise<void> {
     if (this.me == null) {
-      this.me = await this.auth.getUser();
+      this.me = await this.auth.getUser(); // todo: use then here
     }
     const length = this.messages.length;
 
