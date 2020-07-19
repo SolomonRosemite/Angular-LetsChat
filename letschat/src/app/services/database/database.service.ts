@@ -28,9 +28,13 @@ export class DatabaseService {
     const message: Message = {
       chatId: data.chatId,
       message: data.message,
+      receiverDisplayName: data.receiverDisplayName,
+      receiverPhotoURL: data.receiverPhotoURL,
       receiverUid: data.receiverUid,
+      senderDisplayName: data.senderDisplayName,
+      senderPhotoURL: data.senderPhotoURL,
       senderUid: data.senderUid,
-      timestamp: new Date(),
+      timestamp: data.timestamp,
     };
 
     docs.push(

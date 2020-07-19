@@ -1,13 +1,9 @@
 import { Router } from '@angular/router';
 import { AuthService } from './../services/auth/auth.service';
-import { DatabaseService } from './../services/database/database.service';
 import { BottomPopupComponent } from './bottom-popup/bottom-popup.component';
 import { Component, OnInit } from '@angular/core';
 import { EventEmitterService } from '../services/event/event-emitter.service';
-import {
-  MatBottomSheet,
-  MatBottomSheetRef,
-} from '@angular/material/bottom-sheet';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-home',
@@ -28,11 +24,11 @@ export class HomeComponent implements OnInit {
     if (isLoggedIn) {
       this.router.navigate(['/chat']);
     }
-    this.eventEmitterService.invokeBottomBarOpenFunction.subscribe(() => {
+    this.eventEmitterService.onBottomBarOpenFunction.subscribe(() => {
       this.openBottomSheet();
     });
 
-    this.eventEmitterService.invokeBottomBarCloseFunction.subscribe(() => {
+    this.eventEmitterService.onBottomBarCloseFunction.subscribe(() => {
       this.closeBottomSheet();
     });
   }

@@ -1,4 +1,4 @@
-<button mat-button type="button" class="block">
+<button mat-button (click)="selectedUser()" type="button" class="block">
   <div
     style="
       display: inline-flex;
@@ -9,15 +9,15 @@
       width: 100%;
     "
   >
-    <span style="display: inline-flex;">
+    <span>
       <img
         style="
           border-radius: 50%;
-          padding-left: 10px;
-          width: 40px;
-          height: 40px;
+          margin-left: 20px;
+          width: 50px;
+          height: 50px;
         "
-        src="{{ imageUrl }}"
+        src="{{ info.photoURL }}"
       />
       <div
         style="
@@ -27,13 +27,14 @@
           text-align: start;
         "
       >
-        <h6 class="name">{{ displayname }}</h6>
-        <div style="padding-top: 5px;"></div>
-        <h6 class="message">{{ message }}</h6>
+        <h6 class="name">{{ info.displayName }}</h6>
+        <h6 class="message" style="margin-top: 5px;">
+          {{ shortMessage(info.latestMessage) }}
+        </h6>
       </div>
     </span>
     <span>
-      <h6 class="date">{{ lastSeen }}</h6>
+      <h6 class="date">{{ info.date }}</h6>
     </span>
   </div>
 </button>

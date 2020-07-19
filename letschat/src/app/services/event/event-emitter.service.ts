@@ -10,38 +10,39 @@ export class EventEmitterService {
   constructor() {}
 
   // Homepage
-  invokeBottomBarOpenFunction = new EventEmitter();
-  invokeBottomBarCloseFunction = new EventEmitter();
-  invokeOpenPopupDialogFunction = new EventEmitter<any>();
-  invokeClosePopupDialogFunction = new EventEmitter();
-  invokeSendMessageFunction = new EventEmitter<Message>();
+  onBottomBarOpenFunction = new EventEmitter();
+  onBottomBarCloseFunction = new EventEmitter();
+  onOpenPopupDialogFunction = new EventEmitter<any>();
+  onClosePopupDialogFunction = new EventEmitter();
+  onNewMessage = new EventEmitter<Message[]>();
 
   // ChatPage
-  invokeUserSelectedOnChatPage = new EventEmitter();
+  invokeUserSelectedOnChatPage = new EventEmitter<string>();
 
   // HomePage
   onBottomBarClickClose(): void {
-    this.invokeBottomBarCloseFunction.emit();
+    this.onBottomBarCloseFunction.emit();
   }
 
   onBottomBarClickOpen(): void {
-    this.invokeBottomBarOpenFunction.emit();
+    this.onBottomBarOpenFunction.emit();
   }
 
   showDialog(title: string, text: string): void {
     const data = [title, text];
-    this.invokeOpenPopupDialogFunction.emit(data);
+    this.onOpenPopupDialogFunction.emit(data);
   }
 
   closeDialog(): void {
-    this.invokeClosePopupDialogFunction.emit();
-  }
-  sendMessage(message: Message): void {
-    this.invokeSendMessageFunction.emit(message);
+    this.onClosePopupDialogFunction.emit();
   }
 
   // ChatPage
-  onUserSelectedOnChatPage(user: User): void {
-    this.invokeUserSelectedOnChatPage.emit(user);
+  onUserSelectedOnChatPage(uid: string): void {
+    this.invokeUserSelectedOnChatPage.emit(uid);
+  }
+
+  onNewMessageReceived(message: Message[]): void {
+    this.onNewMessage.emit(message);
   }
 }

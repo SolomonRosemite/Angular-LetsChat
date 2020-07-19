@@ -1,8 +1,10 @@
+import { EventEmitterService } from 'src/app/services/event/event-emitter.service';
 import { DatabaseService } from 'src/app/services/database/database.service';
 import { AuthService } from './../../../services/auth/auth.service';
 import { Message } from 'src/app/services/Models/message.model';
 import { User } from 'src/app/services/Models/user.model';
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, Input } from '@angular/core';
+import { templateSourceUrl } from '@angular/compiler';
 
 @Component({
   selector: 'app-chat-messages-page',
@@ -11,35 +13,66 @@ import { Component, OnInit, NgZone } from '@angular/core';
 })
 export class ChatMessagesPageComponent implements OnInit {
   constructor(
+    private eventEmitterService: EventEmitterService,
     private auth: AuthService,
-    private database: DatabaseService,
     public ngZone: NgZone
   ) {}
-  messages: Message[] = [];
-  me: User;
 
-  firstRun = true;
+  me: User;
+  receiver: User;
+  messages: Message[] = [];
+
+  allMessages: Message[] = [];
 
   async ngOnInit(): Promise<void> {
     this.me = await this.auth.getUser();
 
-    const date = new Date().getTime();
+    this.eventEmitterService.invokeUserSelectedOnChatPage.subscribe(
+      (user: User) => {
+        this.receiver = user;
 
-    const messages = this.database.receiveMessages(this.me).ref;
-    const query = messages.orderBy('timestamp').startAt(date);
+        this.messages = [];
 
-    this.ngZone.run(() => {
-      query.onSnapshot((items) => {
-        items.docChanges().forEach((element) => {
+        this.allMessages.forEach((element) => {
           this.ngZone.run((): void => {
-            this.addMessage(element.doc.data() as Message);
+            // todo: Only add messages that are from this chat
+            this.addMessage(element);
           });
         });
+      }
+    );
+
+    this.eventEmitterService.onNewMessage.subscribe((items: Message[]) => {
+      console.log('as');
+
+      items.forEach((element) => {
+        this.allMessages.push(element);
       });
+
+      // if (this.receiver) {
+      //   this.allMessages.forEach((element) => {
+      //     this.ngZone.run((): void => {
+      //       // todo: Only add messages that are from this chat
+      //       this.addMessage(element);
+      //     });
+      //   });
+      // }
     });
   }
 
+  // showMessages(): Message[] {
+  //   let items: Message[] = [];
+
+  //   this.messages.forEach((message) => {});
+
+  //   return items;
+  // }
+
   async addMessage(message: Message): Promise<void> {
+    if (this.me == null) {
+      this.me = await this.auth.getUser();
+    }
+
     const length = this.messages.length;
 
     if (length === 0) {

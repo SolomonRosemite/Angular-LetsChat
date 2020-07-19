@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { EventEmitterService } from 'src/app/services/event/event-emitter.service';
+import { User } from 'src/app/services/Models/user.model';
+import { Component, OnInit, Input } from '@angular/core';
+import { ChatCardInfo } from 'src/app/services/Models/ChatCardInfo.model';
 
 @Component({
   selector: 'app-chat-card',
@@ -6,39 +9,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat-card.component.scss'],
 })
 export class ChatCardComponent implements OnInit {
-  constructor() {}
+  @Input()
+  info: ChatCardInfo;
 
-  displayname: string;
-  message: string;
-  lastSeen: string;
-  imageUrl: string;
+  constructor(private eventEmitterService: EventEmitterService) {}
 
-  ngOnInit(): void {
-    const result = Math.random();
-    if (result > 0.1 && result < 0.2) {
-      this.displayname = 'James';
-      this.lastSeen = 'Online';
-      this.message = 'I will be there.';
-      this.imageUrl =
-        'https://i.pinimg.com/originals/2e/2f/ac/2e2fac9d4a392456e511345021592dd2.jpg';
-    } else if (result > 0.2 && result < 0.4) {
-      this.displayname = 'Lessie';
-      this.lastSeen = 'Fri';
-      this.message = 'Hi';
-      this.imageUrl =
-        'https://i.pinimg.com/originals/2e/2f/ac/2e2fac9d4a392456e511345021592dd2.jpg';
-    } else if (result > 0.4 && result < 0.8) {
-      this.displayname = 'Jesse';
-      this.lastSeen = 'Mon';
-      this.message = 'You got the Homework?';
-      this.imageUrl =
-        'https://i.pinimg.com/originals/2e/2f/ac/2e2fac9d4a392456e511345021592dd2.jpg';
-    } else {
-      this.displayname = 'Jamie';
-      this.lastSeen = 'Thu';
-      this.message = 'Sure😘';
-      this.imageUrl =
-        'https://i.pinimg.com/originals/2e/2f/ac/2e2fac9d4a392456e511345021592dd2.jpg';
+  ngOnInit(): void {}
+
+  selectedUser(): void {
+    if (this.info.receiverUid) {
+      this.eventEmitterService.onUserSelectedOnChatPage(this.info.receiverUid);
     }
+  }
+
+  shortMessage(message: string): string {
+    if (message.length < 24) {
+      return message;
+    }
+
+    return message.substring(0, 24) + '...';
   }
 }
