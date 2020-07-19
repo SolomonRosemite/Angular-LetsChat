@@ -35,10 +35,11 @@
       <li *ngFor="let user of singleCategory(); let i = index">
         <button *ngIf="i < 7" mat-button>
           <img
-            src="https://images-eu.ssl-images-amazon.com/images/I/41lHohh8cRL._SX342_QL70_ML2_.jpg"
+            src="{{ user.photoURL }}"
             style="width: 40px; height: 40px; margin-right: 10px;"
           />{{ user.displayName }}
         </button>
+        <!-- src="https://images-eu.ssl-images-amazon.com/images/I/41lHohh8cRL._SX342_QL70_ML2_.jpg" -->
       </li>
     </ul>
     <button

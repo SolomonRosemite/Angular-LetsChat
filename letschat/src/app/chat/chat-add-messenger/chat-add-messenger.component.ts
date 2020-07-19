@@ -14,7 +14,6 @@ export class ChatAddMessengerComponent implements OnInit {
   currentSerach = '';
 
   allUsers: User[] = [];
-  currentFoundUsers: User[] = [];
 
   ngOnInit() {
     this.database.getAllUsers().then((users) => {
@@ -33,20 +32,19 @@ export class ChatAddMessengerComponent implements OnInit {
   }
 
   onKey(event) {
-    console.log('here');
-
     this.currentSerach = event.target.value;
   }
 
   public singleCategory(): User[] {
-    console.log('?');
     if (!this.allUsers) {
       return [];
-    } else if (this.currentSerach.length) {
+    } else if (this.currentSerach.length === 0) {
       return this.allUsers;
     } else {
       return this.allUsers.filter((u) =>
-        u.displayName.startsWith(this.currentSerach)
+        u.displayName
+          .toLocaleLowerCase()
+          .startsWith(this.currentSerach.toLocaleLowerCase())
       );
     }
   }
