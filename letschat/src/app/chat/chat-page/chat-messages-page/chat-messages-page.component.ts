@@ -43,20 +43,20 @@ export class ChatMessagesPageComponent implements OnInit {
     );
 
     this.eventEmitterService.onNewMessage.subscribe((items: Message[]) => {
-      console.log('as');
-
       items.forEach((element) => {
         this.allMessages.push(element);
       });
 
-      // if (this.receiver) {
-      //   this.allMessages.forEach((element) => {
-      //     this.ngZone.run((): void => {
-      //       // todo: Only add messages that are from this chat
-      //       this.addMessage(element);
-      //     });
-      //   });
-      // }
+      this.messages = [];
+
+      if (this.receiver) {
+        this.allMessages.forEach((element) => {
+          this.ngZone.run((): void => {
+            // todo: Only add messages that are from this chat
+            this.addMessage(element);
+          });
+        });
+      }
     });
   }
 

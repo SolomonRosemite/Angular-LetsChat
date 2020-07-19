@@ -71,4 +71,14 @@ export class DatabaseService {
 
     return userRef.set(data, { merge: true });
   }
+
+  public async getAllUsers(): Promise<User[]> {
+    var x = this.firestore.collection('users').ref;
+    let users: User[] = [];
+
+    (await x.get()).docs.forEach((data) => {
+      users.push(data.data() as User);
+    });
+    return users;
+  }
 }

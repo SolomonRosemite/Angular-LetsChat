@@ -53,6 +53,7 @@ import { FileReferenceCardComponent } from './chat/common/file-reference-card/fi
 import { ChatMessagesPageComponent } from './chat/chat-page/chat-messages-page/chat-messages-page.component';
 import { EditSettingsComponent } from './home/user-settings/edit-settings/edit-settings.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ChatAddMessengerComponent } from './chat/chat-add-messenger/chat-add-messenger.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { HttpClientModule } from '@angular/common/http';
     FileReferenceCardComponent,
     ChatMessagesPageComponent,
     EditSettingsComponent,
+    ChatAddMessengerComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

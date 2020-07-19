@@ -35,8 +35,8 @@ export class ChatNavbarComponent implements OnInit {
     this.lastSeen = new Date().toDateString();
   }
 
-  openSettings(): void {
-    this.router.navigate(['/settings']);
+  routeTo(route: string): void {
+    this.router.navigate([route]);
   }
 
   goToLink(url: string): void {

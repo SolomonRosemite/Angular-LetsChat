@@ -9,6 +9,7 @@ import { ChatPageComponent } from './chat/chat-page/chat-page.component';
 import { HomeComponent } from './home/home.component';
 
 import { AuthGuard } from './auth.guard';
+import { ChatAddMessengerComponent } from './chat/chat-add-messenger/chat-add-messenger.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,11 @@ const routes: Routes = [
   {
     path: 'chat',
     component: ChatPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'chat/add',
+    component: ChatAddMessengerComponent,
     canActivate: [AuthGuard],
   },
 ];
