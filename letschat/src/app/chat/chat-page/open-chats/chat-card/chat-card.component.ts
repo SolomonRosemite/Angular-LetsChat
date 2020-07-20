@@ -18,7 +18,7 @@ export class ChatCardComponent implements OnInit {
 
   selectedUser(): void {
     if (this.info.receiverUid) {
-      this.eventEmitterService.onUserSelectedOnChatPage(this.info.receiverUid);
+      this.eventEmitterService.onUserSelectedOnChatPage(this.info);
     }
   }
 

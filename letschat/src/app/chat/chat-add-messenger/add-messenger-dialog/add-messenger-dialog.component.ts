@@ -38,7 +38,7 @@ export class AddMessengerDialogComponent {
     }
 
     const message = new Message({
-      chatId: '1234', // todo
+      chatId: this.getChatId(this.me.uid, this.receiver.uid),
       message: this.message,
       timestamp: new Date(),
 
@@ -54,10 +54,18 @@ export class AddMessengerDialogComponent {
     this.finishMessage(message);
   }
 
+  getChatId(uid1: string, uid2: string): string {
+    return uid1.charAt(0) > uid2.charAt(0)
+      ? `${uid1}-${uid2}`
+      : `${uid2}-${uid1}`;
+  }
+
   finishMessage(message: Message): void {
     this.message = '';
 
     this.database.sendMessage(message);
+    this.close();
+
     this.router.navigate(['/chat']);
   }
 

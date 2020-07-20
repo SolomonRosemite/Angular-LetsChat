@@ -31,6 +31,7 @@ export class OpenChatsComponent implements OnInit {
         if (!this.user) {
           this.user = await this.auth.getUser();
         }
+
         messages.forEach((msg) => {
           let addedItem = false;
 

@@ -1,3 +1,4 @@
+import { ChatCardInfo } from 'src/app/services/Models/ChatCardInfo.model';
 import { Message } from './../../services/Models/message.model';
 import { Component, OnInit } from '@angular/core';
 import { EventEmitterService } from 'src/app/services/event/event-emitter.service';
@@ -17,16 +18,21 @@ export class ChatPageComponent implements OnInit {
     private database: DatabaseService,
     private auth: AuthService
   ) {}
-  user: User;
+  me: User;
+  receiver: ChatCardInfo;
 
   message = '';
 
   async ngOnInit(): Promise<void> {
-    this.user = await this.auth.getUser();
+    this.eventEmitterService.onSelectedUser.subscribe(
+      (user: ChatCardInfo) => (this.receiver = user)
+    );
+
+    this.me = await this.auth.getUser();
 
     const date = new Date().getTime();
 
-    const messages = this.database.receiveMessages(this.user).ref;
+    const messages = this.database.receiveMessages(this.me).ref;
     const query = messages.orderBy('timestamp').startAt(date);
 
     query.onSnapshot((items) => {
@@ -41,50 +47,38 @@ export class ChatPageComponent implements OnInit {
   }
 
   async sendMessage(event): Promise<void> {
-    if (event != null && event.keyCode !== 13) {
+    if ((event != null && event.keyCode !== 13) || !this.receiver) {
       return;
     }
 
-    // todo: temp data
-    if (this.user.uid === '0T5Tcxi2OUfXKvJdcom3psJG5uK2') {
-      var mySender = '0T5Tcxi2OUfXKvJdcom3psJG5uK2';
-      var myReceiver: User = {
-        displayName: 'Solomon Jesse',
-        email: 'Hi',
-        location: 'Berlin, Germany',
-        photoURL:
-          'https://www.thoughtco.com/thmb/w922nFq9tvm_XUvVA6c2kYDpemQ=/1414x1414/smart/filters:no_upscale()/businessman-taking-a-break-962669770-da1085e93dad4d5c9723795466c615e6.jpg',
-        uid: 'YdydojqkxIS60B3q67hrO4KZR9i2',
-      };
-    } else {
-      var mySender = 'YdydojqkxIS60B3q67hrO4KZR9i2';
-      var myReceiver: User = {
-        displayName: 'Solomon Jesse',
-        email: 'Hi',
-        location: 'Berlin, Germany',
-        photoURL:
-          'https://www.thoughtco.com/thmb/w922nFq9tvm_XUvVA6c2kYDpemQ=/1414x1414/smart/filters:no_upscale()/businessman-taking-a-break-962669770-da1085e93dad4d5c9723795466c615e6.jpg',
-        uid: '0T5Tcxi2OUfXKvJdcom3psJG5uK2',
-      };
+    let uid = this.receiver.senderUid;
+
+    if (this.me.uid === this.receiver.senderUid) {
+      uid = this.receiver.receiverUid;
     }
 
-    // todo: adjust here
     const message = new Message({
-      receiverDisplayName: myReceiver.displayName,
-      receiverPhotoURL: myReceiver.photoURL,
-      senderDisplayName: 'Solomon Rosemite',
-      senderPhotoURL:
-        'https://lh3.googleusercontent.com/a-/AOh14GgcE44KDpbMewHjBQpBiBVyrkjhTcXhCrkSfHNX',
-      chatId: '1234',
+      chatId: this.getChatId(this.me.uid, uid),
       message: this.message,
-      receiver: myReceiver.uid,
-      sender: mySender,
+
+      receiver: uid,
+      receiverPhotoURL: this.receiver.photoURL,
+      receiverDisplayName: this.receiver.displayName,
+
+      sender: this.me.uid,
+      senderPhotoURL: this.me.photoURL,
+      senderDisplayName: this.me.displayName,
+
       timestamp: new Date(),
-      // receiver: '0T5Tcxi2OUfXKvJdcom3psJG5uK2',
-      // sender: user.uid,
     });
 
     this.finishMessage(message);
+  }
+
+  getChatId(uid1: string, uid2: string): string {
+    return uid1.charAt(0) > uid2.charAt(0)
+      ? `${uid1}-${uid2}`
+      : `${uid2}-${uid1}`;
   }
 
   finishMessage(message: Message): void {

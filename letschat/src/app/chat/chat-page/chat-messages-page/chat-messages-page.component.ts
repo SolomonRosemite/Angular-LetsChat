@@ -5,6 +5,7 @@ import { Message } from 'src/app/services/Models/message.model';
 import { User } from 'src/app/services/Models/user.model';
 import { Component, OnInit, NgZone, Input } from '@angular/core';
 import { templateSourceUrl } from '@angular/compiler';
+import { ChatCardInfo } from 'src/app/services/Models/ChatCardInfo.model';
 
 @Component({
   selector: 'app-chat-messages-page',
@@ -19,7 +20,8 @@ export class ChatMessagesPageComponent implements OnInit {
   ) {}
 
   me: User;
-  receiver: User;
+  receiver: ChatCardInfo;
+
   messages: Message[] = [];
 
   allMessages: Message[] = [];
@@ -27,20 +29,26 @@ export class ChatMessagesPageComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.me = await this.auth.getUser();
 
-    this.eventEmitterService.invokeUserSelectedOnChatPage.subscribe(
-      (user: User) => {
-        this.receiver = user;
+    this.eventEmitterService.onSelectedUser.subscribe((user: ChatCardInfo) => {
+      this.receiver = user;
 
-        this.messages = [];
+      this.messages = [];
 
+      if (this.receiver) {
         this.allMessages.forEach((element) => {
-          this.ngZone.run((): void => {
-            // todo: Only add messages that are from this chat
-            this.addMessage(element);
-          });
+          let uid = this.receiver.senderUid;
+
+          if (this.receiver.senderUid === this.me.uid) {
+            uid = this.receiver.receiverUid;
+          }
+          if (element.chatId.includes(uid)) {
+            this.ngZone.run((): void => {
+              this.addMessage(element);
+            });
+          }
         });
       }
-    );
+    });
 
     this.eventEmitterService.onNewMessage.subscribe((items: Message[]) => {
       items.forEach((element) => {
@@ -51,22 +59,20 @@ export class ChatMessagesPageComponent implements OnInit {
 
       if (this.receiver) {
         this.allMessages.forEach((element) => {
-          this.ngZone.run((): void => {
-            // todo: Only add messages that are from this chat
-            this.addMessage(element);
-          });
+          let uid = this.receiver.senderUid;
+
+          if (this.receiver.senderUid === this.me.uid) {
+            uid = this.receiver.receiverUid;
+          }
+          if (element.chatId.includes(uid)) {
+            this.ngZone.run((): void => {
+              this.addMessage(element);
+            });
+          }
         });
       }
     });
   }
-
-  // showMessages(): Message[] {
-  //   let items: Message[] = [];
-
-  //   this.messages.forEach((message) => {});
-
-  //   return items;
-  // }
 
   async addMessage(message: Message): Promise<void> {
     if (this.me == null) {

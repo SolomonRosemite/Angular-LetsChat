@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { User } from '../Models/user.model';
 import { Message } from '../Models/message.model';
+import { ChatCardInfo } from '../Models/ChatCardInfo.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,7 @@ export class EventEmitterService {
   onNewMessage = new EventEmitter<Message[]>();
 
   // ChatPage
-  invokeUserSelectedOnChatPage = new EventEmitter<string>();
+  onSelectedUser = new EventEmitter<ChatCardInfo>();
 
   // HomePage
   onBottomBarClickClose(): void {
@@ -38,8 +39,8 @@ export class EventEmitterService {
   }
 
   // ChatPage
-  onUserSelectedOnChatPage(uid: string): void {
-    this.invokeUserSelectedOnChatPage.emit(uid);
+  onUserSelectedOnChatPage(user: ChatCardInfo): void {
+    this.onSelectedUser.emit(user);
   }
 
   onNewMessageReceived(message: Message[]): void {
