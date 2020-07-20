@@ -1,0 +1,37 @@
+<div style="width: 100%; height: 100%; background-color: white;">
+  <div class="card" style="background-color: white;">
+    <img src="{{ data.photoURL }}" style="width: 150px; height: 150px;" />
+    <h1 style="font-size: 28px; margin-top: 10px; margin-bottom: 20px;">
+      {{ data.displayName }}
+    </h1>
+
+    <h3>{{ location() }}</h3>
+    <button
+      mat-button
+      class="hover"
+      style="
+        background-color: rgb(255, 255, 255);
+        color: black;
+        margin-top: 20px;
+        text-align: center;
+        height: 50px;
+      "
+      (click)="message()"
+    >
+      Message {{ data.displayName }}
+    </button>
+    <button
+      mat-button
+      class="hover"
+      style="
+        background-color: rgb(0, 0, 0);
+        text-align: center;
+        color: white;
+        height: 50px;
+      "
+      (click)="close()"
+    >
+      Close
+    </button>
+  </div>
+</div>

@@ -30,16 +30,25 @@
     <h1 style="font-size: 28px; margin-top: 10px; margin-bottom: 20px;">
       Search for Messenger
     </h1>
-    <input style="margin-bottom: 30px;" (keyup)="onKey($event)" type="text" />
+    <mat-form-field style="width: 70%;">
+      <mat-label>Messenger name</mat-label>
+      <input
+        matInput
+        autocomplete="off"
+        (keyup)="onKey($event)"
+        placeholder="Ex. Lia"
+      />
+    </mat-form-field>
     <ul class="items">
-      <li *ngFor="let user of singleCategory(); let i = index">
-        <button *ngIf="i < 7" mat-button>
-          <img
-            src="{{ user.photoURL }}"
-            style="width: 40px; height: 40px; margin-right: 10px;"
-          />{{ user.displayName }}
+      <li *ngFor="let user of foundUsers(); let i = index">
+        <button (click)="openDialog(user)" mat-button *ngIf="i < 7">
+          <img class="profileimage" src="{{ user.photoURL }}" />{{
+            user.displayName
+          }}
+          <!-- <button mat-icon-button class="iconbtn" aria-label="icon button">
+            <mat-icon style="margin-top: -20px;">message</mat-icon>
+          </button> -->
         </button>
-        <!-- src="https://images-eu.ssl-images-amazon.com/images/I/41lHohh8cRL._SX342_QL70_ML2_.jpg" -->
       </li>
     </ul>
     <button
