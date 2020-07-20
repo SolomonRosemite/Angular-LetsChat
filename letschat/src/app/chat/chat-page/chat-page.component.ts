@@ -18,7 +18,6 @@ export class ChatPageComponent implements OnInit {
     private auth: AuthService
   ) {}
   user: User;
-  currentReceiver: User;
 
   message = '';
 

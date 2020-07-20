@@ -60,14 +60,8 @@
   </span>
 
   <span>
-    <!-- TODO: Add Messenger Method -->
-    <button mat-button>
-      <mat-icon
-        aria-hidden="false"
-        aria-label="settings icon"
-        (click)="routeTo('chat/add')"
-        >person_add</mat-icon
-      >
+    <button (click)="routeTo('chat/add')" mat-button>
+      <mat-icon>person_add</mat-icon>
     </button>
     <button mat-button (click)="routeTo('/settings')">
       <mat-icon aria-hidden="false" aria-label="settings icon"
@@ -75,7 +69,6 @@
       >
     </button>
     <mat-menu #appMenu2="matMenu">
-      <!-- TODO: Add Messenger Method -->
       <button mat-menu-item (click)="routeTo('chat/add')">Add Messenger</button>
       <button mat-menu-item (click)="routeTo('/settings')">Settings</button>
     </mat-menu>

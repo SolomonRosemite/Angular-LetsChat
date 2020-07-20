@@ -2,18 +2,13 @@ import { AuthService } from './../../services/auth/auth.service';
 import { User } from './../../services/Models/user.model';
 import { DatabaseService } from 'src/app/services/database/database.service';
 import { Router } from '@angular/router';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, EventEmitter } from '@angular/core';
 import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-
-export interface DialogData {
-  displayName: string;
-  location: string;
-  photoURL: string;
-}
+import { AddMessengerDialogComponent } from './add-messenger-dialog/add-messenger-dialog.component';
 
 @Component({
   selector: 'app-chat-add-messenger',
@@ -53,14 +48,8 @@ export class ChatAddMessengerComponent implements OnInit {
   }
 
   openDialog(user: User): void {
-    console.log(user);
-
-    this.dialog.open(DialogOverview, {
-      data: {
-        displayName: user.displayName,
-        location: user.location,
-        photoURL: user.photoURL,
-      },
+    this.dialog.open(AddMessengerDialogComponent, {
+      data: [user, this.user],
     });
   }
 
@@ -76,30 +65,5 @@ export class ChatAddMessengerComponent implements OnInit {
           .startsWith(this.currentSerach.toLocaleLowerCase())
       );
     }
-  }
-}
-@Component({
-  selector: 'app-dialog-overview',
-  styleUrls: ['./chat-add-messenger.component.scss'],
-  templateUrl: 'dialog-overview.html',
-})
-export class DialogOverview {
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverview>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) {
-    console.log(data);
-  }
-
-  location(): string {
-    return this.data.location.length !== 0
-      ? `Location ${this.data.location}`
-      : '';
-  }
-
-  message(): void {}
-
-  close(): void {
-    this.dialogRef.close();
   }
 }

@@ -71,6 +71,25 @@ export class OpenChatsComponent implements OnInit {
         });
       }
     );
+
+    // this.eventEmitterService.onNewMessager.subscribe((user: User) => {
+    //   console.log('here');
+
+    //   this.ngZone.run(() => {
+    //     this.chatCardsInfo.push(
+    //       new ChatCardInfo({
+    //         // date: msg.timestamp.getDate().toString(),
+    //         date: '12.03.20', // TODO here
+    //         displayName: user.displayName,
+    //         latestMessage: '',
+    //         chatId: '',
+    //         photoURL: user.photoURL,
+    //         receiverUid: '',
+    //         senderUid: '',
+    //       })
+    //     );
+    //   });
+    // });
   }
 
   setSearchValue(event): void {

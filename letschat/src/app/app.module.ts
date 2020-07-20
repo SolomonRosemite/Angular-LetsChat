@@ -54,6 +54,7 @@ import { ChatMessagesPageComponent } from './chat/chat-page/chat-messages-page/c
 import { EditSettingsComponent } from './home/user-settings/edit-settings/edit-settings.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ChatAddMessengerComponent } from './chat/chat-add-messenger/chat-add-messenger.component';
+import { AddMessengerDialogComponent } from './chat/chat-add-messenger/add-messenger-dialog/add-messenger-dialog.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { ChatAddMessengerComponent } from './chat/chat-add-messenger/chat-add-me
     ChatMessagesPageComponent,
     EditSettingsComponent,
     ChatAddMessengerComponent,
+    AddMessengerDialogComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
