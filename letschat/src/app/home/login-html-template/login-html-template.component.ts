@@ -29,7 +29,7 @@ export class LoginHtmlTemplateComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.get('http://ip-api.com/json').subscribe((item: any) => {
-      this.userLocation = `${item.city} ${item.country}`;
+      this.userLocation = `${item.city}, ${item.country}`;
     });
   }
 

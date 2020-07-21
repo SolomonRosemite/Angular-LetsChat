@@ -12,12 +12,22 @@ export class ChatCardComponent implements OnInit {
   @Input()
   info: ChatCardInfo;
 
+  last: ChatCardInfo;
+
   constructor(private eventEmitterService: EventEmitterService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.eventEmitterService.onSelectedUser.subscribe((info: ChatCardInfo) => {
+      this.last = info;
+    });
+  }
 
   selectedUser(): void {
-    if (this.info.receiverUid) {
+    if (this.info) {
+      if (this.last && this.last === this.info) {
+        return;
+      }
+
       this.eventEmitterService.onUserSelectedOnChatPage(this.info);
     }
   }

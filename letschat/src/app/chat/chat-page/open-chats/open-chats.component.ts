@@ -52,8 +52,6 @@ export class OpenChatsComponent implements OnInit {
             displayName = msg.receiverDisplayName;
             photoURL = msg.receiverPhotoURL;
           }
-          // console.log(msg.timestamp);
-          // console.log(msg.timestamp);
 
           if (addedItem !== true) {
             this.ngZone.run(() => {

@@ -36,7 +36,7 @@ export class SignupHtmlTemplateComponent implements OnInit {
     }
 
     this.http.get('http://ip-api.com/json').subscribe((item: any) => {
-      this.location = `${item.city} ${item.country}`;
+      this.location = `${item.city}, ${item.country}`;
     });
   }
 
