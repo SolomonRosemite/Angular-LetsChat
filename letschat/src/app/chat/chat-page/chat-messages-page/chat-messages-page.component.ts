@@ -1,11 +1,11 @@
+import { Router, NavigationStart } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { EventEmitterService } from 'src/app/services/event/event-emitter.service';
-import { DatabaseService } from 'src/app/services/database/database.service';
+import { ChatCardInfo } from 'src/app/services/Models/ChatCardInfo.model';
 import { AuthService } from './../../../services/auth/auth.service';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Message } from 'src/app/services/Models/message.model';
 import { User } from 'src/app/services/Models/user.model';
-import { Component, OnInit, NgZone, Input } from '@angular/core';
-import { templateSourceUrl } from '@angular/compiler';
-import { ChatCardInfo } from 'src/app/services/Models/ChatCardInfo.model';
 
 @Component({
   selector: 'app-chat-messages-page',
@@ -23,31 +23,31 @@ export class ChatMessagesPageComponent implements OnInit {
   receiver: ChatCardInfo;
 
   messages: Message[] = [];
-
   allMessages: Message[] = [];
 
   async ngOnInit(): Promise<void> {
     this.me = await this.auth.getUser();
 
     this.eventEmitterService.onSelectedUser.subscribe((user: ChatCardInfo) => {
+      if (user === this.receiver) {
+        return;
+      }
       this.receiver = user;
 
       this.messages = [];
 
-      if (this.receiver) {
-        this.allMessages.forEach((element) => {
-          let uid = this.receiver.senderUid;
+      this.allMessages.forEach((element) => {
+        let uid = this.receiver.senderUid;
+        if (this.receiver.senderUid === this.me.uid) {
+          uid = this.receiver.receiverUid;
+        }
 
-          if (this.receiver.senderUid === this.me.uid) {
-            uid = this.receiver.receiverUid;
-          }
-          if (element.chatId.includes(uid)) {
-            this.ngZone.run((): void => {
-              this.addMessage(element);
-            });
-          }
-        });
-      }
+        if (element.chatId.includes(uid)) {
+          this.ngZone.run((): void => {
+            this.addMessage(element);
+          });
+        }
+      });
     });
 
     this.eventEmitterService.onNewMessage.subscribe((items: Message[]) => {
@@ -60,10 +60,10 @@ export class ChatMessagesPageComponent implements OnInit {
       if (this.receiver) {
         this.allMessages.forEach((element) => {
           let uid = this.receiver.senderUid;
-
           if (this.receiver.senderUid === this.me.uid) {
             uid = this.receiver.receiverUid;
           }
+
           if (element.chatId.includes(uid)) {
             this.ngZone.run((): void => {
               this.addMessage(element);
@@ -74,11 +74,7 @@ export class ChatMessagesPageComponent implements OnInit {
     });
   }
 
-  async addMessage(message: Message): Promise<void> {
-    if (this.me == null) {
-      this.me = await this.auth.getUser();
-    }
-
+  addMessage(message: Message): void {
     const length = this.messages.length;
 
     if (length === 0) {

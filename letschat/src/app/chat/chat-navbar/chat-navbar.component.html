@@ -60,7 +60,7 @@
   </span>
 
   <span>
-    <button (click)="routeTo('chat/add')" mat-button>
+    <button (click)="routeTo('addmessenger')" mat-button>
       <mat-icon>person_add</mat-icon>
     </button>
     <button mat-button (click)="routeTo('/settings')">
@@ -69,7 +69,9 @@
       >
     </button>
     <mat-menu #appMenu2="matMenu">
-      <button mat-menu-item (click)="routeTo('chat/add')">Add Messenger</button>
+      <button mat-menu-item (click)="routeTo('addmessenger')">
+        Add Messenger
+      </button>
       <button mat-menu-item (click)="routeTo('/settings')">Settings</button>
     </mat-menu>
     <button mat-button [matMenuTriggerFor]="appMenu2">

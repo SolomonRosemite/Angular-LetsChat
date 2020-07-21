@@ -1,10 +1,11 @@
+import { Subscription } from 'rxjs';
+import { Router, NavigationStart } from '@angular/router';
 import { ChatCardInfo } from 'src/app/services/Models/ChatCardInfo.model';
 import { Message } from './../../services/Models/message.model';
 import { Component, OnInit } from '@angular/core';
 import { EventEmitterService } from 'src/app/services/event/event-emitter.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { DatabaseService } from 'src/app/services/database/database.service';
-import { DatePipe } from '@angular/common';
 import { User } from 'src/app/services/Models/user.model';
 
 @Component({
@@ -18,36 +19,43 @@ export class ChatPageComponent implements OnInit {
     private database: DatabaseService,
     private auth: AuthService
   ) {}
+
   me: User;
   receiver: ChatCardInfo;
 
   message = '';
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.eventEmitterService.onSelectedUser.subscribe(
       (user: ChatCardInfo) => (this.receiver = user)
     );
 
-    this.me = await this.auth.getUser();
+    this.auth.getUser().then((user) => {
+      this.me = user;
 
-    const date = new Date().getTime();
+      const date = new Date().getTime();
 
-    const messages = this.database.receiveMessages(this.me).ref;
-    const query = messages.orderBy('timestamp').startAt(date);
+      const messages = this.database.receiveMessages(this.me).ref;
+      const query = messages.orderBy('timestamp').startAt(date);
 
-    query.onSnapshot((items) => {
-      let messages: Message[] = [];
+      query.onSnapshot((items) => {
+        let messages: Message[] = [];
 
-      items.docChanges().forEach((element) => {
-        messages.push(element.doc.data() as Message);
+        items.docChanges().forEach((element) => {
+          messages.push(element.doc.data() as Message);
+        });
+
+        this.eventEmitterService.onNewMessageReceived(messages);
       });
-
-      this.eventEmitterService.onNewMessageReceived(messages);
     });
   }
 
-  async sendMessage(event): Promise<void> {
-    if ((event != null && event.keyCode !== 13) || !this.receiver) {
+  sendMessage(event): void {
+    if (
+      (event != null && event.keyCode != 13) ||
+      !this.receiver ||
+      this.message.length == 0
+    ) {
       return;
     }
 

@@ -1,7 +1,7 @@
 import { AuthService } from './../../services/auth/auth.service';
 import { User } from './../../services/Models/user.model';
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat-navbar',

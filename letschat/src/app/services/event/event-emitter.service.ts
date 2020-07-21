@@ -1,6 +1,4 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Subscription } from 'rxjs/internal/Subscription';
-import { User } from '../Models/user.model';
 import { Message } from '../Models/message.model';
 import { ChatCardInfo } from '../Models/ChatCardInfo.model';
 
@@ -8,16 +6,16 @@ import { ChatCardInfo } from '../Models/ChatCardInfo.model';
   providedIn: 'root',
 })
 export class EventEmitterService {
-  constructor() {}
+  didReloadChat = true;
 
   // Homepage
   onBottomBarOpenFunction = new EventEmitter();
   onBottomBarCloseFunction = new EventEmitter();
   onOpenPopupDialogFunction = new EventEmitter<any>();
   onClosePopupDialogFunction = new EventEmitter();
-  onNewMessage = new EventEmitter<Message[]>();
 
   // ChatPage
+  onNewMessage = new EventEmitter<Message[]>();
   onSelectedUser = new EventEmitter<ChatCardInfo>();
 
   // HomePage
