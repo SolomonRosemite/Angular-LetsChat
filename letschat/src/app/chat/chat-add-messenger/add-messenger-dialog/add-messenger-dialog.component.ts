@@ -63,10 +63,11 @@ export class AddMessengerDialogComponent {
   finishMessage(message: Message): void {
     this.message = '';
 
-    this.database.sendMessage(message);
-    this.close();
+    this.database.sendMessage(message).then(() => {
+      this.close();
 
-    this.router.navigate(['/chat']);
+      this.router.navigate(['/chat']);
+    });
   }
 
   close(): void {

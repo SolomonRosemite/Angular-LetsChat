@@ -22,8 +22,8 @@ export class DatabaseService {
       .collection<Message>('chats');
   }
 
-  public sendMessage(data: Message) {
-    const docs: Promise<DocumentReference>[] = [];
+  public async sendMessage(data: Message): Promise<DocumentReference[]> {
+    const docs: DocumentReference[] = [];
 
     const message: Message = {
       chatId: data.chatId,
@@ -38,7 +38,7 @@ export class DatabaseService {
     };
 
     docs.push(
-      this.firestore
+      await this.firestore
         .collection('messages')
         .doc(message.senderUid)
         .collection('chats')
@@ -46,7 +46,7 @@ export class DatabaseService {
     );
 
     docs.push(
-      this.firestore
+      await this.firestore
         .collection('messages')
         .doc(message.receiverUid)
         .collection('chats')

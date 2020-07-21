@@ -8,7 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./file-reference-card.component.scss'],
 })
 export class FileReferenceCardComponent implements OnInit {
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor() {}
 
   fileReference: FileReference;
   imageUrl = '../../../../assets/images/file-Icon.png';
@@ -26,7 +26,6 @@ export class FileReferenceCardComponent implements OnInit {
 
     if (type === 'png' || type === 'gif' || type === 'jpg' || type === 'jpeg') {
       this.imageUrl = this.fileReference.fileFileReferenceUrl;
-      console.log('hererererer');
     }
   }
 
