@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { UserSettingsComponent } from './home/user-settings/user-settings.component';
 import { EditSettingsComponent } from './home/user-settings/edit-settings/edit-settings.component';
-import { SignupComponent } from './home/signup/signup.component';
-import { LoginComponent } from './home/login/login.component';
+import { SignUpPageComponent } from './home/sign-up-page/sign-up-page.component';
+import { SignInPageComponent } from './home/sign-in-page/sign-in-page.component';
 import { ChatPageComponent } from './chat/chat-page/chat-page.component';
 import { HomeComponent } from './home/home.component';
 
@@ -17,12 +17,12 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'login',
-    component: LoginComponent,
+    path: 'signin',
+    component: SignInPageComponent,
   },
   {
     path: 'signup',
-    component: SignupComponent,
+    component: SignUpPageComponent,
   },
   {
     path: 'settings',

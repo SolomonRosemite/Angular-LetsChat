@@ -34,14 +34,10 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { UserSettingsComponent } from './home/user-settings/user-settings.component';
 import { BottomPopupComponent } from './home/bottom-popup/bottom-popup.component';
-import { SignupComponent } from './home/signup/signup.component';
-import { LoginComponent } from './home/login/login.component';
 import { NavbarComponent } from './home/navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { AppComponent } from './app.component';
-import { SignupHtmlTemplateComponent } from './home/signup-html-template/signup-html-template.component';
-import { LoginHtmlTemplateComponent } from './home/login-html-template/login-html-template.component';
 import { InfoDialogComponent } from './home/info-dialog/info-dialog.component';
 import { PopupDialogComponent } from './home/info-dialog/popup-dialog/popup-dialog.component';
 import { ChatPageComponent } from './chat/chat-page/chat-page.component';
@@ -55,18 +51,16 @@ import { EditSettingsComponent } from './home/user-settings/edit-settings/edit-s
 import { HttpClientModule } from '@angular/common/http';
 import { ChatAddMessengerComponent } from './chat/chat-add-messenger/chat-add-messenger.component';
 import { AddMessengerDialogComponent } from './chat/chat-add-messenger/add-messenger-dialog/add-messenger-dialog.component';
+import { SignInPageComponent } from './home/sign-in-page/sign-in-page.component';
+import { SignUpPageComponent } from './home/sign-up-page/sign-up-page.component';
 
 @NgModule({
   declarations: [
-    SignupHtmlTemplateComponent,
     AppComponent,
     NavbarComponent,
     HomeComponent,
     BottomPopupComponent,
-    LoginComponent,
-    SignupComponent,
     UserSettingsComponent,
-    LoginHtmlTemplateComponent,
     InfoDialogComponent,
     PopupDialogComponent,
     ChatPageComponent,
@@ -79,6 +73,8 @@ import { AddMessengerDialogComponent } from './chat/chat-add-messenger/add-messe
     EditSettingsComponent,
     ChatAddMessengerComponent,
     AddMessengerDialogComponent,
+    SignInPageComponent,
+    SignUpPageComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

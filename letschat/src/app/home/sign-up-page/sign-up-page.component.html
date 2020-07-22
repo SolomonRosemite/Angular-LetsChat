@@ -1,0 +1,52 @@
+<div class="main">
+  <div class="split left">
+    <div class="centered">
+      <h2>Jane Flex</h2>
+      <p>Some text.</p>
+    </div>
+  </div>
+
+  <div class="split right">
+    <div class="centered">
+      <h1 class="title">Create Account</h1>
+      <p>Sign Up with Google.</p>
+      <button mat-raised-button aria-label="Google Image">
+        <img
+          src="https://img.icons8.com/plasticine/2x/google-logo.png"
+          alt="Google Icon"
+        />
+      </button>
+      <p class="space">Or use email for registration.</p>
+
+      <form class="form">
+        <mat-form-field class="fullWidth">
+          <mat-label>Name</mat-label>
+          <input autocomplete="off" matInput placeholder="Ex. Johnny" />
+        </mat-form-field>
+
+        <mat-form-field class="fullWidth">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            autocomplete="off"
+            placeholder="Ex. email@example.com"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="fullWidth">
+          <mat-label>Password</mat-label>
+          <input autocomplete="off" matInput />
+        </mat-form-field>
+
+        <mat-form-field class="fullWidth">
+          <mat-label>Confirm Password</mat-label>
+          <input autocomplete="off" matInput />
+        </mat-form-field>
+      </form>
+
+      <button class="signinButton" mat-raised-button>
+        Sign In
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SignupHtmlTemplateComponent } from './signup-html-template.component';
+import { SignInPageComponent } from './sign-in-page.component';
 
-describe('SignupHtmlTemplateComponent', () => {
-  let component: SignupHtmlTemplateComponent;
-  let fixture: ComponentFixture<SignupHtmlTemplateComponent>;
+describe('SignInPageComponent', () => {
+  let component: SignInPageComponent;
+  let fixture: ComponentFixture<SignInPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SignupHtmlTemplateComponent ]
+      declarations: [ SignInPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SignupHtmlTemplateComponent);
+    fixture = TestBed.createComponent(SignInPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
