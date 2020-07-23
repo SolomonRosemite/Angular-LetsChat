@@ -1,5 +1,3 @@
-$primary: #0d47a1;
-
 div.main {
   margin: 0px;
   padding: 0px;
@@ -18,7 +16,7 @@ div.main {
   .left {
     left: 0;
     width: 40%;
-    background-color: $primary;
+    background-color: #0d47a1;
   }
 
   /* Control the right side */
@@ -26,54 +24,58 @@ div.main {
     right: 0;
     width: 60%;
     background-color: white;
-    // display: block;
+
+    .centered .space {
+      margin: 0px;
+      padding-top: 30px;
+      padding-bottom: 10px;
+    }
+
+    .centered div {
+      margin-bottom: 40px;
+    }
+
+    .centered img {
+      width: 60px;
+      height: 60px;
+    }
+
+    .form {
+      min-width: 150px;
+      max-width: 500px;
+      width: 100%;
+      margin-top: 20px;
+
+      mat-form-field.fullWidth {
+        width: 100%;
+      }
+    }
   }
 
-  /* If you want the content centered horizontally and vertically */
+  p {
+    font-weight: normal;
+    font-size: 17px;
+  }
+
+  .signButton {
+    margin-top: 30px;
+    height: 50px;
+    width: 80%;
+    font-size: 17px;
+  }
+  .title {
+    margin-bottom: 30px;
+    font-weight: bold;
+    font-size: 55px;
+    padding: 0px;
+    line-height: normal;
+  }
+
   .centered {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-  }
-
-  .title {
-    margin-bottom: 50px;
-    font-weight: bold;
-    font-size: 50px;
-    padding: 0px;
-  }
-  /* Style the image inside the centered container, if needed */
-  .centered .space {
-    margin: 0px;
-    padding-top: 30px;
-    padding-bottom: 10px;
-  }
-
-  .centered div {
-    margin-bottom: 40px;
-  }
-
-  .centered img {
-    width: 60px;
-    height: 60px;
-  }
-
-  .form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-
-    mat-form-field.fullWidth {
-      width: 100%;
-    }
-  }
-
-  .signinButton {
-    margin-top: 30px;
-    height: 50px;
-    width: 80%;
-    font-size: 17px;
   }
 }
