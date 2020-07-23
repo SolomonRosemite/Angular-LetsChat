@@ -1,0 +1,86 @@
+div.main {
+  margin: 0px;
+  padding: 0px;
+
+  /* Split the screen in half */
+  .split {
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+
+  /* Control the left side */
+  .left {
+    left: 0;
+    width: 40%;
+    background-color: #0d47a1;
+  }
+
+  /* Control the right side */
+  .right {
+    right: 0;
+    width: 60%;
+    background-color: white;
+
+    .centered .space {
+      margin: 0px;
+      padding-top: 30px;
+      padding-bottom: 10px;
+    }
+
+    .centered div {
+      margin-bottom: 40px;
+    }
+
+    .centered img {
+      width: 60px;
+      height: 60px;
+    }
+
+    Button.icon {
+      margin-top: 10px;
+    }
+
+    .form {
+      min-width: 150px;
+      max-width: 500px;
+      width: 100%;
+      margin-top: 20px;
+
+      mat-form-field.fullWidth {
+        width: 100%;
+      }
+    }
+  }
+
+  p {
+    font-weight: normal;
+    font-size: 17px;
+  }
+
+  .signButton {
+    margin-top: 30px;
+    height: 50px;
+    width: 80%;
+    font-size: 17px;
+  }
+
+  .title {
+    margin-bottom: 30px;
+    font-weight: bold;
+    font-size: 55px;
+    padding: 0px;
+    line-height: normal;
+  }
+
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+}
