@@ -4,7 +4,7 @@
       <h1 class="title" style="color: white;">Already have an Account?</h1>
       <p style="color: white;">Then Welcome Back!</p>
       <p style="color: white;">You can Sign In here.</p>
-      <button class="signButton" mat-raised-button>
+      <button class="signButton" [routerLink]="['/signin']" mat-raised-button>
         Sign In
       </button>
     </div>
@@ -13,18 +13,19 @@
   <div class="split right">
     <div class="centered">
       <h1 class="title">Create Account</h1>
-      <p >Sign Up with Google or Email.</p>
+      <p>Sign Up with Google or Email.</p>
       <button class="icon" mat-raised-button aria-label="Google Image">
         <img
           src="https://img.icons8.com/plasticine/2x/google-logo.png"
           alt="Google Icon"
-        />
+          />
       </button>
 
-      <form class="form">
+      <form (keydown)="onKeyDown($event)" class="form">
         <mat-form-field class="fullWidth">
           <mat-label>Name</mat-label>
-          <input autocomplete="off" matInput placeholder="Ex. Johnny" />
+          <input autocomplete="off" matInput [(ngModel)]="name" name="name"
+            placeholder="Ex. Johnny" />
         </mat-form-field>
 
         <mat-form-field class="fullWidth">
@@ -32,24 +33,46 @@
           <input
             matInput
             autocomplete="off"
+            [(ngModel)]="email" name="email"
             placeholder="Ex. email@example.com"
-          />
+            />
         </mat-form-field>
 
         <mat-form-field class="fullWidth">
           <mat-label>Password</mat-label>
-          <input autocomplete="off" matInput />
+          <input autocomplete="off" type="password" [(ngModel)]="password"
+            name="password" appPassword matInput />
         </mat-form-field>
 
         <mat-form-field class="fullWidth">
           <mat-label>Confirm Password</mat-label>
-          <input autocomplete="off" matInput />
+          <input autocomplete="off" type="password"
+            [(ngModel)]="confirmPassword" name="confirmPassword" appPassword
+            matInput />
         </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Gender</mat-label>
+          <mat-select [(ngModel)]="gender" name="gender">
+            <mat-option *ngFor="let gender of genders" [value]="gender.value">
+              {{gender.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- <mat-label style="color: #000;">Select Gender</mat-label>
+        <mat-select>
+          <mat-option style="color: #000;" *ngFor="let gender of gender"
+            [value]="gender.value">
+            {{gender.viewValue}}
+          </mat-option>
+        </mat-select> -->
       </form>
 
-      <button class="signButton" mat-raised-button>
+      <button class="signButton" (click)="onSubmit()" mat-raised-button>
         Sign Up
       </button>
     </div>
   </div>
 </div>
+
+<app-info-dialog></app-info-dialog>
