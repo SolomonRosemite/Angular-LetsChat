@@ -34,6 +34,18 @@ div.main {
       left: 25%;
       transform: translate(-50%, -50%);
       text-align: center;
+
+      .title {
+        margin-bottom: 50px;
+        font-size: 65px;
+        font-weight: bold;
+      }
+    }
+
+    button {
+      font-size: 20px;
+      width: 180px;
+      height: 50px;
     }
   }
 
@@ -43,12 +55,12 @@ div.main {
 
     img {
       position: absolute;
-      top: 50%;
-      left: 75%;
       width: 500px;
       height: 320px;
-      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 75%;
       text-align: center;
+      transform: translate(-50%, -50%);
     }
   }
 }
