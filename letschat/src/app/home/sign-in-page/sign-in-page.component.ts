@@ -1,6 +1,7 @@
+import { EventEmitterService } from 'src/app/services/event/event-emitter.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -12,7 +13,8 @@ export class SignInPageComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private eventEmitter: EventEmitterService
   ) {}
 
   email = '';
@@ -38,9 +40,10 @@ export class SignInPageComponent implements OnInit {
         this.router.navigate(['chat']);
       })
       .catch((reason) => {
-        console.log(reason);
-
-        // Todo: Display Message: Email Or Password doesn't seem to be right. Try Agian Please
+        this.eventEmitter.showDialog(
+          'Invalid Sign In',
+          "The Email Or Password dosent't seem to be right. Please Try Agian."
+        );
       });
   }
 
