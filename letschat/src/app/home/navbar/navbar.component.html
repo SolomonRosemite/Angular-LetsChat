@@ -1,41 +1,33 @@
-<mat-toolbar
-  class="mat-elevation-z8"
-  style="justify-content: space-between; position: fixed;"
->
+<mat-toolbar>
   <span>
-    <button mat-icon-button [matMenuTriggerFor]="appMenu">
-      <mat-icon aria-hidden="false" aria-label="message icon">eco</mat-icon>
+    <button class="leftSide" mat-icon-button [matMenuTriggerFor]="appMenu">
+      <mat-icon aria-hidden="false" class="btnIcon" aria-label="eco icon">eco</mat-icon>
     </button>
     <mat-menu #appMenu="matMenu">
       <button
         mat-menu-item
-        (click)="
-          goToLink('https://github.com/SolomonRosemite/Angular-LetsChat')
-        "
-      >
+        (click)="goToLink('https://github.com/SolomonRosemite/Angular-LetsChat')">
         GitHub
       </button>
-      <button mat-menu-item routerLink="settings">Settings</button>
       <button
         mat-menu-item
-        (click)="
-          goToLink(
-            'https://docs.google.com/forms/d/e/1FAIpQLSfgNupcmVDMI8CHVJkCfJLslp2Sv2lT0mqkFOV_g2u-3Up6CA/viewform?usp=sf_link'
-          )
-        "
-      >
+        (click)="goToLink(
+        'https://docs.google.com/forms/d/e/1FAIpQLSfgNupcmVDMI8CHVJkCfJLslp2Sv2lT0mqkFOV_g2u-3Up6CA/viewform?usp=sf_link'
+        )">
         Feedback
       </button>
     </mat-menu>
 
-    <button mat-button (click)="openBottomSheet()">Get started</button>
+    <h1 class="leftSide">Let's Chat</h1>
   </span>
 
   <span>
-    <button mat-icon-button [matMenuTriggerFor]="appMenu">
-      <a>About</a>
+    <button style="margin-right: 50px" mat-button
+      [matMenuTriggerFor]="appMenu">
+      <a style="font-size: 16px;">About</a>
     </button>
-    <a routerLink="signin" mat-button>Login</a>
-    <a routerLink="signup" mat-raised-button color="accent">Sign Up</a>
+    <a class="rightSide" routerLink="signin" mat-button>Login</a>
+    <a class="rightSide" routerLink="signup" mat-button>Sign
+      Up</a>
   </span>
 </mat-toolbar>

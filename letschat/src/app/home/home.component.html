@@ -1,40 +1,21 @@
-<div class="colored" style="height: 50%;">
-  <app-navbar></app-navbar>
-  <div class="toplevel">
-    <div style="padding-top: 20%;"></div>
-    <h1 style="font-size: 60px;">
-      Let's Chat
-    </h1>
-    <div style="padding-top: 10px;"></div>
-    <p style="font-size: 18px;">A Web based Chat App</p>
+<div class="main">
+  <video
+    autoplay
+    muted
+    loop
+    oncanplay="this.play()"
+    onloadedmetadata="this.muted = true"
+    id="myVideo"
+  >
+    <div class="content">
+      <h1>Heading</h1>
+      <p>Lorem ipsum</p>
+    </div>
+    <source src="./../../assets/images/video_1.mp4" type="video/mp4" />
+    Your browser does not support HTML5 video.
+  </video>
 
-    <div style="padding-top: 50px;"></div>
-
-    <button mat-raised-button color="white" (click)="openBottomSheet()">
-      Get started
-    </button>
+  <div class="content">
+    <app-navbar></app-navbar>
   </div>
-</div>
-
-<div style="background-color: white; height: 50%;">
-  <section class="lowerlevel" style="height: 100%;">
-    <div class="center" style="width: 50%; color: gray; float: left;">
-      <h1 style="font-weight: 500;">Chat over the Web!</h1>
-      <br />
-      <h2 style="font-weight: normal; color: gray;">
-        Chat with your Friends and Groups. Cool Right?
-        <br />
-      </h2>
-      <button routerLink="signup" mat-raised-button color="primary">
-        Try it Now!
-      </button>
-    </div>
-
-    <div class="center" style="width: 50%; left: 70%; float: right;">
-      <img
-        src="../../assets/images/Chat Menu.png"
-        style="width: 50%; height: 50%;"
-      />
-    </div>
-  </section>
 </div>
