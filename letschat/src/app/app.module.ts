@@ -11,8 +11,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
-import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -92,6 +93,7 @@ import { SignUpPageComponent } from './home/sign-up-page/sign-up-page.component'
     TextFieldModule,
     MatDialogModule,
     MatButtonModule,
+    MatSelectModule,
     MatInputModule,
     BrowserModule,
     MatIconModule,

@@ -19,7 +19,7 @@
           alt="Google Icon" />
       </button>
 
-      <form #f="ngForm" (keydown)="onKeyDown($event)" class="form">
+      <form (keydown)="onKeyDown($event)" class="form">
         <mat-form-field class="fullWidth">
           <mat-label>Email</mat-label>
           <input matInput autocomplete="off" [(ngModel)]="email" name="email"
@@ -33,7 +33,7 @@
         </mat-form-field>
       </form>
 
-      <button (click)="onSubmit(f)" class="signButton" mat-raised-button>
+      <button (click)="onSubmit()" class="signButton" mat-raised-button>
         Sign In
       </button>
     </div>
