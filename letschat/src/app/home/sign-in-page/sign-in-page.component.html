@@ -3,7 +3,7 @@
     <div class="centered">
       <h1 class="title" style="color: white;">Not Created a Account yet?</h1>
       <p style="color: white;">Create a new Account here!</p>
-      <button class="signButton" mat-raised-button>
+      <button class="signButton" [routerLink]="['/signup']" mat-raised-button>
         Sign Up
       </button>
     </div>
@@ -13,23 +13,27 @@
     <div class="centered">
       <h1 class="title">Sign In</h1>
       <p>Sign In with Google or Email.</p>
-      <button class="icon" mat-raised-button aria-label="Google Image">
-        <img src="https://img.icons8.com/plasticine/2x/google-logo.png" alt="Google Icon" />
+      <button mat-raised-button class="icon" aria-label="Google Image"
+        (click)="googleSignin()">
+        <img src="https://img.icons8.com/plasticine/2x/google-logo.png"
+          alt="Google Icon" />
       </button>
 
-      <form class="form">
+      <form #f="ngForm" (keydown)="onKeyDown($event)" class="form">
         <mat-form-field class="fullWidth">
           <mat-label>Email</mat-label>
-          <input matInput autocomplete="off" placeholder="Ex. email@example.com" />
+          <input matInput autocomplete="off" [(ngModel)]="email" name="email"
+            placeholder="Ex. email@example.com" />
         </mat-form-field>
 
         <mat-form-field class="fullWidth">
           <mat-label>Password</mat-label>
-          <input autocomplete="off" matInput />
+          <input autocomplete="off" [(ngModel)]="password" name="password"
+            type="password" appPassword matInput />
         </mat-form-field>
       </form>
 
-      <button class="signButton" mat-raised-button>
+      <button (click)="onSubmit(f)" class="signButton" mat-raised-button>
         Sign In
       </button>
     </div>
