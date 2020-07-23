@@ -72,7 +72,7 @@ export class SignUpPageComponent implements OnInit {
     } else {
       this.auth
         .emailSignup(this.email, this.password)
-        .then(async (loggedInUser) => {
+        .then((loggedInUser) => {
           const user: User = {
             displayName: this.name,
             photoURL: this.getPhotoUrl(),
@@ -81,10 +81,13 @@ export class SignUpPageComponent implements OnInit {
             uid: loggedInUser.user.uid,
           };
 
-          await this.auth.setUserData(user);
-          this.router.navigate(['chat']);
+          this.auth
+            .setUserData(user)
+            .then(() => this.router.navigate(['chat']));
         })
         .catch((reason) => {
+          console.log(reason);
+
           const msg: string = reason.message;
 
           const alreadyUsed = 'The email address is already in use';
