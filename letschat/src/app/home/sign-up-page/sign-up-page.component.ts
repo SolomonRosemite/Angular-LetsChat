@@ -2,9 +2,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { timeStamp } from 'console';
 import { User } from 'src/app/services/Models/user.model';
-import { async } from 'rxjs/internal/scheduler/async';
 import { EventEmitterService } from 'src/app/services/event/event-emitter.service';
 
 @Component({
@@ -62,8 +60,8 @@ export class SignUpPageComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // Validate Date
-    if (this.name.length < 3) {
+    // Validate Data
+    if (this.name.length < 2) {
       this.message('Name has to be at least 4 letters long.');
     } else if (this.name.length > 12) {
       this.message("Name can't be longer then 12 letters long.");
@@ -72,7 +70,6 @@ export class SignUpPageComponent implements OnInit {
     } else if (this.password !== this.confirmPassword) {
       this.message("Passwords don't match.");
     } else {
-      console.log('here');
       this.auth
         .emailSignup(this.email, this.password)
         .then(async (loggedInUser) => {
@@ -88,7 +85,17 @@ export class SignUpPageComponent implements OnInit {
           this.router.navigate(['chat']);
         })
         .catch((reason) => {
-          console.log(reason.message); // TODO: Check if different reason ex. Email taken, Email formated badly
+          const msg: string = reason.message;
+
+          const alreadyUsed = 'The email address is already in use';
+
+          if (msg.startsWith(alreadyUsed)) {
+            this.message(alreadyUsed);
+          } else if (msg.startsWith('The email address is badly')) {
+            this.message("Email address isn't Valid");
+          } else {
+            this.message("Something wen't wrong. Please try again");
+          }
         });
     }
   }
