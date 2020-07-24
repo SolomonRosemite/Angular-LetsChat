@@ -23,7 +23,7 @@ export class OpenChatsComponent implements OnInit {
   ) {}
 
   chatCardsInfo: ChatCardInfo[] = [];
-  search = '';
+  currentSerach = '';
   user: User;
 
   ngOnInit(): void {
@@ -36,12 +36,14 @@ export class OpenChatsComponent implements OnInit {
         messages.forEach((msg) => {
           let addedItem = false;
 
+          const date = this.getDate(msg.timestamp);
+
           for (let i = 0; i < this.chatCardsInfo.length; i++) {
             if (this.chatCardsInfo[i].chatId === msg.chatId) {
               addedItem = true;
               this.ngZone.run(() => {
                 this.chatCardsInfo[i].latestMessage = msg.message;
-                this.chatCardsInfo[i].date = this.transform(msg.timestamp);
+                this.chatCardsInfo[i].date = date;
               });
               break;
             }
@@ -59,7 +61,7 @@ export class OpenChatsComponent implements OnInit {
             this.ngZone.run(() => {
               this.chatCardsInfo.push(
                 new ChatCardInfo({
-                  date: this.transform(msg.timestamp),
+                  date: date,
                   displayName: displayName,
                   latestMessage: msg.message,
                   chatId: msg.chatId,
@@ -75,11 +77,45 @@ export class OpenChatsComponent implements OnInit {
     );
   }
 
-  transform(value: any): string {
-    return this.datepipe.transform(value, 'HH:mm dd.MMM');
+  transform(value: any, format: string): string {
+    return this.datepipe.transform(value, format);
   }
 
   setSearchValue(event): void {
-    this.search = event.target.value.replace(/\s/g, '');
+    this.currentSerach = event.target.value.replace(/\s/g, '');
+  }
+
+  getDate(date: Date): string {
+    if (this.dateIsToday(new Date(date))) {
+      return this.transform(date, 'HH:mm');
+    }
+
+    return this.transform(date, 'HH:mm dd.MM');
+  }
+
+  dateIsToday(date: Date): boolean {
+    // Get today's date
+    var todaysDate = new Date();
+
+    // call setHours to take the time out of the comparison
+    if (date.setHours(0, 0, 0, 0) == todaysDate.setHours(0, 0, 0, 0)) {
+      return true;
+    }
+
+    return false;
+  }
+
+  public foundUsers(): ChatCardInfo[] {
+    if (!this.chatCardsInfo) {
+      return [];
+    } else if (this.currentSerach.length === 0) {
+      return this.chatCardsInfo;
+    } else {
+      return this.chatCardsInfo.filter((u) =>
+        u.displayName
+          .toLocaleLowerCase()
+          .startsWith(this.currentSerach.toLocaleLowerCase())
+      );
+    }
   }
 }

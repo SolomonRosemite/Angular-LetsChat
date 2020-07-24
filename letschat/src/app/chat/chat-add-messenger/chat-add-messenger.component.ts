@@ -1,3 +1,4 @@
+import { EventEmitterService } from './../../services/event/event-emitter.service';
 import { AuthService } from './../../services/auth/auth.service';
 import { User } from './../../services/Models/user.model';
 import { DatabaseService } from 'src/app/services/database/database.service';
@@ -20,7 +21,8 @@ export class ChatAddMessengerComponent implements OnInit {
     private router: Router,
     private database: DatabaseService,
     public dialog: MatDialog,
-    private auth: AuthService
+    private auth: AuthService,
+    private eventEmitter: EventEmitterService
   ) {}
 
   currentSerach = '';
@@ -38,6 +40,8 @@ export class ChatAddMessengerComponent implements OnInit {
   }
 
   refresh(): void {
+    this.allUsers = [];
+
     this.database.getAllUsers().then((users) => {
       this.allUsers = users;
     });
@@ -48,9 +52,16 @@ export class ChatAddMessengerComponent implements OnInit {
   }
 
   openDialog(user: User): void {
-    this.dialog.open(AddMessengerDialogComponent, {
-      data: [user, this.user],
-    });
+    if (user.uid == this.user.uid) {
+      this.eventEmitter.showDialog(
+        'Nice try',
+        "Well... I'm sorry but you sadly can't text your Self"
+      );
+    } else {
+      this.dialog.open(AddMessengerDialogComponent, {
+        data: [user, this.user],
+      });
+    }
   }
 
   public foundUsers(): User[] {
