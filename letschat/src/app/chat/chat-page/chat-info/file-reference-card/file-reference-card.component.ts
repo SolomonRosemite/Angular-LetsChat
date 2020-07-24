@@ -35,6 +35,7 @@ export class FileReferenceCardComponent implements OnInit {
   imageUrl = '../../../../../assets/images/file-Icon.png';
 
   ngOnInit(): void {
+
     const type = this.fileReference.getFileType().toLowerCase();
     if (type === 'png' || type === 'gif' || type === 'jpg' || type === 'jpeg') {
       this.imageUrl = this.fileReference.fileFileReferenceUrl;

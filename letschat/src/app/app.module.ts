@@ -32,6 +32,7 @@ import { AngularFireModule } from 'angularfire2';
 
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { UserSettingsComponent } from './home/user-settings/user-settings.component';
 import { BottomPopupComponent } from './home/bottom-popup/bottom-popup.component';
@@ -80,6 +81,7 @@ import { SignUpPageComponent } from './home/sign-up-page/sign-up-page.component'
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    AngularFireStorageModule,
     BrowserAnimationsModule,
     AngularFirestoreModule,
     AngularFireAuthModule,
