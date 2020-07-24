@@ -33,10 +33,10 @@ export class ChatCardComponent implements OnInit {
   }
 
   shortMessage(message: string): string {
-    if (message.length < 15) {
+    if (message.length < 20) {
       return message;
     }
 
-    return message.substring(0, 15) + '...';
+    return message.substring(0, 20) + '...';
   }
 }

@@ -42,7 +42,19 @@ export class ChatPageComponent implements OnInit {
         let messages: Message[] = [];
 
         items.docChanges().forEach((element) => {
-          messages.push(element.doc.data() as Message);
+          const item = element.doc.data();
+
+          messages.push({
+            chatId: item.chatId,
+            message: item.message,
+            receiverDisplayName: item.receiverDisplayName,
+            receiverPhotoURL: item.receiverPhotoURL,
+            receiverUid: item.receiverUid,
+            senderDisplayName: item.senderDisplayName,
+            senderPhotoURL: item.senderPhotoURL,
+            senderUid: item.senderUid,
+            timestamp: (item.timestamp as firebase.firestore.Timestamp).toDate(),
+          });
         });
 
         this.eventEmitterService.onNewMessageReceived(messages);

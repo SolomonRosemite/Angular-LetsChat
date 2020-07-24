@@ -1,12 +1,13 @@
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { User } from './../../../services/Models/user.model';
 import { Message } from './../../../services/Models/message.model';
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Pipe, PipeTransform, Component, OnInit, NgZone } from '@angular/core';
 
 import { DatePipe } from '@angular/common';
 
 import { EventEmitterService } from './../../../services/event/event-emitter.service';
 import { ChatCardInfo } from 'src/app/services/Models/ChatCardInfo.model';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-open-chats',
@@ -57,8 +58,7 @@ export class OpenChatsComponent implements OnInit {
             this.ngZone.run(() => {
               this.chatCardsInfo.push(
                 new ChatCardInfo({
-                  // date: msg.timestamp.getDate().toString(), // TODO here
-                  date: '12.03.20', // TODO here
+                  date: this.transform(msg.timestamp),
                   displayName: displayName,
                   latestMessage: msg.message,
                   chatId: msg.chatId,
@@ -72,6 +72,10 @@ export class OpenChatsComponent implements OnInit {
         });
       }
     );
+  }
+
+  transform(value: any): string {
+    return this.datepipe.transform(value, 'hh:mm dd.MMM');
   }
 
   setSearchValue(event): void {

@@ -19,6 +19,8 @@ export class ChatInfoComponent implements OnInit {
 
   allUsers: User[] = [];
 
+  me: User;
+
   user = new User({
     displayName: '',
     email: '',
@@ -31,14 +33,17 @@ export class ChatInfoComponent implements OnInit {
     if (this.user.displayName.length === 0) {
       this.auth.getUser().then((user) => {
         this.user = user;
-        console.log(this.user);
+
+        this.me = user;
+        console.log(this.me);
       });
     }
 
     this.eventEmitter.onSelectedUser.subscribe((user: ChatCardInfo) => {
-      let receiverUid = user.receiverUid;
+      //  me :1234, rec: 4321
+      let receiverUid = user.receiverUid; // ?
 
-      if (receiverUid === this.user.uid) {
+      if (receiverUid === this.me.uid) {
         receiverUid = user.senderUid;
       }
 
