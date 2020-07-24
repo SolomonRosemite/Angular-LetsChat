@@ -2,6 +2,20 @@ div.main {
   margin: 0px;
   padding: 0px;
 
+  Button.goBackButton {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 55px;
+    margin-left: 20px;
+    font-size: 18px;
+  }
+
   /* Split the screen in half */
   .split {
     height: 100%;

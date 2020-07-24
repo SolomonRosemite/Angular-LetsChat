@@ -1,14 +1,30 @@
-@import "./../../../theme.scss";
-
-.mat-icon {
-  vertical-align: middle;
-}
-
-.mat-toolbar {
+mat-toolbar {
+  justify-content: space-between;
+  position: fixed;
   color: white;
-  background-color: map-get($primary, 500);
+  background-color: transparent;
+  margin-top: 20px;
 }
 
-.spacer {
-  flex: 1 1 auto;
+.leftSide {
+  margin-left: 50px;
+}
+
+button.btn {
+  margin: 20px;
+  font-size: 20px;
+}
+
+.btnIcon {
+  vertical-align: middle;
+  font-size: 40px;
+}
+
+.rightSide {
+  margin-right: 50px;
+  font-size: 16px;
+}
+
+h1 {
+  display: inline-block;
 }

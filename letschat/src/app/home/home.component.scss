@@ -1,32 +1,66 @@
-@import "../../theme.scss";
-
-div.colored {
-  background-color: map-get($primary, 500);
-  color: white;
+div.main {
+  height: 100%;
 }
 
-div.toplevel {
-  padding-top: 6%;
-  padding-left: 20%;
-  text-align: center;
-  margin: auto;
-  width: 50%;
-  padding: 10px;
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
 }
 
-section.lowerlevel {
-  padding: 20px;
-  margin: auto;
-  vertical-align: middle;
-  text-align: center;
-  flex-direction: row;
-}
+.content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  height: 100%;
 
-.center {
-  position: absolute;
-  width: auto;
-  height: auto;
-  top: 72.5%;
-  left: 30%;
-  transform: translate(-50%, -50%);
+  .split {
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+
+  .left {
+    flex: 1;
+    height: 100%;
+
+    .centered {
+      position: absolute;
+      top: 50%;
+      left: 25%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+
+      .title {
+        margin-bottom: 50px;
+        font-size: 65px;
+        font-weight: bold;
+      }
+    }
+
+    button {
+      font-size: 20px;
+      width: 180px;
+      height: 50px;
+    }
+  }
+
+  .right {
+    flex: 1;
+    height: 100%;
+
+    img {
+      position: absolute;
+      width: 500px;
+      height: 320px;
+      top: 50%;
+      left: 75%;
+      text-align: center;
+      transform: translate(-50%, -50%);
+    }
+  }
 }
