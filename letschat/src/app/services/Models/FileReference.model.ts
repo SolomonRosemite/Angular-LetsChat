@@ -1,14 +1,22 @@
+interface FileReferenceInterface {
+  fileFileReferenceUrl: string;
+  fullFilename: string;
+  filename: string;
+  date: Date;
+}
+
 export class FileReference {
-  constructor({ fileFileReferenceUrl, fullFilename, filename, date }) {
-    this.fileFileReferenceUrl = fileFileReferenceUrl;
-    this.fullFilename = fullFilename;
-    this.filename = filename;
-    this.date = date;
+  constructor(fileReference?: FileReferenceInterface) {
+    this.fileFileReferenceUrl = fileReference.fileFileReferenceUrl;
+    this.fullFilename = fileReference.fullFilename;
+    this.filename = fileReference.filename;
+    this.date = fileReference.date;
   }
+
   public fileFileReferenceUrl: string;
   public fullFilename: string;
   public filename: string;
-  public date: string;
+  public date: Date;
 
   public getFileType(): string {
     if (this.fullFilename.includes('.') === false) {

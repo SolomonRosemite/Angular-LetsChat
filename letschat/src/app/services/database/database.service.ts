@@ -1,3 +1,4 @@
+import { FileReference } from 'src/app/services/Models/FileReference.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 
@@ -5,6 +6,7 @@ import {
   AngularFirestoreDocument,
   DocumentReference,
   DocumentData,
+  AngularFirestoreCollection,
 } from 'angularfire2/firestore';
 import { User } from '../Models/user.model';
 import { Message } from '../Models/message.model';
@@ -15,7 +17,7 @@ import { Message } from '../Models/message.model';
 export class DatabaseService {
   constructor(private firestore: AngularFirestore) {}
 
-  public receiveMessages(user: User) {
+  public receiveMessages(user: User): AngularFirestoreCollection<Message> {
     return this.firestore
       .collection('messages')
       .doc(user.uid)
@@ -80,5 +82,20 @@ export class DatabaseService {
       users.push(data.data() as User);
     });
     return users;
+  }
+
+  public async getSharedFiles(
+    chatId: string,
+    uid: string
+  ): Promise<FileReference[]> {
+    var x = this.firestore.collection('sharedfiles').doc(uid).collection(chatId)
+      .ref;
+    let fileReferences: FileReference[] = [];
+
+    (await x.get()).docs.forEach((data) => {
+      fileReferences.push(data.data() as FileReference);
+    });
+
+    return fileReferences;
   }
 }

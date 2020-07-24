@@ -48,14 +48,12 @@
   <span style="text-align: center; padding-left: 10%;">
     <div *ngIf="currentUser != null; else user" style="text-align: center;">
       <h1>{{ currentUser }}</h1>
-      <h1 style="font-size: 15px;">
-        {{ lastSeen }}
-      </h1>
+      <h1 style="font-size: 15px;">{{ location }}</h1>
     </div>
 
     <ng-template #user>
       <h1>{{ me.displayName }}</h1>
-      <h1 style="font-size: 15px;">Online</h1>
+      <h1 style="font-size: 15px;">{{ me.location }}</h1>
     </ng-template>
   </span>
 

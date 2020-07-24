@@ -1,5 +1,3 @@
-import { Subscription } from 'rxjs';
-import { Router, NavigationStart } from '@angular/router';
 import { ChatCardInfo } from 'src/app/services/Models/ChatCardInfo.model';
 import { Message } from './../../services/Models/message.model';
 import { Component, OnInit } from '@angular/core';
