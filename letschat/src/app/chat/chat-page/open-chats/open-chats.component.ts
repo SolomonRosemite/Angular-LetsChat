@@ -41,6 +41,7 @@ export class OpenChatsComponent implements OnInit {
               addedItem = true;
               this.ngZone.run(() => {
                 this.chatCardsInfo[i].latestMessage = msg.message;
+                this.chatCardsInfo[i].date = this.transform(msg.timestamp);
               });
               break;
             }
@@ -75,7 +76,7 @@ export class OpenChatsComponent implements OnInit {
   }
 
   transform(value: any): string {
-    return this.datepipe.transform(value, 'hh:mm dd.MMM');
+    return this.datepipe.transform(value, 'HH:mm dd.MMM');
   }
 
   setSearchValue(event): void {

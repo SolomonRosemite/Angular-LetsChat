@@ -13,17 +13,10 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 export class HomeComponent implements OnInit {
   constructor(
     private buttomSheet: MatBottomSheet,
-    private eventEmitterService: EventEmitterService,
-    private router: Router,
-    private auth: AuthService
+    private eventEmitterService: EventEmitterService
   ) {}
 
-  async ngOnInit(): Promise<void> {
-    const isLoggedIn = (await this.auth.getUser()) !== null;
-
-    if (isLoggedIn) {
-      this.router.navigate(['/chat']);
-    }
+  ngOnInit(): void {
     this.eventEmitterService.onBottomBarOpenFunction.subscribe(() => {
       this.openBottomSheet();
     });

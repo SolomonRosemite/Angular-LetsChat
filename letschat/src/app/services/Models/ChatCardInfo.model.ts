@@ -22,6 +22,6 @@ export class ChatCardInfo {
   readonly photoURL: string;
   readonly receiverUid: string;
   readonly senderUid: string;
-  readonly date: string;
+  date: string;
   latestMessage: string;
 }
