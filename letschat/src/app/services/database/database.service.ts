@@ -1,3 +1,4 @@
+import { FileReferenceInterface } from './../Models/FileReference.model';
 import { FileReference } from 'src/app/services/Models/FileReference.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
@@ -75,10 +76,10 @@ export class DatabaseService {
   }
 
   public async getAllUsers(): Promise<User[]> {
-    var x = this.firestore.collection('users').ref;
+    var ref = this.firestore.collection('users').ref;
     let users: User[] = [];
 
-    (await x.get()).docs.forEach((data) => {
+    (await ref.get()).docs.forEach((data) => {
       users.push(data.data() as User);
     });
     return users;
@@ -97,5 +98,38 @@ export class DatabaseService {
     });
 
     return fileReferences;
+  }
+
+  public async postFile(data: FileReference): Promise<DocumentReference[]> {
+    const docs: DocumentReference[] = [];
+
+    const fr: FileReferenceInterface = {
+      date: data.date,
+      chatId: data.chatId,
+      senderUid: data.senderUid,
+      receiverUid: data.receiverUid,
+
+      filename: data.filename,
+      fullFilename: data.fullFilename,
+      fileFileReferenceUrl: data.fileFileReferenceUrl,
+    };
+
+    docs.push(
+      await this.firestore
+        .collection('sharedfiles')
+        .doc(data.senderUid)
+        .collection(data.chatId)
+        .add(fr)
+    );
+
+    docs.push(
+      await this.firestore
+        .collection('sharedfiles')
+        .doc(data.receiverUid)
+        .collection(data.chatId)
+        .add(fr)
+    );
+
+    return docs;
   }
 }

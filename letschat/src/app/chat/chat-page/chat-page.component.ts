@@ -114,10 +114,24 @@ export class ChatPageComponent implements OnInit {
       return;
     }
 
+    // TODO: Open Popup
+
+    let receiverUid = this.chatCardInfo.senderUid;
+
+    if (this.chatCardInfo.senderUid === this.me.uid) {
+      receiverUid = this.chatCardInfo.receiverUid;
+    }
+
     const items = await this.storageService.uploadFiles(
       files,
-      this.chatCardInfo.chatId
+      this.chatCardInfo.chatId,
+      this.me.uid,
+      receiverUid
     );
-    console.log(items);
+
+    items.forEach(async (file) => {
+      await this.database.postFile(file);
+    });
+    // TODO: notify user Upload is Complete!
   }
 }
