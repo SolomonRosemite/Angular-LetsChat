@@ -1,3 +1,24 @@
+// import { BrowserModule } from '@angular/platform-browser';
+// import { NgModule } from '@angular/core';
+
+// import { AppRoutingModule } from './app-routing.module';
+// import { AppComponent } from './app.component';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { environment } from 'src/environments/environment';
+// import { AngularFireModule } from '@angular/fire';
+
+// @NgModule({
+//   declarations: [AppComponent],
+//   imports: [
+//     AngularFireModule.initializeApp(environment.firebase),
+//     BrowserModule,
+//     AppRoutingModule,
+//     BrowserAnimationsModule,
+//   ],
+//   providers: [],
+//   bootstrap: [AppComponent],
+// })
+// export class AppModule {}
 import { DatePipe } from '@angular/common';
 import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
@@ -26,9 +47,9 @@ import { FormsModule } from '@angular/forms';
 import { DatabaseService } from './services/database/database.service';
 import { EventEmitterService } from './services/event/event-emitter.service';
 
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire';
 
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';

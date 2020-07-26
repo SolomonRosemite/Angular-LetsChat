@@ -23,7 +23,7 @@ export class OpenChatsComponent implements OnInit {
   ) {}
 
   chatCardsInfo: ChatCardInfo[] = [];
-  currentSerach = '';
+  currentSearch = '';
   user: User;
 
   ngOnInit(): void {
@@ -82,7 +82,7 @@ export class OpenChatsComponent implements OnInit {
   }
 
   setSearchValue(event): void {
-    this.currentSerach = event.target.value.replace(/\s/g, '');
+    this.currentSearch = event.target.value.replace(/\s/g, '');
   }
 
   getDate(date: Date): string {
@@ -90,7 +90,7 @@ export class OpenChatsComponent implements OnInit {
       return this.transform(date, 'HH:mm');
     }
 
-    return this.transform(date, 'HH:mm dd.MM');
+    return this.transform(date, 'HH:mm dd/MM/yyyy');
   }
 
   dateIsToday(date: Date): boolean {
@@ -108,13 +108,13 @@ export class OpenChatsComponent implements OnInit {
   public foundUsers(): ChatCardInfo[] {
     if (!this.chatCardsInfo) {
       return [];
-    } else if (this.currentSerach.length === 0) {
+    } else if (this.currentSearch.length === 0) {
       return this.chatCardsInfo;
     } else {
       return this.chatCardsInfo.filter((u) =>
         u.displayName
           .toLocaleLowerCase()
-          .startsWith(this.currentSerach.toLocaleLowerCase())
+          .startsWith(this.currentSearch.toLocaleLowerCase())
       );
     }
   }

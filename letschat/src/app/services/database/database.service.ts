@@ -5,7 +5,12 @@ import {
   AngularFirestoreDocument,
   DocumentReference,
   DocumentData,
+<<<<<<< Updated upstream
 } from 'angularfire2/firestore';
+=======
+  AngularFirestoreCollection,
+} from '@angular/fire/firestore';
+>>>>>>> Stashed changes
 import { User } from '../Models/user.model';
 import { Message } from '../Models/message.model';
 

@@ -106,4 +106,44 @@ export class ChatPageComponent implements OnInit {
 
     this.database.sendMessage(message);
   }
+<<<<<<< Updated upstream
+=======
+
+  async handleFileInput(files: FileList) {
+    if (files.length == 0 || !this.chatCardInfo) {
+      return;
+    }
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      if (file.size / 1000000 > 20) {
+        this.eventEmitterService.showDialog(
+          'File too big.',
+          "Files can't be bigger than 20MB"
+        );
+        return;
+      }
+    }
+
+    // TODO: Open Popup
+
+    let receiverUid = this.chatCardInfo.senderUid;
+
+    if (this.chatCardInfo.senderUid === this.me.uid) {
+      receiverUid = this.chatCardInfo.receiverUid;
+    }
+
+    const items = await this.storageService.uploadFiles(
+      files,
+      this.chatCardInfo.chatId,
+      this.me.uid,
+      receiverUid
+    );
+
+    items.forEach(async (file) => {
+      await this.database.postFile(file);
+    });
+    // TODO: notify user Upload is Complete!
+  }
+>>>>>>> Stashed changes
 }

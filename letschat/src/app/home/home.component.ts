@@ -12,7 +12,7 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 })
 export class HomeComponent implements OnInit {
   constructor(
-    private buttomSheet: MatBottomSheet,
+    private bottomSheet: MatBottomSheet,
     private eventEmitterService: EventEmitterService
   ) {}
 
@@ -27,10 +27,10 @@ export class HomeComponent implements OnInit {
   }
 
   public closeBottomSheet(): void {
-    this.buttomSheet.dismiss(BottomPopupComponent);
+    this.bottomSheet.dismiss(BottomPopupComponent);
   }
 
   public openBottomSheet(): void {
-    this.buttomSheet.open(BottomPopupComponent);
+    this.bottomSheet.open(BottomPopupComponent);
   }
 }

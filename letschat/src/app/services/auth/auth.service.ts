@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../Models/user.model';
 
-import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {
   AngularFirestore,
@@ -11,6 +10,7 @@ import {
 
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import * as firebase from 'firebase';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -43,16 +43,16 @@ export class AuthService {
   }
 
   emailSignup(email: string, password: string) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+    return this.afAuth.createUserWithEmailAndPassword(email, password);
   }
 
   emailSignin(email: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
+    return this.afAuth.signInWithEmailAndPassword(email, password);
   }
 
-  async googleSignin(userLocation: string) {
-    const provider = new auth.GoogleAuthProvider();
-    const credential = await this.afAuth.auth.signInWithPopup(provider);
+  async googleSignin(userLocation: string): Promise<void> {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const credential = await this.afAuth.signInWithPopup(provider);
 
     const user: User = {
       displayName: credential.user.displayName,
@@ -66,7 +66,6 @@ export class AuthService {
   }
 
   async setUserData(user: User): Promise<void> {
-    // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
       `users/${user.uid}`
     );
@@ -83,7 +82,7 @@ export class AuthService {
   }
 
   async signOut() {
-    await this.afAuth.auth.signOut();
-    this.router.navigate(['/signin']);
+    await this.afAuth.signOut();
+    this.router.navigate(['/']);
   }
 }

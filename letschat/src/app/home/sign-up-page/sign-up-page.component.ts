@@ -62,7 +62,7 @@ export class SignUpPageComponent implements OnInit {
   onSubmit(): void {
     // Validate Data
     if (this.name.length < 2) {
-      this.message('Name has to be at least 4 letters long.');
+      this.message('Name has to be at least 3 letters long.');
     } else if (this.name.length > 12) {
       this.message("Name can't be longer then 12 letters long.");
     } else if (this.password.length < 5) {
@@ -72,7 +72,7 @@ export class SignUpPageComponent implements OnInit {
     } else {
       this.auth
         .emailSignup(this.email, this.password)
-        .then((loggedInUser) => {
+        .then(async (loggedInUser) => {
           const user: User = {
             displayName: this.name,
             photoURL: this.getPhotoUrl(),
@@ -81,9 +81,11 @@ export class SignUpPageComponent implements OnInit {
             uid: loggedInUser.user.uid,
           };
 
-          this.auth
-            .setUserData(user)
-            .then(() => this.router.navigate(['chat']));
+          await this.auth.setUserData(user);
+
+          console.log('shit');
+
+          this.router.navigate(['chat']);
         })
         .catch((reason) => {
           console.log(reason);
@@ -97,7 +99,7 @@ export class SignUpPageComponent implements OnInit {
           } else if (msg.startsWith('The email address is badly')) {
             this.message("Email address isn't Valid");
           } else {
-            this.message("Something wen't wrong. Please try again");
+            this.message('Something went wrong. Please try again');
           }
         });
     }

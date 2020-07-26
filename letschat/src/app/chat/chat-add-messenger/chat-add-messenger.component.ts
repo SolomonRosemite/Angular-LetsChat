@@ -25,7 +25,7 @@ export class ChatAddMessengerComponent implements OnInit {
     private eventEmitter: EventEmitterService
   ) {}
 
-  currentSerach = '';
+  currentSearch = '';
   allUsers: User[] = [];
   user: User;
 
@@ -48,7 +48,7 @@ export class ChatAddMessengerComponent implements OnInit {
   }
 
   onKey(event) {
-    this.currentSerach = event.target.value;
+    this.currentSearch = event.target.value;
   }
 
   openDialog(user: User): void {
@@ -67,13 +67,13 @@ export class ChatAddMessengerComponent implements OnInit {
   public foundUsers(): User[] {
     if (!this.allUsers) {
       return [];
-    } else if (this.currentSerach.length === 0) {
+    } else if (this.currentSearch.length === 0) {
       return this.allUsers;
     } else {
       return this.allUsers.filter((u) =>
         u.displayName
           .toLocaleLowerCase()
-          .startsWith(this.currentSerach.toLocaleLowerCase())
+          .startsWith(this.currentSearch.toLocaleLowerCase())
       );
     }
   }
