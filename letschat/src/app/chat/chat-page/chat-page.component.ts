@@ -1,5 +1,4 @@
-import { Subscription } from 'rxjs';
-import { Router, NavigationStart } from '@angular/router';
+import { StorageService } from './../../services/storage/storage.service';
 import { ChatCardInfo } from 'src/app/services/Models/ChatCardInfo.model';
 import { Message } from './../../services/Models/message.model';
 import { Component, OnInit } from '@angular/core';
@@ -17,17 +16,20 @@ export class ChatPageComponent implements OnInit {
   constructor(
     private eventEmitterService: EventEmitterService,
     private database: DatabaseService,
-    private auth: AuthService
+    private auth: AuthService,
+    private storageService: StorageService
   ) {}
 
+  fileToUpload: File = null;
+
   me: User;
-  receiver: ChatCardInfo;
+  chatCardInfo: ChatCardInfo;
 
   message = '';
 
   ngOnInit(): void {
     this.eventEmitterService.onSelectedUser.subscribe(
-      (user: ChatCardInfo) => (this.receiver = user)
+      (user: ChatCardInfo) => (this.chatCardInfo = user)
     );
 
     this.auth.getUser().then((user) => {
@@ -65,16 +67,16 @@ export class ChatPageComponent implements OnInit {
   sendMessage(event): void {
     if (
       (event != null && event.keyCode != 13) ||
-      !this.receiver ||
+      !this.chatCardInfo ||
       this.message.length == 0
     ) {
       return;
     }
 
-    let uid = this.receiver.senderUid;
+    let uid = this.chatCardInfo.senderUid;
 
-    if (this.me.uid === this.receiver.senderUid) {
-      uid = this.receiver.receiverUid;
+    if (this.me.uid === this.chatCardInfo.senderUid) {
+      uid = this.chatCardInfo.receiverUid;
     }
 
     const message = new Message({
@@ -82,8 +84,8 @@ export class ChatPageComponent implements OnInit {
       message: this.message,
 
       receiver: uid,
-      receiverPhotoURL: this.receiver.photoURL,
-      receiverDisplayName: this.receiver.displayName,
+      receiverPhotoURL: this.chatCardInfo.photoURL,
+      receiverDisplayName: this.chatCardInfo.displayName,
 
       sender: this.me.uid,
       senderPhotoURL: this.me.photoURL,
@@ -106,9 +108,6 @@ export class ChatPageComponent implements OnInit {
 
     this.database.sendMessage(message);
   }
-<<<<<<< Updated upstream
-=======
-
   async handleFileInput(files: FileList) {
     if (files.length == 0 || !this.chatCardInfo) {
       return;
@@ -145,5 +144,4 @@ export class ChatPageComponent implements OnInit {
     });
     // TODO: notify user Upload is Complete!
   }
->>>>>>> Stashed changes
 }

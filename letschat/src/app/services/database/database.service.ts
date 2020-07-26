@@ -1,3 +1,5 @@
+import { FileReferenceInterface } from './../Models/FileReference.model';
+import { FileReference } from 'src/app/services/Models/FileReference.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 
@@ -5,12 +7,8 @@ import {
   AngularFirestoreDocument,
   DocumentReference,
   DocumentData,
-<<<<<<< Updated upstream
-} from 'angularfire2/firestore';
-=======
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
->>>>>>> Stashed changes
 import { User } from '../Models/user.model';
 import { Message } from '../Models/message.model';
 
@@ -20,7 +18,7 @@ import { Message } from '../Models/message.model';
 export class DatabaseService {
   constructor(private firestore: AngularFirestore) {}
 
-  public receiveMessages(user: User) {
+  public receiveMessages(user: User): AngularFirestoreCollection<Message> {
     return this.firestore
       .collection('messages')
       .doc(user.uid)
@@ -78,12 +76,60 @@ export class DatabaseService {
   }
 
   public async getAllUsers(): Promise<User[]> {
-    var x = this.firestore.collection('users').ref;
+    var ref = this.firestore.collection('users').ref;
     let users: User[] = [];
 
-    (await x.get()).docs.forEach((data) => {
+    (await ref.get()).docs.forEach((data) => {
       users.push(data.data() as User);
     });
     return users;
+  }
+
+  public async getSharedFiles(
+    chatId: string,
+    uid: string
+  ): Promise<FileReference[]> {
+    var x = this.firestore.collection('sharedfiles').doc(uid).collection(chatId)
+      .ref;
+    let fileReferences: FileReference[] = [];
+
+    (await x.get()).docs.forEach((data) => {
+      fileReferences.push(data.data() as FileReference);
+    });
+
+    return fileReferences;
+  }
+
+  public async postFile(data: FileReference): Promise<DocumentReference[]> {
+    const docs: DocumentReference[] = [];
+
+    const fr: FileReferenceInterface = {
+      date: data.date,
+      chatId: data.chatId,
+      senderUid: data.senderUid,
+      receiverUid: data.receiverUid,
+
+      filename: data.filename,
+      fullFilename: data.fullFilename,
+      fileFileReferenceUrl: data.fileFileReferenceUrl,
+    };
+
+    docs.push(
+      await this.firestore
+        .collection('sharedfiles')
+        .doc(data.senderUid)
+        .collection(data.chatId)
+        .add(fr)
+    );
+
+    docs.push(
+      await this.firestore
+        .collection('sharedfiles')
+        .doc(data.receiverUid)
+        .collection(data.chatId)
+        .add(fr)
+    );
+
+    return docs;
   }
 }

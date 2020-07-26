@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/services/Models/user.model';
 import { EventEmitterService } from './../../../services/event/event-emitter.service';
 import { ChatCardInfo } from 'src/app/services/Models/ChatCardInfo.model';
+import { FileReference } from 'src/app/services/Models/FileReference.model';
 
 @Component({
   selector: 'app-chat-info',
@@ -29,6 +30,8 @@ export class ChatInfoComponent implements OnInit {
     uid: '',
   });
 
+  sharedFiles: FileReference[] = [];
+
   ngOnInit(): void {
     if (this.user.displayName.length === 0) {
       this.auth.getUser().then((user) => {
@@ -39,15 +42,21 @@ export class ChatInfoComponent implements OnInit {
       });
     }
 
-    this.eventEmitter.onSelectedUser.subscribe((user: ChatCardInfo) => {
-      //  me :1234, rec: 4321
-      let receiverUid = user.receiverUid; // ?
+    this.eventEmitter.onSelectedUser.subscribe((chatCardInfo: ChatCardInfo) => {
+      let receiverUid = chatCardInfo.receiverUid;
 
       if (receiverUid === this.me.uid) {
-        receiverUid = user.senderUid;
+        receiverUid = chatCardInfo.senderUid;
       }
 
-      this.getUserInfo(receiverUid).then((user) => (this.user = user));
+      this.getUserInfo(receiverUid).then(async (user) => {
+        this.user = user;
+
+        this.sharedFiles = await this.database.getSharedFiles(
+          chatCardInfo.chatId,
+          this.me.uid
+        );
+      });
     });
   }
 

@@ -53,6 +53,7 @@ import { AngularFireModule } from '@angular/fire';
 
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { UserSettingsComponent } from './home/user-settings/user-settings.component';
 import { BottomPopupComponent } from './home/bottom-popup/bottom-popup.component';
@@ -67,7 +68,7 @@ import { ChatNavbarComponent } from './chat/chat-navbar/chat-navbar.component';
 import { OpenChatsComponent } from './chat/chat-page/open-chats/open-chats.component';
 import { ChatCardComponent } from './chat/chat-page/open-chats/chat-card/chat-card.component';
 import { ChatInfoComponent } from './chat/chat-page/chat-info/chat-info.component';
-import { FileReferenceCardComponent } from './chat/common/file-reference-card/file-reference-card.component';
+import { FileReferenceCardComponent } from './chat/chat-page/chat-info/file-reference-card/file-reference-card.component';
 import { ChatMessagesPageComponent } from './chat/chat-page/chat-messages-page/chat-messages-page.component';
 import { EditSettingsComponent } from './home/user-settings/edit-settings/edit-settings.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -101,6 +102,7 @@ import { SignUpPageComponent } from './home/sign-up-page/sign-up-page.component'
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    AngularFireStorageModule,
     BrowserAnimationsModule,
     AngularFirestoreModule,
     AngularFireAuthModule,

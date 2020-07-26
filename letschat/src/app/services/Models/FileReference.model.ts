@@ -1,14 +1,34 @@
+export interface FileReferenceInterface {
+  date: Date;
+  chatId: string;
+  senderUid: string;
+  receiverUid: string;
+
+  filename: string;
+  fullFilename: string;
+  fileFileReferenceUrl: string;
+}
+
 export class FileReference {
-  constructor({ fileFileReferenceUrl, fullFilename, filename, date }) {
-    this.fileFileReferenceUrl = fileFileReferenceUrl;
-    this.fullFilename = fullFilename;
-    this.filename = filename;
-    this.date = date;
+  constructor(fr: FileReferenceInterface) {
+    this.date = fr.date;
+    this.chatId = fr.chatId;
+    this.senderUid = fr.senderUid;
+    this.receiverUid = fr.receiverUid;
+
+    this.filename = fr.filename;
+    this.fullFilename = fr.fullFilename;
+    this.fileFileReferenceUrl = fr.fileFileReferenceUrl;
   }
-  public fileFileReferenceUrl: string;
-  public fullFilename: string;
+
+  public date: Date;
+  public chatId: string;
+  public senderUid: string;
+  public receiverUid: string;
+
   public filename: string;
-  public date: string;
+  public fullFilename: string;
+  public fileFileReferenceUrl: string;
 
   public getFileType(): string {
     if (this.fullFilename.includes('.') === false) {

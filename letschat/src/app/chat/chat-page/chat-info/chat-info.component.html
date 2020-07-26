@@ -1,35 +1,31 @@
 <div
   class="mat-elevation-z3"
-  style="
-    margin: 0px;
-    padding: 0px;
-    padding-top: 10%;
-    text-align: center;
-    padding-bottom: 5px;
-  "
->
+  style="margin: 0px;
+  padding: 0px;
+  padding-top: 10%;
+  text-align: center;
+  padding-bottom: 5px;">
   <div>
     <img
       style="border-radius: 50%; width: 90px; height: 90px;"
       src="{{ user.photoURL }}"
-    />
+      />
 
-    <div style="padding-top: 20px;"></div>
-    <p style="font-size: 20px; font-weight: 500;">{{ user.displayName }}</p>
-    <p style="font-size: 15px; font-weight: normal;">{{ user.location }}</p>
-    <div style="padding-top: 10px;"></div>
+    <p style="font-size: 20px; margin-top: 20px; font-weight: 500;">
+      {{ user.displayName }}
+    </p>
+    <p style="font-size: 15px; margin-bottom: 10px; font-weight: normal;">
+      {{ user.location }}
+    </p>
   </div>
 </div>
 
-<<<<<<< Updated upstream
-<div style="text-align: center; width: 100%; padding-top: 5%;">
-  <h1>Shared Files</h1>
-=======
 <div class="sharedFilesTab" style="text-align: center; width: 100%; padding-top:
   5%;">
   <h1 *ngIf="sharedFiles.length != 0">Shared Files</h1>
->>>>>>> Stashed changes
   <ul>
-    <li><app-file-reference-card></app-file-reference-card></li>
+    <li *ngFor="let sharedFile of sharedFiles">
+      <app-file-reference-card [input]="sharedFile"></app-file-reference-card>
+    </li>
   </ul>
 </div>

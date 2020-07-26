@@ -1,13 +1,12 @@
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { User } from './../../../services/Models/user.model';
 import { Message } from './../../../services/Models/message.model';
-import { Pipe, PipeTransform, Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 
 import { DatePipe } from '@angular/common';
 
 import { EventEmitterService } from './../../../services/event/event-emitter.service';
 import { ChatCardInfo } from 'src/app/services/Models/ChatCardInfo.model';
-import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-open-chats',
