@@ -1,32 +1,39 @@
-h6.name {
-  font-size: 15px;
-  font-weight: bold;
-  margin: -8px;
-  padding: 0px;
-  padding-bottom: 5px;
-}
-
-h6.message {
-  font-size: 15px;
-  margin-left: -8px;
-  padding: 0px;
-}
-
-h6.date {
-  font-size: 13.5px;
-}
-
-button.chat {
-  margin: 0;
-  padding: 0;
-}
-
-.block {
+.chatCardButton {
   display: block;
   width: 100%;
   border: none;
-  padding: 10px 25px 5px 10px;
+  padding: 0px 25px 0px 10px;
+  // padding: 0px;
+  margin: 0px;
   font-size: 16px;
-  cursor: pointer;
   text-align: center;
+  cursor: pointer;
+
+  h6 {
+    font-weight: normal;
+  }
+
+  h6.name {
+    font-size: 15px;
+    font-weight: 700;
+    margin: -8px;
+    padding: 0px;
+    padding-bottom: 5px;
+  }
+
+  h6.message {
+    font-size: 15px;
+    margin-left: -8px;
+    padding: 0px;
+    line-height: 10px;
+  }
+
+  h6.date {
+    font-size: 13.5px;
+  }
+
+  button.chat {
+    margin: 0;
+    padding: 0;
+  }
 }

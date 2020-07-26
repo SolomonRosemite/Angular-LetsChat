@@ -1,32 +1,25 @@
-<button mat-button (click)="selectedUser()" type="button" class="block">
+<button mat-button (click)="selectedUser()" type="button" class="chatCardButton">
   <div
-    style="
-      display: inline-flex;
-      padding-left: 10px;
-      padding-bottom: 5px;
-      margin-left: -10px;
-      justify-content: space-between;
-      width: 100%;
-    "
-  >
+    style="display: inline-flex;
+    padding-left: 10px;
+    /* padding-bottom: 500px; */
+    margin-left: -10px;
+    justify-content: space-between;
+    width: 100%;">
     <span>
       <img
-        style="
-          border-radius: 50%;
-          margin-left: 20px;
-          width: 50px;
-          height: 50px;
-        "
-        src="{{ info.photoURL }}"
-      />
+        style="border-radius: 50%;
+        margin-top: 30px;
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 50px;
+        height: 50px;" src="{{ info.photoURL }}"
+        />
       <div
-        style="
-          padding-top: 12px;
-          padding-left: 20px;
-          display: inline-block;
-          text-align: start;
-        "
-      >
+        style="padding-top: 12px;
+        padding-left: 20px;
+        display: inline-block;
+        text-align: start;">
         <h6 class="name">{{ info.displayName }}</h6>
         <h6 class="message" style="margin-top: 5px;">
           {{ shortMessage(info.latestMessage) }}
