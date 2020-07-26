@@ -1,3 +1,4 @@
+import { DownloadService } from './../../../../services/download/download.service';
 import { FileReference } from './../../../../services/Models/FileReference.model';
 import { Component, OnInit, Input } from '@angular/core';
 import { DatePipe } from '@angular/common';
@@ -8,7 +9,10 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./file-reference-card.component.scss'],
 })
 export class FileReferenceCardComponent implements OnInit {
-  constructor(private datepipe: DatePipe) {}
+  constructor(
+    private datepipe: DatePipe,
+    private downloadService: DownloadService
+  ) {}
 
   @Input()
   input: FileReference;
@@ -21,6 +25,10 @@ export class FileReferenceCardComponent implements OnInit {
 
       this._fileReference = new FileReference({
         date: date,
+        chatId: this.input.chatId,
+        receiverUid: this.input.receiverUid,
+        senderUid: this.input.senderUid,
+
         fileFileReferenceUrl: this.input.fileFileReferenceUrl,
         filename: this.input.filename,
         fullFilename: this.input.fullFilename,
@@ -35,7 +43,6 @@ export class FileReferenceCardComponent implements OnInit {
   imageUrl = '../../../../../assets/images/file-Icon.png';
 
   ngOnInit(): void {
-
     const type = this.fileReference.getFileType().toLowerCase();
     if (type === 'png' || type === 'gif' || type === 'jpg' || type === 'jpeg') {
       this.imageUrl = this.fileReference.fileFileReferenceUrl;
@@ -53,7 +60,21 @@ export class FileReferenceCardComponent implements OnInit {
     return this.datepipe.transform(value, 'dd.MMM.yyyy');
   }
 
+  public viewFile(): void {
+    window.open(this.fileReference.fileFileReferenceUrl);
+  }
+
   public downloadFile(): void {
-    // TODO: Add Download function.
+    this.downloadService
+      .download(this.fileReference.fileFileReferenceUrl)
+      .subscribe((blob) => {
+        const a = document.createElement('a');
+        const objectUrl = URL.createObjectURL(blob);
+        a.href = objectUrl;
+        a.download = this.fileReference.fullFilename;
+        a.click();
+
+        URL.revokeObjectURL(objectUrl);
+      });
   }
 }

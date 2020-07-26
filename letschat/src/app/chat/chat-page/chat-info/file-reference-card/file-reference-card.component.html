@@ -1,27 +1,21 @@
-<button (click)="downloadFile()" mat-button type="button" class="block">
+<button [matMenuTriggerFor]="appMenu" mat-button type="button" class="block">
   <div
-    style="
-      display: inline-flex;
-      padding-left: 10px;
-      padding-bottom: 5px;
-      margin-left: -10px;
-      justify-content: space-between;
-      width: 100%;
-    "
-  >
+    style="display: inline-flex;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    margin-left: -10px;
+    justify-content: space-between;
+    width: 100%;">
     <span style="display: inline-flex;">
       <img
         style="padding-left: 10px; width: 40px; height: 40px;"
         src="{{ imageUrl }}"
-      />
+        />
       <div
-        style="
-          padding-top: 12px;
-          padding-left: 20px;
-          display: inline-block;
-          text-align: start;
-        "
-      >
+        style="padding-top: 12px;
+        padding-left: 20px;
+        display: inline-block;
+        text-align: start;">
         <h6 class="name">{{ displayFilename(fileReference.filename) }}</h6>
         <div style="padding-top: 5;"></div>
         <h6 class="filetype">{{ fileReference.getFileType() }}</h6>
@@ -32,3 +26,12 @@
     </span>
   </div>
 </button>
+
+<mat-menu #appMenu="matMenu">
+  <button mat-menu-item (click)="viewFile()">
+    View File
+  </button>
+  <button mat-menu-item (click)="downloadFile()">
+    Download File
+  </button>
+</mat-menu>

@@ -1,12 +1,9 @@
 <mat-toolbar
   class="mat-elevation-z3"
-  style="
-    justify-content: space-between;
-    position: fixed;
-    margin: 0;
-    padding: 0;
-  "
->
+  style="justify-content: space-between;
+  position: fixed;
+  margin: 0;
+  padding: 0;">
   <span>
     <div style="display: flex; padding-left: 10px;">
       <button mat-icon-button [matMenuTriggerFor]="appMenu">
@@ -14,27 +11,19 @@
           class="icon-display"
           aria-hidden="false"
           aria-label="leaf icon"
-          style="color: lightcoral;"
-          >eco</mat-icon
-        >
+          style="color: lightcoral;">eco</mat-icon>
       </button>
       <mat-menu #appMenu="matMenu">
         <button
           mat-menu-item
-          (click)="
-            goToLink('https://github.com/SolomonRosemite/Angular-LetsChat')
-          "
-        >
+          (click)="goToLink('https://github.com/SolomonRosemite/Angular-LetsChat')">
           GitHub
         </button>
         <button
           mat-menu-item
-          (click)="
-            goToLink(
-              'https://docs.google.com/forms/d/e/1FAIpQLSfgNupcmVDMI8CHVJkCfJLslp2Sv2lT0mqkFOV_g2u-3Up6CA/viewform?usp=sf_link'
-            )
-          "
-        >
+          (click)="goToLink(
+          'https://docs.google.com/forms/d/e/1FAIpQLSfgNupcmVDMI8CHVJkCfJLslp2Sv2lT0mqkFOV_g2u-3Up6CA/viewform?usp=sf_link'
+          )">
           Feedback
         </button>
       </mat-menu>
@@ -62,9 +51,7 @@
       <mat-icon>person_add</mat-icon>
     </button>
     <button mat-button (click)="routeTo('/settings')">
-      <mat-icon aria-hidden="false" aria-label="settings icon"
-        >settings</mat-icon
-      >
+      <mat-icon aria-hidden="false" aria-label="settings icon">settings</mat-icon>
     </button>
     <mat-menu #appMenu2="matMenu">
       <button mat-menu-item (click)="routeTo('addmessenger')">
@@ -78,7 +65,7 @@
       <img
         style="border-radius: 50%; width: 40px; height: 40px;"
         src="{{ me.photoURL }}"
-      />
+        />
     </button>
   </span>
 </mat-toolbar>
