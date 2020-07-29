@@ -3,6 +3,8 @@ import { User } from './../../../services/Models/user.model';
 import { Message } from './../../../services/Models/message.model';
 import { Component, OnInit, NgZone } from '@angular/core';
 
+import * as moment from 'moment';
+
 import { DatePipe } from '@angular/common';
 
 import { EventEmitterService } from './../../../services/event/event-emitter.service';
@@ -108,13 +110,25 @@ export class OpenChatsComponent implements OnInit {
     if (!this.chatCardsInfo) {
       return [];
     } else if (this.currentSearch.length === 0) {
-      return this.chatCardsInfo;
+      return this.sortByDate(this.chatCardsInfo);
     } else {
-      return this.chatCardsInfo.filter((u) =>
-        u.displayName
-          .toLocaleLowerCase()
-          .startsWith(this.currentSearch.toLocaleLowerCase())
+      return this.sortByDate(
+        this.chatCardsInfo.filter((u) =>
+          u.displayName
+            .toLocaleLowerCase()
+            .startsWith(this.currentSearch.toLocaleLowerCase())
+        )
       );
     }
+  }
+
+  private sortByDate(users: ChatCardInfo[]): ChatCardInfo[] {
+    users = users.sort((b, a) =>
+      moment(a.date, 'HH:mm dd/MM/yyyy').diff(
+        moment(b.date, 'HH:mm dd/MM/yyyy')
+      )
+    );
+
+    return users;
   }
 }

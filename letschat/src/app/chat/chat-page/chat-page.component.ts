@@ -20,8 +20,6 @@ export class ChatPageComponent implements OnInit {
     private storageService: StorageService
   ) {}
 
-  fileToUpload: File = null;
-
   me: User;
   chatCardInfo: ChatCardInfo;
 

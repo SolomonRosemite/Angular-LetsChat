@@ -6,6 +6,9 @@ import { EventEmitterService } from './../../../services/event/event-emitter.ser
 import { ChatCardInfo } from 'src/app/services/Models/ChatCardInfo.model';
 import { FileReference } from 'src/app/services/Models/FileReference.model';
 
+import * as moment from 'moment';
+import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-chat-info',
   templateUrl: './chat-info.component.html',
@@ -15,7 +18,8 @@ export class ChatInfoComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private eventEmitter: EventEmitterService,
-    private database: DatabaseService
+    private database: DatabaseService,
+    private datepipe: DatePipe
   ) {}
 
   allUsers: User[] = [];
@@ -71,5 +75,22 @@ export class ChatInfoComponent implements OnInit {
     }
 
     return this.getUserInfo(uid, true);
+  }
+
+  getSharedFiles(): FileReference[] {
+    if (this.sharedFiles[0]) {
+      console.log(this.transform(this.sharedFiles[0].date));
+    }
+    return this.sharedFiles.sort((a, b) =>
+      moment(this.transform(a.date), 'HH:mm dd.MM.yyyy').diff(
+        moment(this.transform(b.date), 'HH:mm dd.MM.yyyy')
+      )
+    );
+  }
+
+  transform(value: any): string {
+    const date = ((value as any) as firebase.firestore.Timestamp).toDate();
+
+    return this.datepipe.transform(date, 'HH:mm dd.MM.yyyy');
   }
 }

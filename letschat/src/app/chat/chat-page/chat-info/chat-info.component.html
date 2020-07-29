@@ -27,7 +27,7 @@
   <div class="sharedFilesTab" style="text-align: center; width: 100%;">
     <h2 *ngIf="sharedFiles.length != 0">Shared Files</h2>
     <ul>
-      <li *ngFor="let sharedFile of sharedFiles; let i = index">
+      <li *ngFor="let sharedFile of getSharedFiles(); let i = index">
         <app-file-reference-card [input]="sharedFile"></app-file-reference-card>
       </li>
     </ul>
