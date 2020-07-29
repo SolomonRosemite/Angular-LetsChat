@@ -1,6 +1,12 @@
 .sharedFilesTab {
   height: 100vh;
   overflow-y: auto;
+
+  h2 {
+    font-size: 27px;
+    padding-left: 20px;
+    font-weight: normal;
+  }
 }
 
 /* width */
@@ -28,6 +34,10 @@
 ul {
   list-style-position: inside;
   padding-left: 0;
+}
+
+.space {
+  height: 380px;
 }
 
 li {

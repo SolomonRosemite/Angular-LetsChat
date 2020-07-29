@@ -1,30 +1,21 @@
 <button [matMenuTriggerFor]="appMenu" mat-button type="button" class="block">
-  <div
-    style="display: inline-flex;
-    padding-left: 10px;
-    padding-bottom: 5px;
-    margin-left: -10px;
-    justify-content: space-between;
-    width: 100%;">
-    <span style="display: inline-flex;">
-      <img
-        style="padding-left: 10px; width: 40px; height: 40px;"
-        src="{{ imageUrl }}"
-        />
-      <div
-        style="padding-top: 12px;
-        padding-left: 20px;
-        display: inline-block;
-        text-align: start;">
-        <h6 class="name">{{ displayFilename(fileReference.filename) }}</h6>
-        <div style="padding-top: 5;"></div>
-        <h6 class="filetype">{{ fileReference.getFileType() }}</h6>
-      </div>
-    </span>
-    <span>
-      <h6 class="date">{{ transform(fileReference.date) }}</h6>
-    </span>
-  </div>
+  <mat-card class="mat-elevation-z0" style="right: 30px; width: 100%;">
+    <img
+      style="
+        /* padding-top: 5%; */
+        padding-left: 15px;
+        width: 40px;
+        z-index: 0;
+        height: 40px;
+        float: left;
+      "
+      src="{{ imageUrl }}"
+    />
+    <h6 class="name" style="float: right;">
+      {{ displayFilename(fileReference.filename) }}
+    </h6>
+    <h6 class="date">{{ transform(fileReference.date) }}</h6>
+  </mat-card>
 </button>
 
 <mat-menu #appMenu="matMenu">
@@ -35,3 +26,23 @@
     Download File
   </button>
 </mat-menu>
+
+<!-- <mat-card class="mat-elevation-z0" style="right: 30px;">
+      <img
+        style="
+          padding-top: 5%;
+          padding-left: 10px;
+          width: 40px;
+          z-index: 0;
+          height: 40px;
+          float: left;
+        "
+        src="{{ imageUrl }}"
+      />
+      <div>
+        <h6 class="name" style="float: right;">
+          {{ displayFilename(fileReference.filename) }}
+        </h6>
+      </div>
+      <h6 class="date">{{ transform(fileReference.date) }}</h6>
+    </mat-card> -->
