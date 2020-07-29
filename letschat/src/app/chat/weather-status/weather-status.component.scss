@@ -1,0 +1,64 @@
+div.container {
+  margin: 40px;
+  text-align: center;
+
+  .weatherIcon {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    align-self: center;
+    width: 200px;
+    height: 200px;
+  }
+
+  .cityTitle {
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 20px;
+    font-family: Roboto;
+  }
+
+  .subTitle {
+    font-size: 25px;
+    line-height: 20px;
+    font-weight: 400;
+    font-family: Roboto;
+  }
+
+  hr {
+    width: 10%;
+    background-color: rgb(78, 78, 78);
+    border: 1px solid rgb(78, 78, 78);
+    border-radius: 7px 7px 7px 7px;
+    height: 5px;
+  }
+
+  .temperature {
+    font-size: 40px;
+    font-weight: 300;
+  }
+
+  h6 {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 0px;
+    color: gray;
+  }
+
+  .weatherInfo {
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .wrapper {
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+
+    // button {
+    //   position: absolute;
+    //   top: 95%;
+    // }
+  }
+}
