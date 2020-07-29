@@ -26,6 +26,8 @@ export class ChatMessagesPageComponent implements OnInit {
   allMessages: Message[] = [];
 
   async ngOnInit(): Promise<void> {
+    console.log(this.receiver);
+
     this.me = await this.auth.getUser();
 
     this.eventEmitterService.onSelectedUser.subscribe((user: ChatCardInfo) => {

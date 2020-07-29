@@ -1,9 +1,11 @@
-<div style="width: 100%;">
-  <div class="scrollable" style="padding-top: 1%;">
-    <ul class="chat">
-      <li *ngFor="let message of messages" class="{{ message.class }}">
-        {{ message.message }}
-      </li>
-    </ul>
-  </div>
-</div>
+<div *ngIf="!receiver; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock><app-weather-status></app-weather-status></ng-template>
+<ng-template #elseBlock><div style="width: 100%;">
+    <div class="scrollable" style="padding-top: 1%;">
+      <ul class="chat">
+        <li *ngFor="let message of messages" class="{{ message.class }}">
+          {{ message.message }}
+        </li>
+      </ul>
+    </div>
+  </div></ng-template>

@@ -78,9 +78,6 @@ export class ChatInfoComponent implements OnInit {
   }
 
   getSharedFiles(): FileReference[] {
-    if (this.sharedFiles[0]) {
-      console.log(this.transform(this.sharedFiles[0].date));
-    }
     return this.sharedFiles.sort((a, b) =>
       moment(this.transform(a.date), 'HH:mm dd.MM.yyyy').diff(
         moment(this.transform(b.date), 'HH:mm dd.MM.yyyy')
