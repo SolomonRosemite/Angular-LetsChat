@@ -46,7 +46,7 @@ export class WeatherStatusComponent implements OnInit {
   initWeatherStatus(): WeatherStatus {
     return {
       city: '',
-      image: '',
+      image: 'emptyImage.png',
       sunrise: '',
       temperature: '',
       wind: '',
