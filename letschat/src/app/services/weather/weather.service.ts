@@ -33,8 +33,10 @@ export class WeatherService {
     return t;
   }
 
-  // TODO: Get corresponding to the description
-  public getImage(description: string): string {
-    return '...';
+  public getImage(iconId: string): string {
+    if (new Date().getHours() > 21 || new Date().getHours() <= 4) {
+      return `night/${iconId}.png`;
+    }
+    return `${iconId}.png`;
   }
 }

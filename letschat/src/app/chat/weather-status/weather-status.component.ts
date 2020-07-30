@@ -30,7 +30,7 @@ export class WeatherStatusComponent implements OnInit {
         sunrise: this.weatherService.convertTime(response.sys.sunrise),
         temperature: response.main.temp,
         wind: response.wind.speed,
-        image: this.weatherService.getImage(response.weather.description),
+        image: this.weatherService.getImage(response.weather[0].icon),
       };
     });
 

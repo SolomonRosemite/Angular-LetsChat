@@ -2,10 +2,9 @@
   <h1 class="cityTitle">{{ weatherStatus.city.toUpperCase() }}</h1>
   <h2 class="subTitle">{{ getFormattedDate(updateTrigger).toUpperCase() }}</h2>
 
-  <!-- TODO: Load Image from variable -->
   <img
     class="weatherIcon"
-    src="./../../../assets/images/weather/Cloudy_Sunny.png"
+    src="./../../../assets/images/weather/{{ weatherStatus.image }}"
     alt="weather icon"
   />
   <h2 class="temperature">{{ weatherStatus.temperature }}°C</h2>
