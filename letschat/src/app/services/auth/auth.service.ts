@@ -78,6 +78,7 @@ export class AuthService {
       uid: user.uid,
     };
 
+    // TODO: Only Update Location if it is undefined
     return userRef.set(data, { merge: true });
   }
 

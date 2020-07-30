@@ -4,6 +4,7 @@ import { AuthService } from './../auth/auth.service';
 import { Injectable } from '@angular/core';
 import { WeatherStatus } from '../Models/weather.model';
 import { Observable } from 'rxjs';
+import { User } from '../Models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,14 +14,15 @@ export class WeatherService {
 
   private apiKey = '7de3f60e04a40a806d51ab3444fe7126';
 
-  async getWeather(location?: string): Promise<Observable<Object>> {
-    if (!location) {
-      location = (await this.auth.getUser()).location;
-    }
+  async getWeather(): Promise<any> {
+    const user = await this.auth.getUser();
 
-    return this.http.get(
-      `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${this.apiKey}&units=metric`
-    );
+    return [
+      this.http.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${user.location}&appid=${this.apiKey}&units=metric`
+      ),
+      user,
+    ];
   }
 
   public convertTime(unixTime): string {

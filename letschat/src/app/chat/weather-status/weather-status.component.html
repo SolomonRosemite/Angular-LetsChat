@@ -1,7 +1,6 @@
 <div class="container" [ngStyle]="{ height: screenHeight + 'px' }">
-  <h1 class="cityTitle">{{ weatherStatus.city }}</h1>
-  <!-- TODO: Current date here -->
-  <h2 class="subTitle">TUESDAY 6:00 AM</h2>
+  <h1 class="cityTitle">{{ weatherStatus.city.toUpperCase() }}</h1>
+  <h2 class="subTitle">{{ getFormattedDate(updateTrigger).toUpperCase() }}</h2>
 
   <!-- TODO: Load Image from variable -->
   <img
@@ -11,9 +10,8 @@
   />
   <h2 class="temperature">{{ weatherStatus.temperature }}°C</h2>
 
-  <!-- TODO: Assign to variables -->
-  <h6 class="default">GOOD MORNING</h6>
-  <h6 class="default">USERNAME</h6>
+  <h6 class="default">GOOD {{ getTime().toUpperCase() }}</h6>
+  <h6 class="default">{{ name.toUpperCase() }}</h6>
 
   <section>
     <hr />
