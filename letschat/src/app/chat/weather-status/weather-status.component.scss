@@ -3,7 +3,7 @@ div.container {
   text-align: center;
 
   .weatherIcon {
-    margin-top: 17%;
+    margin-top: 15%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -31,31 +31,53 @@ div.container {
     background-color: rgb(78, 78, 78);
     border: 1px solid rgb(78, 78, 78);
     border-radius: 7px 7px 7px 7px;
-    height: 5px;
+    height: 2px;
+    margin-bottom: 4%;
   }
 
   .temperature {
-    margin-top: 8%;
+    margin-top: 10%;
     font-size: 40px;
     font-weight: 300;
   }
 
-  h6 {
+  h6.default {
     padding-bottom: 25px;
     margin: 0px;
     font-size: 18px;
     font-weight: 400;
     line-height: 0px;
-    color: gray;
-  }
-
-  section {
-    margin-top: 6%;
+    color: rgb(78, 78, 78);
   }
 
   .weatherInfo {
+    margin-left: 3.5%;
     text-align: center;
     display: flex;
     justify-content: space-evenly;
+
+    .smallIcon {
+      width: 55px;
+      height: 55px;
+    }
+
+    h6.title {
+      text-align: center;
+      margin: 0px;
+      margin-top: 10px;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 20px;
+      color: #000;
+    }
+
+    h6.prop {
+      text-align: center;
+      margin: 0px;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 20px;
+      color: #000;
+    }
   }
 }
