@@ -1,3 +1,4 @@
+import { WeatherService } from './../../services/weather/weather.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';

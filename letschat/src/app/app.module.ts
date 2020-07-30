@@ -1,24 +1,4 @@
-// import { BrowserModule } from '@angular/platform-browser';
-// import { NgModule } from '@angular/core';
-
-// import { AppRoutingModule } from './app-routing.module';
-// import { AppComponent } from './app.component';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { environment } from 'src/environments/environment';
-// import { AngularFireModule } from '@angular/fire';
-
-// @NgModule({
-//   declarations: [AppComponent],
-//   imports: [
-//     AngularFireModule.initializeApp(environment.firebase),
-//     BrowserModule,
-//     AppRoutingModule,
-//     BrowserAnimationsModule,
-//   ],
-//   providers: [],
-//   bootstrap: [AppComponent],
-// })
-// export class AppModule {}
+import { WeatherService } from './services/weather/weather.service';
 import { DatePipe } from '@angular/common';
 import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
@@ -130,7 +110,13 @@ import { WeatherStatusComponent } from './chat/weather-status/weather-status.com
     FormsModule,
     HttpClientModule,
   ],
-  providers: [EventEmitterService, DatabaseService, AngularFirestore, DatePipe],
+  providers: [
+    EventEmitterService,
+    DatabaseService,
+    AngularFirestore,
+    DatePipe,
+    WeatherService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

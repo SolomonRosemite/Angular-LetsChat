@@ -6,6 +6,7 @@ import { AuthService } from './../../../services/auth/auth.service';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Message } from 'src/app/services/Models/message.model';
 import { User } from 'src/app/services/Models/user.model';
+import { WeatherStatus } from 'src/app/services/Models/weather.model';
 
 @Component({
   selector: 'app-chat-messages-page',
@@ -26,8 +27,6 @@ export class ChatMessagesPageComponent implements OnInit {
   allMessages: Message[] = [];
 
   async ngOnInit(): Promise<void> {
-    console.log(this.receiver);
-
     this.me = await this.auth.getUser();
 
     this.eventEmitterService.onSelectedUser.subscribe((user: ChatCardInfo) => {
