@@ -1,13 +1,10 @@
 <div style="width: 100%; height: 100%;">
   <mat-toolbar
     class="mat-elevation-z3"
-    style="justify-content: space-between; background-color: white;"
-  >
+    style="justify-content: space-between; background-color: white;">
     <span>
       <button mat-button (click)="goBack()">
-        <mat-icon aria-hidden="false" aria-label="goback icon"
-          >keyboard_arrow_left</mat-icon
-        >
+        <mat-icon aria-hidden="false" aria-label="goback icon">keyboard_arrow_left</mat-icon>
       </button>
     </span>
     <span>
@@ -28,11 +25,11 @@
           <mat-label>Name</mat-label>
           <input
             matInput
-            (keyup)="onKeydisplayName($event)"
+            (keyup)="onKeyDisplayName($event)"
             placeholder="Ex. James"
             autocomplete="off"
             value="{{ me.displayName }}"
-          />
+            />
         </mat-form-field>
         <mat-form-field class="input-form-width">
           <mat-label>Location</mat-label>
@@ -42,31 +39,25 @@
             placeholder="Ex. Hamburg, Germany"
             autocomplete="off"
             value="{{ me.location }}"
-          />
+            />
         </mat-form-field>
       </form>
     </div>
     <button
       mat-button
-      style="
-        background-color: rgb(53, 236, 53);
-        margin-top: 20px;
-        color: white;
-      "
-      (click)="save()"
-    >
+      style="background-color: rgb(53, 236, 53);
+      margin-top: 20px;
+      color: white;"(click)="save()">
       Apply
     </button>
     <button
       mat-button
-      style="
-        background-color: rgb(236, 53, 53);
-        color: white;
-        margin-top: 20px;
-      "
-      (click)="goBack()"
-    >
+      style="background-color: rgb(236, 53, 53);
+      color: white;
+      margin-top: 20px;"(click)="goBack()">
       Discard
     </button>
   </div>
 </div>
+
+<app-info-dialog></app-info-dialog>

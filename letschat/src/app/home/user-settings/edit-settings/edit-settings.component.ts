@@ -1,3 +1,5 @@
+import { EventEmitterService } from './../../../services/event/event-emitter.service';
+import { WeatherService } from './../../../services/weather/weather.service';
 import { DatabaseService } from 'src/app/services/database/database.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -13,7 +15,9 @@ export class EditSettingsComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private datebase: DatabaseService
+    private database: DatabaseService,
+    private weatherService: WeatherService,
+    private event: EventEmitterService
   ) {}
 
   me = new User({
@@ -40,7 +44,16 @@ export class EditSettingsComponent implements OnInit {
   }
 
   async save(): Promise<void> {
-    await this.datebase.updateUser(this.tempUser);
+    if (
+      (await this.weatherService.cityExists(this.tempUser.location)) === false
+    ) {
+      this.event.showDialog(
+        'Invalid City',
+        "It seems like this city doesn't exists."
+      );
+      return;
+    }
+    await this.database.updateUser(this.tempUser);
     this.router.navigate(['/settings']);
   }
 
@@ -48,7 +61,7 @@ export class EditSettingsComponent implements OnInit {
     this.router.navigate(['/settings']);
   }
 
-  onKeydisplayName(event): void {
+  onKeyDisplayName(event): void {
     this.tempUser.displayName = event.target.value;
   }
   onKeyLocation(event): void {

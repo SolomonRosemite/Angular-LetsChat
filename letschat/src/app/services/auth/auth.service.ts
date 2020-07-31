@@ -70,15 +70,21 @@ export class AuthService {
       `users/${user.uid}`
     );
 
-    const data: User = {
+    let data: User = {
       displayName: user.displayName,
       photoURL: user.photoURL,
-      location: user.location,
       email: user.email,
       uid: user.uid,
     };
 
-    // TODO: Only Update Location if it is undefined
+    const item = await userRef.get().toPromise();
+
+    if (item.exists === false) {
+      data.location = user.location;
+
+      return userRef.set(data, { merge: true });
+    }
+
     return userRef.set(data, { merge: true });
   }
 

@@ -25,6 +25,19 @@ export class WeatherService {
     ];
   }
 
+  public async cityExists(city: string): Promise<boolean> {
+    try {
+      await this.http
+        .get(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.apiKey}&units=metric`
+        )
+        .toPromise();
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
   public convertTime(unixTime): string {
     let dt = new Date(unixTime * 1000);
     let h = dt.getHours();

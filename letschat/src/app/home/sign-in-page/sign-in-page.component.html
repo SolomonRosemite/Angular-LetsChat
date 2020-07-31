@@ -1,9 +1,7 @@
 <div class="main">
   <div class="split left">
     <button mat-button class="goBackButton" [routerLink]="['/']">
-      <mat-icon aria-hidden="false" aria-label="goback icon"
-        >keyboard_arrow_left</mat-icon
-      >
+      <mat-icon aria-hidden="false" aria-label="goback icon">keyboard_arrow_left</mat-icon>
     </button>
     <div class="centered">
       <h1 class="title" style="color: white;">Not Created a Account yet?</h1>
@@ -22,12 +20,11 @@
         mat-raised-button
         class="icon"
         aria-label="Google Image"
-        (click)="googleSignin()"
-      >
+        (click)="googleSignin()">
         <img
-          src="https://img.icons8.com/plasticine/2x/google-logo.png"
+          src="./../../../assets/images/google-logo.png"
           alt="Google Icon"
-        />
+          />
       </button>
 
       <form (keydown)="onKeyDown($event)" class="form">
@@ -39,7 +36,7 @@
             [(ngModel)]="email"
             name="email"
             placeholder="Ex. email@example.com"
-          />
+            />
         </mat-form-field>
 
         <mat-form-field class="fullWidth">
@@ -51,7 +48,7 @@
             type="password"
             appPassword
             matInput
-          />
+            />
         </mat-form-field>
       </form>
 
