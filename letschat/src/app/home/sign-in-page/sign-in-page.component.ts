@@ -22,9 +22,12 @@ export class SignInPageComponent implements OnInit {
   password = '';
   userLocation = '';
 
+  // todo: Add Scrolling to "Add Messenger" page but only when searching
   ngOnInit(): void {
-    this.http.get('http://ip-api.com/json').subscribe((item: any) => {
-      this.userLocation = `${item.city}, ${item.country}`;
+    const url = 'https://letschat-fetch-location.herokuapp.com/';
+
+    this.http.get(url).subscribe((item: any) => {
+      this.userLocation = `${item.data.geo.region_name}, ${item.data.geo.country_name}`;
     });
   }
 
@@ -43,7 +46,7 @@ export class SignInPageComponent implements OnInit {
       .catch((reason) => {
         this.eventEmitter.showDialog(
           'Invalid Sign In',
-          "The Email Or Password dosent't seem to be right. Please Try Agian."
+          "The Email Or Password doesn't seem to be right. Please Try Again."
         );
       });
   }

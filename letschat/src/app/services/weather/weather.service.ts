@@ -48,6 +48,7 @@ export class WeatherService {
 
   public getImage(iconId: string): string {
     if (new Date().getHours() > 21 || new Date().getHours() <= 4) {
+      iconId = iconId.substring(0, iconId.length - 1) + 'd';
       return `night/${iconId}.png`;
     }
     return `${iconId}.png`;

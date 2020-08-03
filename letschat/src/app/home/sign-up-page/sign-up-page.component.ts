@@ -35,8 +35,10 @@ export class SignUpPageComponent implements OnInit {
   userLocation = '';
 
   ngOnInit(): void {
-    this.http.get('http://ip-api.com/json').subscribe((item: any) => {
-      this.userLocation = `${item.city}, ${item.country}`;
+    const url = 'https://letschat-fetch-location.herokuapp.com/';
+
+    this.http.get(url).subscribe((item: any) => {
+      this.userLocation = `${item.data.geo.region_name}, ${item.data.geo.country_name}`;
     });
   }
 
@@ -84,13 +86,9 @@ export class SignUpPageComponent implements OnInit {
 
           await this.auth.setUserData(user);
 
-          console.log('shit');
-
           this.router.navigate(['chat']);
         })
         .catch((reason) => {
-          console.log(reason);
-
           const msg: string = reason.message;
 
           const alreadyUsed = 'The email address is already in use';
@@ -107,7 +105,7 @@ export class SignUpPageComponent implements OnInit {
   }
 
   message(message: string): void {
-    this.eventEmitter.showDialog('Invalid Sign In', message);
+    this.eventEmitter.showDialog('Invalid Sign data', message);
   }
 
   googleSignin() {
