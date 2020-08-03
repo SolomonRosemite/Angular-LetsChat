@@ -23,7 +23,6 @@ export class ChatInfoComponent implements OnInit {
   ) {}
 
   allUsers: User[] = [];
-
   me: User;
 
   user = new User({
@@ -47,20 +46,24 @@ export class ChatInfoComponent implements OnInit {
     }
 
     this.eventEmitter.onSelectedUser.subscribe((chatCardInfo: ChatCardInfo) => {
+      this.sharedFiles = [];
+
+      this.database
+        .getSharedFilesReferences(chatCardInfo.chatId, this.me.uid)
+        .onSnapshot((x) => {
+          this.sharedFiles = [];
+          x.docs.forEach((data) => {
+            this.sharedFiles.push(data.data() as FileReference);
+          });
+        });
+
       let receiverUid = chatCardInfo.receiverUid;
 
       if (receiverUid === this.me.uid) {
         receiverUid = chatCardInfo.senderUid;
       }
 
-      this.getUserInfo(receiverUid).then(async (user) => {
-        this.user = user;
-
-        this.sharedFiles = await this.database.getSharedFiles(
-          chatCardInfo.chatId,
-          this.me.uid
-        );
-      });
+      this.getUserInfo(receiverUid).then((user) => (this.user = user));
     });
   }
 
@@ -79,8 +82,8 @@ export class ChatInfoComponent implements OnInit {
 
   getSharedFiles(): FileReference[] {
     return this.sharedFiles.sort((a, b) =>
-      moment(this.transform(a.date), 'HH:mm dd.MM.yyyy').diff(
-        moment(this.transform(b.date), 'HH:mm dd.MM.yyyy')
+      moment(this.transform(b.date), 'HH:mm dd.MM.yyyy').diff(
+        moment(this.transform(a.date), 'HH:mm dd.MM.yyyy')
       )
     );
   }

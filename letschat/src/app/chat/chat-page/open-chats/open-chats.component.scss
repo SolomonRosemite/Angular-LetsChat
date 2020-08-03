@@ -17,12 +17,12 @@ li {
 }
 
 hr {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid rgb(184, 184, 184);
-  margin: 1em 0;
-  padding: 0;
+  width: 95%;
+  background-color: rgb(78, 78, 78);
+  border: 1px solid rgb(78, 78, 78);
+  border-radius: 7px 7px 7px 7px;
+  height: 5px;
+  margin-bottom: 4%;
 }
 
 /* width */

@@ -85,19 +85,9 @@ export class DatabaseService {
     return users;
   }
 
-  public async getSharedFiles(
-    chatId: string,
-    uid: string
-  ): Promise<FileReference[]> {
-    var x = this.firestore.collection('sharedfiles').doc(uid).collection(chatId)
+  public getSharedFilesReferences(chatId: string, uid: string) {
+    return this.firestore.collection('sharedfiles').doc(uid).collection(chatId)
       .ref;
-    let fileReferences: FileReference[] = [];
-
-    (await x.get()).docs.forEach((data) => {
-      fileReferences.push(data.data() as FileReference);
-    });
-
-    return fileReferences;
   }
 
   public async postFile(data: FileReference): Promise<DocumentReference[]> {
