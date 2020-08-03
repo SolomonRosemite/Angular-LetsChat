@@ -28,7 +28,7 @@ export class AddMessengerDialogComponent {
 
   location(): string {
     return this.receiver.location.length !== 0
-      ? `Location ${this.receiver.location}`
+      ? `From: ${this.receiver.location}`
       : '';
   }
 

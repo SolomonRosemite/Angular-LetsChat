@@ -22,7 +22,6 @@ export class SignInPageComponent implements OnInit {
   password = '';
   userLocation = '';
 
-  // todo: Add Scrolling to "Add Messenger" page but only when searching
   ngOnInit(): void {
     const url = 'https://letschat-fetch-location.herokuapp.com/';
 
