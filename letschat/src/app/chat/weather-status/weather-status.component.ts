@@ -21,7 +21,6 @@ export class WeatherStatusComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.screenHeight = window.innerHeight - 150;
-    console.log(this.screenHeight);
 
     const weather = await this.weatherService.getWeather();
 

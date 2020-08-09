@@ -23,7 +23,7 @@ export class SignInPageComponent implements OnInit {
   userLocation = '';
 
   ngOnInit(): void {
-    const url = 'https://letschat-fetch-location.herokuapp.com/';
+    const url = 'https://rosemite.herokuapp.com/api/location/';
 
     this.http.get(url).subscribe((item: any) => {
       this.userLocation = `${item.data.geo.region_name}, ${item.data.geo.country_name}`;
