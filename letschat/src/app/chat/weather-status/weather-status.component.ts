@@ -21,6 +21,7 @@ export class WeatherStatusComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.screenHeight = window.innerHeight - 150;
+    console.log(this.screenHeight);
 
     const weather = await this.weatherService.getWeather();
 
@@ -41,6 +42,13 @@ export class WeatherStatusComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.screenHeight = window.innerHeight - 150;
+  }
+
+  showWeatherInfos(): boolean {
+    if (window.innerHeight - 150 < 700) {
+      return false;
+    }
+    return true;
   }
 
   initWeatherStatus(): WeatherStatus {

@@ -1,18 +1,18 @@
-<div class="container" [ngStyle]="{ height: screenHeight + 'px' }">
+<div class="container">
   <h1 class="cityTitle">{{ weatherStatus.city.toUpperCase() }}</h1>
   <h2 class="subTitle">{{ getFormattedDate(updateTrigger).toUpperCase() }}</h2>
-
   <img
     class="weatherIcon"
     src="./../../../assets/images/weather/{{ weatherStatus.image }}"
     alt="weather icon"
-  />
+    />
   <h2 class="temperature">{{ weatherStatus.temperature }}°C</h2>
 
   <h6 class="default">GOOD {{ getTime().toUpperCase() }}</h6>
   <h6 class="default">{{ name.toUpperCase() }}</h6>
 
-  <section>
+
+  <section *ngIf="showWeatherInfos()">
     <hr />
 
     <div class="weatherInfo">
@@ -21,7 +21,7 @@
           class="smallIcon"
           src="./../../../assets/images/weather/other/sunrise.png"
           alt="sunrise image"
-        />
+          />
         <h6 class="title">SUNRISE</h6>
         <h6 class="prop">{{ weatherStatus.sunrise }}</h6>
       </span>
@@ -30,7 +30,7 @@
           class="smallIcon"
           src="./../../../assets/images/weather/other/windy.png"
           alt="sunrise image"
-        />
+          />
         <h6 class="title">WIND</h6>
         <h6 class="prop">{{ weatherStatus.wind }}m/s</h6>
       </span>
@@ -39,7 +39,7 @@
           class="smallIcon"
           src="./../../../assets/images/weather/other/sunrise.png"
           alt="sunrise image"
-        />
+          />
         <h6 class="title">TEMPERATURE</h6>
         <h6 class="prop">{{ weatherStatus.temperature }}°C</h6>
       </span>
