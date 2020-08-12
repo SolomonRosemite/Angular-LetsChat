@@ -19,12 +19,13 @@
       <app-chat-messages-page></app-chat-messages-page>
       <div
         *ngIf="chatCardInfo"
+        class="chatInput"
         style="
           background-color: white;
           overflow: hidden;
           display: flex;
           margin-top: 18px;
-          height: 100%;
+          height: auto;
         "
       >
         <mat-form-field
@@ -52,7 +53,6 @@
           "
         >
           <div
-            class="ColumnIcons"
             style="
               float: right;
               padding-left: 10px;
@@ -70,7 +70,6 @@
             </button>
           </div>
           <div
-            class="ColumnIcons"
             style="float: right; padding-left: 10px; width: 80px;"
           >
             <button
@@ -90,7 +89,6 @@
             (change)="handleFileInput($event.target.files)"
           />
           <div
-            class="ColumnIcons"
             style="float: right; padding-left: 10px; width: 80px;"
           >
             <button

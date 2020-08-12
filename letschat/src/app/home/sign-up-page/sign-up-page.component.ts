@@ -62,8 +62,8 @@ export class SignUpPageComponent implements OnInit {
       : 'https://i.ibb.co/qDMgB1y/male-avatar.png';
   }
 
+  // Validate Data
   onSubmit(): void {
-    // Validate Data
     if (this.name.length < 2) {
       this.message('Name has to be at least 3 letters long.');
     } else if (this.name.length > 12) {
