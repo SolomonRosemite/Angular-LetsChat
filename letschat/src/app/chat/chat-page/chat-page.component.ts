@@ -1,7 +1,7 @@
 import { StorageService } from './../../services/storage/storage.service';
 import { ChatCardInfo } from 'src/app/services/Models/ChatCardInfo.model';
 import { Message } from './../../services/Models/message.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { EventEmitterService } from 'src/app/services/event/event-emitter.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { DatabaseService } from 'src/app/services/database/database.service';
@@ -22,10 +22,18 @@ export class ChatPageComponent implements OnInit {
 
   me: User;
   chatCardInfo: ChatCardInfo;
-
   message = '';
 
+  smallScreenLimit = 1450;
+  useSmallScreen = false;
+
   ngOnInit(): void {
+    if (window.innerWidth < this.smallScreenLimit) {
+      this.useSmallScreen = true;
+    } else {
+      this.useSmallScreen = false;
+    }
+
     this.eventEmitterService.onSelectedUser.subscribe(
       (user: ChatCardInfo) => (this.chatCardInfo = user)
     );
@@ -60,6 +68,12 @@ export class ChatPageComponent implements OnInit {
         this.eventEmitterService.onNewMessageReceived(messages);
       });
     });
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.useSmallScreen =
+      window.innerWidth < this.smallScreenLimit ? true : false;
   }
 
   sendMessage(event): void {

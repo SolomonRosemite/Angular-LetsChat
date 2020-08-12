@@ -5,7 +5,8 @@
     </div>
     <div
       class="column"
-      style="background-color: white; height: 100%; width: 20%;"
+      [ngStyle]="{'width': useSmallScreen ? '25%' : '20%'}"
+      style="background-color: white; height: 100%;"
     >
       <div>
         <app-open-chats></app-open-chats>
@@ -14,7 +15,8 @@
 
     <div
       class="column"
-      style="background-color: white; height: 100%; width: 60%;"
+      [ngStyle]="{'width': useSmallScreen ? '50%' : '60%'}"
+      style="background-color: white; height: 100%;"
     >
       <app-chat-messages-page></app-chat-messages-page>
       <div
@@ -106,7 +108,8 @@
 
     <div
       class="column"
-      style="background-color: white; height: 100%; width: 20%;"
+      [ngStyle]="{'width': useSmallScreen ? '25%' : '20%'}"
+      style="background-color: white; height: 100%;"
     >
       <div>
         <app-chat-info></app-chat-info>

@@ -8,6 +8,19 @@
   }
 }
 
+ul {
+  list-style-position: inside;
+  padding-left: 0;
+}
+
+.space {
+  height: 380px;
+}
+
+li {
+  list-style-type: none;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 7px;
@@ -28,17 +41,4 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(73, 73, 73);
-}
-
-ul {
-  list-style-position: inside;
-  padding-left: 0;
-}
-
-.space {
-  height: 380px;
-}
-
-li {
-  list-style-type: none;
 }

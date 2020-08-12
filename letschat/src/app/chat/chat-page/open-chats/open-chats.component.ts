@@ -91,7 +91,7 @@ export class OpenChatsComponent implements OnInit {
       return this.transform(date, 'HH:mm');
     }
 
-    return this.transform(date, 'HH:mm dd/MM/yyyy');
+    return this.transform(date, 'HH:mm dd.MM.yyyy');
   }
 
   dateIsToday(date: Date): boolean {
@@ -122,13 +122,13 @@ export class OpenChatsComponent implements OnInit {
     }
   }
 
-  private sortByDate(users: ChatCardInfo[]): ChatCardInfo[] {
-    users = users.sort((b, a) =>
+  private sortByDate(chats: ChatCardInfo[]): ChatCardInfo[] {
+    chats = chats.sort((b, a) =>
       moment(a.date, 'HH:mm dd/MM/yyyy').diff(
         moment(b.date, 'HH:mm dd/MM/yyyy')
       )
     );
 
-    return users;
+    return chats;
   }
 }

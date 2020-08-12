@@ -32,6 +32,10 @@ export class ChatCardComponent implements OnInit {
     }
   }
 
+  getDate(date: string): string {
+    return !date.includes('.') ? date : date.substring(6);
+  }
+
   shortMessage(message: string): string {
     if (message.length < 20) {
       return message;

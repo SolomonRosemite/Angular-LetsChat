@@ -1,33 +1,19 @@
 <button mat-button (click)="selectedUser()" type="button" class="chatCardButton">
   <div
-    style="display: inline-flex;
-    padding-left: 10px;
-    /* padding-bottom: 500px; */
-    margin-left: -10px;
-    justify-content: space-between;
-    width: 100%;">
+  class="container">
     <span>
-      <img
-        style="border-radius: 50%;
-        margin-top: 30px;
-        margin-left: 10px;
-        margin-right: 10px;
-        width: 50px;
-        height: 50px;" src="{{ info.photoURL }}"
+      <img src="{{ info.photoURL }}"
         />
       <div
-        style="padding-top: 12px;
-        padding-left: 20px;
-        display: inline-block;
-        text-align: start;">
+        class="itemsContainer">
         <h6 class="name">{{ info.displayName }}</h6>
-        <h6 class="message" style="margin-top: 5px;">
+        <h6 class="message">
           {{ shortMessage(info.latestMessage) }}
         </h6>
       </div>
     </span>
     <span>
-      <h6 class="date">{{ info.date }}</h6>
+      <h6 class="date">{{ getDate(info.date) }}</h6>
     </span>
   </div>
 </button>
