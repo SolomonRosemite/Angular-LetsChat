@@ -1,3 +1,4 @@
+import { Upload } from './../../services/Models/upload.model';
 import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
 import { StorageService } from './../../services/storage/storage.service';
 import { ChatCardInfo } from 'src/app/services/Models/ChatCardInfo.model';
@@ -140,26 +141,23 @@ export class ChatPageComponent implements OnInit {
     }
 
     // TODO: Upload User Image on signup to firebase
+    // TODO: Wait for the location to be fetch and then nav to /chat
+
+    let receiverUid = this.chatCardInfo.senderUid;
+
+    if (this.chatCardInfo.senderUid === this.me.uid) {
+      receiverUid = this.chatCardInfo.receiverUid;
+    }
+
+    const uploads = {
+      file: files,
+      chatId: this.chatCardInfo.chatId,
+      senderUid: this.me.uid,
+      receiverUid: receiverUid,
+    };
 
     this.dialog.open(UploadDialogComponent, {
-      data: files,
+      data: uploads,
     });
-
-    // let receiverUid = this.chatCardInfo.senderUid;
-
-    // if (this.chatCardInfo.senderUid === this.me.uid) {
-    //   receiverUid = this.chatCardInfo.receiverUid;
-    // }
-
-    // const items = await this.storageService.uploadFiles(
-    //   files,
-    //   this.chatCardInfo.chatId,
-    //   this.me.uid,
-    //   receiverUid
-    // );
-
-    // items.forEach(async (file) => {
-    //   await this.database.postFile(file);
-    // });
   }
 }

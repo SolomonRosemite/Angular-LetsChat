@@ -90,33 +90,24 @@ export class DatabaseService {
       .ref;
   }
 
-  public async postFile(data: FileReference): Promise<DocumentReference[]> {
+  public async postFile(
+    fr: FileReferenceInterface
+  ): Promise<DocumentReference[]> {
     const docs: DocumentReference[] = [];
-
-    const fr: FileReferenceInterface = {
-      date: data.date,
-      chatId: data.chatId,
-      senderUid: data.senderUid,
-      receiverUid: data.receiverUid,
-
-      filename: data.filename,
-      fullFilename: data.fullFilename,
-      fileFileReferenceUrl: data.fileFileReferenceUrl,
-    };
 
     docs.push(
       await this.firestore
         .collection('sharedfiles')
-        .doc(data.senderUid)
-        .collection(data.chatId)
+        .doc(fr.senderUid)
+        .collection(fr.chatId)
         .add(fr)
     );
 
     docs.push(
       await this.firestore
         .collection('sharedfiles')
-        .doc(data.receiverUid)
-        .collection(data.chatId)
+        .doc(fr.receiverUid)
+        .collection(fr.chatId)
         .add(fr)
     );
 

@@ -58,6 +58,7 @@ import { SignInPageComponent } from './home/sign-in-page/sign-in-page.component'
 import { SignUpPageComponent } from './home/sign-up-page/sign-up-page.component';
 import { WeatherStatusComponent } from './chat/weather-status/weather-status.component';
 import { UploadDialogComponent } from './chat/chat-page/upload-dialog/upload-dialog.component';
+import { UploadItemComponent } from './chat/chat-page/upload-item/upload-item.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { UploadDialogComponent } from './chat/chat-page/upload-dialog/upload-dia
     SignUpPageComponent,
     WeatherStatusComponent,
     UploadDialogComponent,
+    UploadItemComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
