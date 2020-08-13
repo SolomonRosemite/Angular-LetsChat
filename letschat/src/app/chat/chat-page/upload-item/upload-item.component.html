@@ -4,6 +4,7 @@
 </div>
 
 <div *ngIf="snapshot | async as snap">
-  {{ snap.bytesTransferred }} of {{ snap.totalBytes }}
+  {{ roundNumber(snap.bytesTransferred / 1024 / 1000) }} of {{
+  roundNumber(snap.totalBytes / 1024 / 1000) }} MB
   <button mat-button (click)="task.cancel()" [disabled]="!isActive(snap)">Cancel</button>
 </div>

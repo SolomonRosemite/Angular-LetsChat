@@ -131,10 +131,10 @@ export class ChatPageComponent implements OnInit {
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      if (file.size / 1000000 > 20) {
+      if (file.size / 1024 / 1000 > 50) {
         this.eventEmitterService.showDialog(
           'File too big.',
-          "Files can't be bigger than 20MB"
+          "Files can't be bigger than 50MB"
         );
         return;
       }

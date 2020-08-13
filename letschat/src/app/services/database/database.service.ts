@@ -91,9 +91,6 @@ export class DatabaseService {
   }
 
   public postFile(fr: FileReferenceInterface): void {
-    console.log(fr.senderUid);
-    console.log(fr.receiverUid);
-
     this.firestore
       .collection('sharedfiles')
       .doc(fr.senderUid)

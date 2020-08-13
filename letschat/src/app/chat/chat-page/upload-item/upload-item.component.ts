@@ -50,7 +50,6 @@ export class UploadItemComponent implements OnInit {
     this.percentage = this.task.percentageChanges();
 
     this.snapshot = this.task.snapshotChanges().pipe(
-      tap(console.log),
       // The file's download URL
       finalize(async () => {
         this.downloadURL = await ref.getDownloadURL().toPromise();
@@ -71,6 +70,10 @@ export class UploadItemComponent implements OnInit {
         this.myDatabase.postFile(fr);
       })
     );
+  }
+
+  roundNumber(num): number {
+    return Math.round((num + Number.EPSILON) * 100) / 100;
   }
 
   private getFilename(filename: string): string[] {
