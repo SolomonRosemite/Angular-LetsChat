@@ -3,6 +3,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DatabaseService } from 'src/app/services/database/database.service';
 
+interface Upload {
+  progress: number;
+  file: File;
+}
+
 @Component({
   selector: 'app-upload-dialog',
   templateUrl: './upload-dialog.component.html',
@@ -13,12 +18,25 @@ export class UploadDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<UploadDialogComponent>,
     private database: DatabaseService,
     private router: Router,
-    @Inject(MAT_DIALOG_DATA) private data: any[]
+    @Inject(MAT_DIALOG_DATA) private data: FileList
   ) {
-    console.log(data);
+    for (let i = 0; i < data.length; i++) {
+      const file = data[i];
+
+      this.uploads.push({
+        file: file,
+        progress: 0,
+      });
+    }
   }
 
-  ngOnInit(): void {}
+  uploads: Upload[] = [];
+
+  ngOnInit(): void {
+    console.log(this.uploads);
+  }
+
+  cancelAllUpload(): void {}
 
   close(): void {
     this.dialogRef.close();

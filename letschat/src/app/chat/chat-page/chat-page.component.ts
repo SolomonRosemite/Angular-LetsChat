@@ -139,7 +139,6 @@ export class ChatPageComponent implements OnInit {
       }
     }
 
-    // TODO: Open Popup
     // TODO: Upload User Image on signup to firebase
 
     this.dialog.open(UploadDialogComponent, {

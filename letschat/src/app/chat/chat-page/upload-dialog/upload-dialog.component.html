@@ -1,1 +1,17 @@
-<p>upload-dialog works!</p>
+<div style="width: 100%; height: 100%; background-color: white;">
+  <!-- TODO: Show all uploads with their progress -->
+  <!-- Example: https://miro.medium.com/max/609/1*0-deXQk8KVRKf_0B1CGkKg.png -->
+  <button mat-button class="hover" style="background-color: rgb(236, 53, 53);
+    color: white;
+    margin-top: 20px;
+    text-align: center;
+    height: 50px;" (click)="cancelAllUpload()">
+    Cancel Uploads
+  </button>
+  <button mat-button style="background-color: white;
+    text-align: center;
+    color: black;
+    height: 50px;" (click)="close()">
+    Upload in Background
+  </button>
+</div>
