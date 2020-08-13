@@ -27,7 +27,8 @@
         height: auto;">
         <mat-form-field
           class="column"
-          style="font-size: 20px; padding-left: 10px; width: 80%;">
+          [ngStyle]="{'width': useSmallScreen ? '40%' : '80%'}"
+          style="font-size: 20px; padding-left: 10px;">
           <mat-label style="color: grey;">Type a Message</mat-label>
           <input
             matInput
@@ -40,7 +41,7 @@
         </mat-form-field>
         <div
           class="column"
-          style="width: 400px;
+          style="width: 40%;
           table-layout: fixed;
           margin-top: 20px;
           border-spacing: 10px;
