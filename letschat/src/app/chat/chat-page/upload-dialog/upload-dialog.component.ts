@@ -17,16 +17,14 @@ export class UploadDialogComponent implements OnInit {
         chatId: files.chatId,
         file: files.file.item(i),
         receiverUid: files.receiverUid,
-        senderUid: files.receiverUid,
+        senderUid: files.senderUid,
       });
     }
   }
 
   uploads: Upload[] = [];
 
-  ngOnInit(): void {
-    console.log(this.uploads);
-  }
+  ngOnInit(): void {}
 
   close(): void {
     this.dialogRef.close();
