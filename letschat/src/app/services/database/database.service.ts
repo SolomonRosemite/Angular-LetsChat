@@ -90,27 +90,20 @@ export class DatabaseService {
       .ref;
   }
 
-  public async postFile(
-    fr: FileReferenceInterface
-  ): Promise<DocumentReference[]> {
-    const docs: DocumentReference[] = [];
+  public postFile(fr: FileReferenceInterface): void {
+    console.log(fr.senderUid);
+    console.log(fr.receiverUid);
 
-    docs.push(
-      await this.firestore
-        .collection('sharedfiles')
-        .doc(fr.senderUid)
-        .collection(fr.chatId)
-        .add(fr)
-    );
+    this.firestore
+      .collection('sharedfiles')
+      .doc(fr.senderUid)
+      .collection(fr.chatId)
+      .add(fr);
 
-    docs.push(
-      await this.firestore
-        .collection('sharedfiles')
-        .doc(fr.receiverUid)
-        .collection(fr.chatId)
-        .add(fr)
-    );
-
-    return docs;
+    this.firestore
+      .collection('sharedfiles')
+      .doc(fr.receiverUid)
+      .collection(fr.chatId)
+      .add(fr);
   }
 }
