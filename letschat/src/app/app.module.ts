@@ -57,6 +57,7 @@ import { AddMessengerDialogComponent } from './chat/chat-add-messenger/add-messe
 import { SignInPageComponent } from './home/sign-in-page/sign-in-page.component';
 import { SignUpPageComponent } from './home/sign-up-page/sign-up-page.component';
 import { WeatherStatusComponent } from './chat/weather-status/weather-status.component';
+import { UploadDialogComponent } from './chat/chat-page/upload-dialog/upload-dialog.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { WeatherStatusComponent } from './chat/weather-status/weather-status.com
     SignInPageComponent,
     SignUpPageComponent,
     WeatherStatusComponent,
+    UploadDialogComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

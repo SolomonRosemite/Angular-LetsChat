@@ -6,8 +6,7 @@
     <div
       class="column"
       [ngStyle]="{'width': useSmallScreen ? '25%' : '20%'}"
-      style="background-color: white; height: 100%;"
-    >
+      style="background-color: white; height: 100%;">
       <div>
         <app-open-chats></app-open-chats>
       </div>
@@ -16,89 +15,81 @@
     <div
       class="column"
       [ngStyle]="{'width': useSmallScreen ? '50%' : '60%'}"
-      style="background-color: white; height: 100%;"
-    >
+      style="background-color: white; height: 100%;">
       <app-chat-messages-page></app-chat-messages-page>
       <div
         *ngIf="chatCardInfo"
         class="chatInput"
-        style="
-          background-color: white;
-          overflow: hidden;
-          display: flex;
-          margin-top: 18px;
-          height: auto;
-        "
-      >
+        style="background-color: white;
+        overflow: hidden;
+        display: flex;
+        margin-top: 18px;
+        height: auto;">
         <mat-form-field
           class="column"
-          style="font-size: 20px; padding-left: 10px; width: 80%;"
-        >
+          style="font-size: 20px; padding-left: 10px; width: 80%;">
           <mat-label style="color: grey;">Type a Message</mat-label>
           <input
             matInput
             (keydown)="sendMessage($event)"
-            (input)="message = $event.target.value"
+            (input)="message= $event.target.value"
             type="text"
             autocomplete="off"
             [value]="message"
-          />
+            />
         </mat-form-field>
         <div
           class="column"
-          style="
-            width: 400px;
-            table-layout: fixed;
-            margin-top: 20px;
-            border-spacing: 10px;
-            display: block;
-          "
-        >
+          style="width: 400px;
+          table-layout: fixed;
+          margin-top: 20px;
+          border-spacing: 10px;
+          display: block;">
           <div
-            style="
-              float: right;
-              padding-left: 10px;
-              padding-right: 10px;
-              width: 80px;
-            "
-          >
+            style="float: right;
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 80px;">
             <button
               mat-button
               style="background-color: #69f0ae; color: white; width: 100%;"
               aria-label="icon send button"
-              (click)="sendMessage(null)"
-            >
+              (click)="sendMessage(null)">
               <mat-icon>send</mat-icon>
             </button>
           </div>
           <div
-            style="float: right; padding-left: 10px; width: 80px;"
-          >
+            style="float: right; padding-left: 10px; width: 80px;">
             <button
               mat-button
-              (click)="uploader.click()"
+              (click)="upLoaderImage.click()"
               style="background-color: #303f9f; color: white; width: 100%;"
-              aria-label="icon image button"
-            >
+              aria-label="icon image button">
               <mat-icon>image</mat-icon>
             </button>
           </div>
           <input
             hidden
             type="file"
-            #uploader
+            #upLoaderFile
             multiple="multiple"
             (change)="handleFileInput($event.target.files)"
-          />
+            />
+          <input
+            hidden
+            type="file"
+            accept="image/png, image/jpeg"
+            #upLoaderImage
+            multiple="multiple"
+            (change)="handleFileInput($event.target.files)"
+            />
           <div
-            style="float: right; padding-left: 10px; width: 80px;"
-          >
+            style="float: right; padding-left: 10px; width: 80px;">
             <button
               mat-button
-              (click)="uploader.click()"
+              (click)="upLoaderFile.click()"
               style="background-color: #303f9f; color: white; width: 100%;"
-              aria-label="icon attachment button"
-            >
+              aria-label="icon attachment button">
               <mat-icon>attachment</mat-icon>
             </button>
           </div>
@@ -109,8 +100,7 @@
     <div
       class="column"
       [ngStyle]="{'width': useSmallScreen ? '25%' : '20%'}"
-      style="background-color: white; height: 100%;"
-    >
+      style="background-color: white; height: 100%;">
       <div>
         <app-chat-info></app-chat-info>
       </div>

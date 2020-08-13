@@ -4,11 +4,7 @@ import { User } from './../../services/Models/user.model';
 import { DatabaseService } from 'src/app/services/database/database.service';
 import { Router } from '@angular/router';
 import { Component, OnInit, Inject, EventEmitter } from '@angular/core';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { AddMessengerDialogComponent } from './add-messenger-dialog/add-messenger-dialog.component';
 
 @Component({

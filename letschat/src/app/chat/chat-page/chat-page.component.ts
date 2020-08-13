@@ -1,3 +1,4 @@
+import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
 import { StorageService } from './../../services/storage/storage.service';
 import { ChatCardInfo } from 'src/app/services/Models/ChatCardInfo.model';
 import { Message } from './../../services/Models/message.model';
@@ -6,6 +7,7 @@ import { EventEmitterService } from 'src/app/services/event/event-emitter.servic
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { DatabaseService } from 'src/app/services/database/database.service';
 import { User } from 'src/app/services/Models/user.model';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-chat-page',
@@ -17,6 +19,7 @@ export class ChatPageComponent implements OnInit {
     private eventEmitterService: EventEmitterService,
     private database: DatabaseService,
     private auth: AuthService,
+    public dialog: MatDialog,
     private storageService: StorageService
   ) {}
 
@@ -137,23 +140,27 @@ export class ChatPageComponent implements OnInit {
     }
 
     // TODO: Open Popup
+    // TODO: Upload User Image on signup to firebase
 
-    let receiverUid = this.chatCardInfo.senderUid;
-
-    if (this.chatCardInfo.senderUid === this.me.uid) {
-      receiverUid = this.chatCardInfo.receiverUid;
-    }
-
-    const items = await this.storageService.uploadFiles(
-      files,
-      this.chatCardInfo.chatId,
-      this.me.uid,
-      receiverUid
-    );
-
-    items.forEach(async (file) => {
-      await this.database.postFile(file);
+    this.dialog.open(UploadDialogComponent, {
+      data: files,
     });
-    // TODO: notify user Upload is Complete!
+
+    // let receiverUid = this.chatCardInfo.senderUid;
+
+    // if (this.chatCardInfo.senderUid === this.me.uid) {
+    //   receiverUid = this.chatCardInfo.receiverUid;
+    // }
+
+    // const items = await this.storageService.uploadFiles(
+    //   files,
+    //   this.chatCardInfo.chatId,
+    //   this.me.uid,
+    //   receiverUid
+    // );
+
+    // items.forEach(async (file) => {
+    //   await this.database.postFile(file);
+    // });
   }
 }
