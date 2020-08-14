@@ -1,14 +1,28 @@
 section.body {
   width: 100%;
-  height: 100%;
-  background-color: blue;
 }
 
 div.image {
-  // align-self: center;
-  // text-align: center;
-  // background-color: red;
-  width: 50%;
-  height: 50%;
+  width: 40%;
+  height: 40%;
   position: relative;
+}
+
+footer {
+  margin: 1.5em 0;
+
+  button.Apply-btn {
+    background-color: rgb(53, 236, 53);
+    color: white;
+    margin-right: 1em;
+  }
+  button.Upload-btn {
+    background-color: white;
+    color: black;
+  }
+  button.Cancel-btn {
+    float: right;
+    background-color: rgb(236, 53, 53);
+    color: white;
+  }
 }

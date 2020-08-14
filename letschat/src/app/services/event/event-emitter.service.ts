@@ -32,10 +32,6 @@ export class EventEmitterService {
     this.onOpenPopupDialogFunction.emit(data);
   }
 
-  closeDialog(): void {
-    this.onClosePopupDialogFunction.emit();
-  }
-
   // ChatPage
   onUserSelectedOnChatPage(user: ChatCardInfo): void {
     this.onSelectedUser.emit(user);

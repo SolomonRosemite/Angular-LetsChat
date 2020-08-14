@@ -1,11 +1,31 @@
 <section class="body">
-  <h1>Set a Profile Picture</h1>
+  <h1>Profile Picture</h1>
 
   <div class="image">
     <angular-cropper #angularCropper [imageUrl]="photoURL"></angular-cropper>
   </div>
-  <div>
-    <button mat-button>Upload File</button>
-    <button mat-button (click)="saveImage()">Save</button>
-  </div>
+  <footer>
+    <button class="Apply-btn" mat-raised-button (click)="saveImage()">
+      Apply
+    </button>
+    <button
+      class="Upload-btn"
+      mat-raised-button
+      (click)="upLoaderImage.click()"
+    >
+      Upload Image
+    </button>
+    <button class="Cancel-btn" mat-raised-button (click)="close()">
+      Cancel
+    </button>
+  </footer>
 </section>
+
+<input
+  hidden
+  type="file"
+  accept="image/png, image/jpeg"
+  #upLoaderImage
+  multiple="multiple"
+  (change)="uploadImage($event.target.files)"
+/>

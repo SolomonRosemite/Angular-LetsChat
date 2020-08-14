@@ -46,6 +46,7 @@ export class WeatherService {
     return t;
   }
 
+  // Todo: Fix bug when local time is not the same as city time and image won't be casue of it.
   public getImage(iconId: string): string {
     if (new Date().getHours() >= 21 || new Date().getHours() <= 4) {
       iconId = iconId.substring(0, iconId.length - 1) + 'd';

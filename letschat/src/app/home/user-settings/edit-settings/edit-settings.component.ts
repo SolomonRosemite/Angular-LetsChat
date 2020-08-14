@@ -47,10 +47,11 @@ export class EditSettingsComponent implements OnInit {
   }
 
   updateImage(): void {
-    const dialogRef = this.dialog.open(EditProfileImageComponent);
+    const dialogRef = this.dialog.open(EditProfileImageComponent, {
+      autoFocus: false,
+      maxHeight: '90vh',
+    });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      // Todo:  Check if result is valid
       if (result) {
         this.tempUser.photoURL = result;
       }
@@ -69,10 +70,6 @@ export class EditSettingsComponent implements OnInit {
     }
     await this.database.updateUser(this.tempUser);
     this.router.navigate(['/settings']);
-  }
-
-  getFileUrl(file: string) {
-    // TODO
   }
 
   goBack(): void {

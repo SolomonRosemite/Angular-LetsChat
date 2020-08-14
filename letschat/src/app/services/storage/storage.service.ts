@@ -45,8 +45,20 @@ export class StorageService {
   }
 
   public async updateProfilePicture(image: File, uid: string): Promise<string> {
+    const ref = this.storage.ref(`/profilePictures/${uid}/ProfilePicture`);
+    const task = await ref.put(image);
+
+    const url = await task.ref.getDownloadURL();
+
+    return url;
+  }
+
+  public async uploadProfilePictureTemporary(
+    image: File,
+    uid: string
+  ): Promise<string> {
     const ref = this.storage.ref(
-      `/profilePictures/${uid}/${new Date()}_${image.name}`
+      `/temporarilyProfilePictures/${uid}/ProfilePicture`
     );
     const task = await ref.put(image);
 
