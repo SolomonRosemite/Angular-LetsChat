@@ -44,7 +44,7 @@ export class EditSettingsComponent implements OnInit {
   }
 
   updateImage(): void {
-    console.log('Test');
+    this.router.navigate(['settings/edit/image']);
   }
 
   async save(): Promise<void> {

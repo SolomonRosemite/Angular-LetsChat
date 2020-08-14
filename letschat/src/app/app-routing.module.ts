@@ -1,3 +1,4 @@
+import { EditProfileImageComponent } from './home/user-settings/edit-settings/edit-profile-image/edit-profile-image.component';
 import { ReloadGuard } from './services/guards/reload/reload.guard';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -37,6 +38,11 @@ const routes: Routes = [
   {
     path: 'settings/edit',
     component: EditSettingsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'settings/edit/image',
+    component: EditProfileImageComponent,
     canActivate: [AuthGuard],
   },
   {

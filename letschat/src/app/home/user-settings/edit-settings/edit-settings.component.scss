@@ -42,7 +42,7 @@ a:hover {
 
 .editImage {
   transition: 0.5s ease;
-  opacity: 0;
+  opacity: 0.8; // This can be 0 and be hidden
   position: absolute;
   top: 13%;
   margin: 0;

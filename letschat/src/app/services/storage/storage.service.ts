@@ -44,6 +44,17 @@ export class StorageService {
     return frs;
   }
 
+  public async updateProfilePicture(image: File, uid: string): Promise<string> {
+    const ref = this.storage.ref(
+      `/profilePictures/${uid}/${new Date()}_${image.name}`
+    );
+    const task = await ref.put(image);
+
+    const url = await task.ref.getDownloadURL();
+
+    return url;
+  }
+
   private getFilenames(filename: string): string[] {
     const list = filename.split('.');
 

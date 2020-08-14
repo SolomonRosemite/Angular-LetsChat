@@ -1,0 +1,11 @@
+<section class="body">
+  <h1>Set a Profile Picture</h1>
+
+  <div class="image">
+    <angular-cropper #angularCropper [imageUrl]="photoURL"></angular-cropper>
+  </div>
+  <div>
+    <button mat-button>Upload File</button>
+    <button mat-button (click)="saveImage()">Save</button>
+  </div>
+</section>

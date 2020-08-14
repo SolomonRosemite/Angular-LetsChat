@@ -59,6 +59,9 @@ import { SignUpPageComponent } from './home/sign-up-page/sign-up-page.component'
 import { WeatherStatusComponent } from './chat/weather-status/weather-status.component';
 import { UploadDialogComponent } from './chat/chat-page/upload-dialog/upload-dialog.component';
 import { UploadItemComponent } from './chat/chat-page/upload-item/upload-item.component';
+import { EditProfileImageComponent } from './home/user-settings/edit-settings/edit-profile-image/edit-profile-image.component';
+
+import { AngularCropperjsModule } from 'angular-cropperjs';
 
 @NgModule({
   declarations: [
@@ -84,12 +87,14 @@ import { UploadItemComponent } from './chat/chat-page/upload-item/upload-item.co
     WeatherStatusComponent,
     UploadDialogComponent,
     UploadItemComponent,
+    EditProfileImageComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     BrowserAnimationsModule,
+    AngularCropperjsModule,
     AngularFirestoreModule,
     AngularFireAuthModule,
     MatButtonToggleModule,
