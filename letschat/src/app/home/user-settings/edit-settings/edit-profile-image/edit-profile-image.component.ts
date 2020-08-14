@@ -6,8 +6,7 @@ import { User } from 'src/app/services/Models/user.model';
 import { CropperComponent } from 'angular-cropperjs';
 import { MatDialogRef } from '@angular/material/dialog';
 import { EventEmitterService } from 'src/app/services/event/event-emitter.service';
-import { NgxImageCompressService } from 'ngx-image-compress';
-import { async } from 'rxjs/internal/scheduler/async';
+import Compressor from 'compressorjs';
 
 @Component({
   selector: 'app-edit-profile-image',
@@ -25,8 +24,7 @@ export class EditProfileImageComponent implements OnInit {
     private storage: StorageService,
     public dialogRef: MatDialogRef<EditProfileImageComponent>,
     private ngZone: NgZone,
-    private eventEmitterService: EventEmitterService,
-    private imageCompress: NgxImageCompressService
+    private eventEmitterService: EventEmitterService
   ) {}
 
   ngOnInit(): void {
@@ -43,13 +41,25 @@ export class EditProfileImageComponent implements OnInit {
     this.angularCropper.cropper
       .getCroppedCanvas()
       .toBlob(async (blob: Blob) => {
-        const fileUrl = await this.storage.updateProfilePicture(
-          this.blobToFile(blob, 'ProfilePicture'),
-          this.me.uid
-        );
+        const thisObject = this;
 
-        this.ngZone.run(() => {
-          this.dialogRef.close(fileUrl);
+        new Compressor(blob, {
+          quality: 0.2,
+          success(result) {
+            thisObject.storage
+              .updateProfilePicture(
+                thisObject.blobToFile(result, 'ProfilePicture'),
+                thisObject.me.uid
+              )
+              .then((fileUrl) => {
+                thisObject.ngZone.run(() => {
+                  thisObject.dialogRef.close(fileUrl);
+                });
+              });
+          },
+          error(err) {
+            console.log(err.message);
+          },
         });
       });
   }
@@ -75,10 +85,22 @@ export class EditProfileImageComponent implements OnInit {
       return;
     }
 
-    this.photoURL = await this.storage.uploadProfilePictureTemporary(
-      file[0],
-      this.me.uid
-    );
+    const thisObject = this;
+
+    new Compressor(file[0], {
+      quality: 0.2,
+      success(result) {
+        thisObject.storage
+          .uploadProfilePictureTemporary(
+            thisObject.blobToFile(result, 'ProfilePicture'),
+            thisObject.me.uid
+          )
+          .then((value) => (thisObject.photoURL = value));
+      },
+      error(err) {
+        console.log(err.message);
+      },
+    });
   }
 
   close(): void {

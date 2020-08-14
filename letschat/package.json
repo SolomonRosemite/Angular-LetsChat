@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~10.0.5",
     "@angular/router": "~10.0.5",
     "angular-cropperjs": "^1.0.2",
+    "compressorjs": "^1.0.6",
     "cropperjs": "^1.5.7",
     "firebase": "^7.17.1",
     "moment": "^2.27.0",
