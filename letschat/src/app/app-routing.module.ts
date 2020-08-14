@@ -41,11 +41,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'settings/edit/image',
-    component: EditProfileImageComponent,
-    canActivate: [AuthGuard],
-  },
-  {
     path: 'chat',
     component: ChatPageComponent,
     canActivate: [AuthGuard, ReloadGuard],

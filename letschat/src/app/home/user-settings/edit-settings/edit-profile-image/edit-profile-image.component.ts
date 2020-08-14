@@ -1,10 +1,10 @@
 import { StorageService } from './../../../../services/storage/storage.service';
 import { AuthService } from './../../../../services/auth/auth.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { User } from 'src/app/services/Models/user.model';
 
 import { CropperComponent } from 'angular-cropperjs';
-import { async } from 'rxjs/internal/scheduler/async';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-profile-image',
@@ -17,8 +17,12 @@ export class EditProfileImageComponent implements OnInit {
   me: User;
 
   photoURL = '';
-
-  constructor(private auth: AuthService, private storage: StorageService) {}
+  constructor(
+    private auth: AuthService,
+    private storage: StorageService,
+    public dialogRef: MatDialogRef<EditProfileImageComponent>,
+    private ngZone: NgZone
+  ) {}
 
   ngOnInit(): void {
     console.log();
@@ -32,21 +36,25 @@ export class EditProfileImageComponent implements OnInit {
   }
 
   saveImage(): void {
-    this.angularCropper.cropper.getCroppedCanvas().toBlob((blob: Blob) => {
-      this.storage.updateProfilePicture(
-        this.blobToFile(blob, 'ProfilePicture'),
-        this.me.uid
-      );
-    });
+    this.angularCropper.cropper
+      .getCroppedCanvas()
+      .toBlob(async (blob: Blob) => {
+        const fileUrl = await this.storage.updateProfilePicture(
+          this.blobToFile(blob, 'ProfilePicture'),
+          this.me.uid
+        );
+        // TODO: Check if fileUrl undefined
+        this.ngZone.run(() => {
+          this.dialogRef.close(fileUrl);
+        });
+      });
   }
 
   private blobToFile(theBlob: Blob, fileName: string): File {
     var b: any = theBlob;
-    //A Blob() is almost a File() - it's just missing the two properties below which we will add
     b.lastModifiedDate = new Date();
     b.name = fileName;
 
-    //Cast to a File() type
     return <File>theBlob;
   }
 }

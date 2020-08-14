@@ -1,3 +1,4 @@
+import { EditProfileImageComponent } from './edit-profile-image/edit-profile-image.component';
 import { EventEmitterService } from './../../../services/event/event-emitter.service';
 import { WeatherService } from './../../../services/weather/weather.service';
 import { DatabaseService } from 'src/app/services/database/database.service';
@@ -5,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/services/Models/user.model';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-settings',
@@ -15,6 +17,7 @@ export class EditSettingsComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
+    public dialog: MatDialog,
     private database: DatabaseService,
     private weatherService: WeatherService,
     private event: EventEmitterService
@@ -44,7 +47,14 @@ export class EditSettingsComponent implements OnInit {
   }
 
   updateImage(): void {
-    this.router.navigate(['settings/edit/image']);
+    const dialogRef = this.dialog.open(EditProfileImageComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      // Todo:  Check if result is valid
+      if (result) {
+        this.tempUser.photoURL = result;
+      }
+    });
   }
 
   async save(): Promise<void> {
@@ -59,6 +69,10 @@ export class EditSettingsComponent implements OnInit {
     }
     await this.database.updateUser(this.tempUser);
     this.router.navigate(['/settings']);
+  }
+
+  getFileUrl(file: string) {
+    // TODO
   }
 
   goBack(): void {
