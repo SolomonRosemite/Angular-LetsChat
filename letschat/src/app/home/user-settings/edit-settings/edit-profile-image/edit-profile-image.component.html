@@ -2,7 +2,19 @@
   <h1>Profile Picture</h1>
 
   <div class="image">
-    <angular-cropper #angularCropper [imageUrl]="photoURL"></angular-cropper>
+    <img
+      *ngIf="croppedImage.length == 0"
+      src="{{ photoURL }}"
+      alt="Profile image"
+    />
+    <image-cropper
+      [imageChangedEvent]="imageChangedEvent"
+      [maintainAspectRatio]="true"
+      [imageQuality]="40"
+      [aspectRatio]="1 / 1"
+      format="jpeg"
+      (imageCropped)="imageCropped($event)"
+    ></image-cropper>
   </div>
   <footer>
     <button class="Apply-btn" mat-raised-button (click)="saveImage()">
@@ -27,5 +39,5 @@
   accept="image/png, image/jpeg"
   #upLoaderImage
   multiple="multiple"
-  (change)="uploadImage($event.target.files)"
+  (change)="fileChangeEvent($event)"
 />

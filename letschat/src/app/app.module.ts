@@ -62,6 +62,7 @@ import { UploadItemComponent } from './chat/chat-page/upload-item/upload-item.co
 import { EditProfileImageComponent } from './home/user-settings/edit-settings/edit-profile-image/edit-profile-image.component';
 
 import { AngularCropperjsModule } from 'angular-cropperjs';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { AngularCropperjsModule } from 'angular-cropperjs';
     MatButtonToggleModule,
     MatBottomSheetModule,
     MatFormFieldModule,
+    ImageCropperModule,
     MatGridListModule,
     MatCheckboxModule,
     AppRoutingModule,

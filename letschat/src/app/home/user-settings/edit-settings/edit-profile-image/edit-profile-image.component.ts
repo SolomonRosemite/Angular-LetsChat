@@ -1,11 +1,11 @@
 import { StorageService } from './../../../../services/storage/storage.service';
 import { AuthService } from './../../../../services/auth/auth.service';
-import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { User } from 'src/app/services/Models/user.model';
 
-import { CropperComponent } from 'angular-cropperjs';
 import { MatDialogRef } from '@angular/material/dialog';
 import { EventEmitterService } from 'src/app/services/event/event-emitter.service';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 import Compressor from 'compressorjs';
 
 @Component({
@@ -14,9 +14,10 @@ import Compressor from 'compressorjs';
   styleUrls: ['./edit-profile-image.component.scss'],
 })
 export class EditProfileImageComponent implements OnInit {
-  @ViewChild('angularCropper', { static: true })
-  public angularCropper: CropperComponent;
   me: User;
+
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
 
   photoURL = '';
   constructor(
@@ -28,48 +29,20 @@ export class EditProfileImageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.angularCropper.ready.subscribe(() => {
-      this.angularCropper.cropper.setAspectRatio(1);
-    });
     this.auth.getUser().then((user) => {
       this.photoURL = user.photoURL;
       this.me = user;
     });
   }
 
-  saveImage(): void {
-    this.angularCropper.cropper
-      .getCroppedCanvas()
-      .toBlob(async (blob: Blob) => {
-        const thisObject = this;
-
-        new Compressor(blob, {
-          quality: 0.2,
-          success(result) {
-            thisObject.storage
-              .updateProfilePicture(
-                thisObject.blobToFile(result, 'ProfilePicture'),
-                thisObject.me.uid
-              )
-              .then((fileUrl) => {
-                thisObject.ngZone.run(() => {
-                  thisObject.dialogRef.close(fileUrl);
-                });
-              });
-          },
-          error(err) {
-            console.log(err.message);
-          },
-        });
-      });
+  imageCropped(event: ImageCroppedEvent): void {
+    this.croppedImage = event.base64;
   }
 
-  async uploadImage(file: FileList): Promise<void> {
-    if (file.length == 0) {
-      return;
-    }
+  fileChangeEvent(event: any): void {
+    const x: FileList = event.target.files;
 
-    if (!file[0].type.includes('image')) {
+    if (!x.item(0).type.includes('image')) {
       this.eventEmitterService.showDialog(
         'Only Images.',
         'Please select an Image to set your Profile Picture.'
@@ -77,28 +50,49 @@ export class EditProfileImageComponent implements OnInit {
       return;
     }
 
-    if (file[0].size / 1024 / 1000 > 5) {
+    if (x.item(0).size / 1024 / 1000 > 10) {
       this.eventEmitterService.showDialog(
         'File too big.',
-        "Files can't be bigger than 5MB"
+        'Uploaded Image is too Large.'
       );
       return;
     }
 
+    this.imageChangedEvent = event;
+  }
+
+  dataURLtoFile(dataUrl: string, filename: string) {
+    var arr = dataUrl.split(','),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, { type: mime });
+  }
+
+  saveImage(): void {
+    if (!this.croppedImage) {
+      this.dialogRef.close();
+      return;
+    }
     const thisObject = this;
 
-    new Compressor(file[0], {
-      quality: 0.2,
+    new Compressor(this.dataURLtoFile(this.croppedImage, 'ProfilePicture'), {
+      quality: 0.4,
       success(result) {
+        const file = thisObject.blobToFile(result, 'ProfilePicture');
         thisObject.storage
-          .uploadProfilePictureTemporary(
-            thisObject.blobToFile(result, 'ProfilePicture'),
-            thisObject.me.uid
-          )
-          .then((value) => (thisObject.photoURL = value));
-      },
-      error(err) {
-        console.log(err.message);
+          .uploadProfilePictureTemporary(file, thisObject.me.uid)
+          .then((fileUrl) => {
+            thisObject.ngZone.run(() => {
+              thisObject.dialogRef.close([fileUrl, file]);
+            });
+          });
       },
     });
   }
@@ -108,9 +102,11 @@ export class EditProfileImageComponent implements OnInit {
   }
 
   private blobToFile(theBlob: Blob, fileName: string): File {
-    var b: any = theBlob;
-    b.lastModifiedDate = new Date();
-    b.name = fileName;
+    let b: any = theBlob;
+    try {
+      b.lastModified = new Date();
+      b.name = fileName;
+    } catch (_) {}
 
     return <File>theBlob;
   }

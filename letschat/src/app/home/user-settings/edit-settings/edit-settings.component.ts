@@ -1,3 +1,4 @@
+import { StorageService } from './../../../services/storage/storage.service';
 import { EditProfileImageComponent } from './edit-profile-image/edit-profile-image.component';
 import { EventEmitterService } from './../../../services/event/event-emitter.service';
 import { WeatherService } from './../../../services/weather/weather.service';
@@ -20,7 +21,8 @@ export class EditSettingsComponent implements OnInit {
     public dialog: MatDialog,
     private database: DatabaseService,
     private weatherService: WeatherService,
-    private event: EventEmitterService
+    private event: EventEmitterService,
+    private storage: StorageService
   ) {}
 
   me = new User({
@@ -39,6 +41,8 @@ export class EditSettingsComponent implements OnInit {
     uid: 'Loading...',
   });
 
+  file: File;
+
   ngOnInit(): void {
     this.auth.getUser().then((user) => {
       this.me = user;
@@ -53,7 +57,10 @@ export class EditSettingsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.tempUser.photoURL = result;
+        if (result[0]) {
+          this.tempUser.photoURL = result[0];
+          this.file = result[1];
+        }
       }
     });
   }
@@ -68,6 +75,20 @@ export class EditSettingsComponent implements OnInit {
       );
       return;
     }
+
+    let photoURL;
+
+    if (this.me.photoURL != this.tempUser.photoURL) {
+      photoURL = await this.storage.updateProfilePicture(
+        this.file,
+        this.me.uid
+      );
+    }
+
+    if (photoURL) {
+      this.tempUser.photoURL = photoURL;
+    }
+
     await this.database.updateUser(this.tempUser);
     this.router.navigate(['/settings']);
   }
