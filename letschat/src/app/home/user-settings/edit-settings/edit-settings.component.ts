@@ -43,6 +43,10 @@ export class EditSettingsComponent implements OnInit {
     });
   }
 
+  updateImage(): void {
+    console.log('Test');
+  }
+
   async save(): Promise<void> {
     if (
       (await this.weatherService.cityExists(this.tempUser.location)) === false

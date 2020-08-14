@@ -4,7 +4,7 @@
     style="justify-content: space-between; background-color: white;">
     <span>
       <button mat-button (click)="goBack()">
-        <mat-icon aria-hidden="false" aria-label="goback icon">keyboard_arrow_left</mat-icon>
+        <mat-icon aria-hidden="false" aria-label="go back icon">keyboard_arrow_left</mat-icon>
       </button>
     </span>
     <span>
@@ -12,8 +12,23 @@
     </span>
     <span> </span>
   </mat-toolbar>
+
   <div class="card">
-    <img src="{{ me.photoURL }}" style="width: 150px; height: 150px;" />
+    <section>
+      <div class="container">
+        <img class="main" src="{{ me.photoURL }}" />
+        <div (click)="updateImage()" class="editImage">
+          <div class="center">
+
+            <img class="edit"
+              src="./../../../../assets/images/editPen.png"
+              alt="edit
+              image">
+          </div>
+        </div>
+      </div>
+    </section>
+
     <h1 style="font-size: 28px; margin-top: 10px;">
       {{ tempUser.displayName }}
     </h1>
@@ -47,14 +62,14 @@
       mat-button
       style="background-color: rgb(53, 236, 53);
       margin-top: 20px;
-      color: white;"(click)="save()">
+      color: white;" (click)="save()">
       Apply
     </button>
     <button
       mat-button
       style="background-color: rgb(236, 53, 53);
       color: white;
-      margin-top: 20px;"(click)="goBack()">
+      margin-top: 20px;" (click)="goBack()">
       Discard
     </button>
   </div>
