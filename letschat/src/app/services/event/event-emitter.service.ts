@@ -17,6 +17,7 @@ export class EventEmitterService {
   // ChatPage
   onNewMessage = new EventEmitter<Message[]>();
   onSelectedUser = new EventEmitter<ChatCardInfo>();
+  onCancelUploads = new EventEmitter();
 
   // HomePage
   onBottomBarClickClose(): void {
@@ -32,6 +33,10 @@ export class EventEmitterService {
     this.onOpenPopupDialogFunction.emit(data);
   }
 
+  closeDialog(): void {
+    this.onClosePopupDialogFunction.emit();
+  }
+
   // ChatPage
   onUserSelectedOnChatPage(user: ChatCardInfo): void {
     this.onSelectedUser.emit(user);
@@ -39,5 +44,9 @@ export class EventEmitterService {
 
   onNewMessageReceived(message: Message[]): void {
     this.onNewMessage.emit(message);
+  }
+
+  onUploadCancel(): void {
+    this.onCancelUploads.emit();
   }
 }

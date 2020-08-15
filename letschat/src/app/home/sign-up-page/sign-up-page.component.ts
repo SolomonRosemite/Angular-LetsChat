@@ -34,12 +34,12 @@ export class SignUpPageComponent implements OnInit {
 
   userLocation = '';
 
-  ngOnInit(): void {
+  locationPromise: Promise<Object>;
+
+  async ngOnInit(): Promise<void> {
     const url = 'https://rosemite.herokuapp.com/api/location/';
 
-    this.http.get(url).subscribe((item: any) => {
-      this.userLocation = `${item.data.geo.region_name}, ${item.data.geo.country_name}`;
-    });
+    this.locationPromise = this.http.get(url).toPromise();
   }
 
   onKeyDown(event): void {
@@ -76,6 +76,10 @@ export class SignUpPageComponent implements OnInit {
       this.auth
         .emailSignup(this.email, this.password)
         .then(async (loggedInUser) => {
+          const item = (await this.locationPromise) as any;
+
+          this.userLocation = `${item.data.geo.region_name}, ${item.data.geo.country_name}`;
+
           const user: User = {
             displayName: this.name,
             photoURL: this.getPhotoUrl(),
@@ -104,13 +108,30 @@ export class SignUpPageComponent implements OnInit {
     }
   }
 
-  message(message: string): void {
-    this.eventEmitter.showDialog('Invalid Sign data', message);
+  message(message: string, title = 'Invalid Sign data'): void {
+    this.eventEmitter.showDialog(title, message);
   }
 
-  googleSignin() {
-    this.auth.googleSignin(this.userLocation).then(() => {
-      this.router.navigate(['chat']);
-    });
+  delay(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async googleSignin() {
+    this.message('Please be Patient...', 'Just One Second.');
+
+    const item = (await this.locationPromise) as any;
+
+    this.userLocation = `${item.data.geo.region_name}, ${item.data.geo.country_name}`;
+
+    await this.delay(200);
+
+    this.eventEmitter.closeDialog();
+
+    this.auth
+      .googleSignin(this.userLocation)
+      .then(() => {
+        this.router.navigate(['chat']);
+      })
+      .catch();
   }
 }

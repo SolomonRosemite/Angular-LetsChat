@@ -1,15 +1,16 @@
 <section style="width: 25em; height: 100%; background-color: white;">
   <h3>Uploads</h3>
   <div *ngFor="let upload of uploads">
-    <app-upload-item [upload]="upload"></app-upload-item>
+    <app-upload-item (complete)="complete()" [upload]="upload"></app-upload-item>
   </div>
-  <section>
-    <button mat-button style="background-color: white;
-      text-align: center;
-      color: black;
-      height: 50px;" (click)="close()">
-      Upload in Background
+  <section style="margin-top: 2em;">
+    <button mat-raised-button [disabled]="completeCount == uploads.length"
+      class="cancel-btn" (click)="cancelUploads()">
+      Cancel running Uploads
+    </button>
+    <button [disabled]="!(completeCount == uploads.length)" mat-raised-button
+      class="continue-btn" (click)="close()">
+      Continue
     </button>
   </section>
-
 </section>

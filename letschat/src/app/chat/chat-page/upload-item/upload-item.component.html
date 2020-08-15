@@ -1,10 +1,14 @@
-<div *ngIf="percentage | async as pct">
-  <progress [value]="pct" max="100"></progress>
-  {{ pct | number }}%
-</div>
+<section>
+  <div *ngIf="percentage | async as pct">
+    <h5>{{filename}}</h5>
+    <progress [value]="pct" max="100"></progress>
+    {{ pct | number }}%
+  </div>
 
-<div *ngIf="snapshot | async as snap">
-  {{ roundNumber(snap.bytesTransferred / 1024 / 1000) }} of {{
-  roundNumber(snap.totalBytes / 1024 / 1000) }} MB
-  <button mat-button (click)="task.cancel()" [disabled]="!isActive(snap)">Cancel</button>
-</div>
+  <div *ngIf="snapshot | async as snap">
+    {{ roundNumber(snap.bytesTransferred / 1024 / 1000) }} of {{
+    roundNumber(snap.totalBytes / 1024 / 1000) }} MB
+    <button mat-raised-button (click)="cancelUpload()"
+      [disabled]="!isActive(snap)">Cancel Upload</button>
+  </div>
+</section>

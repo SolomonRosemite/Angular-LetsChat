@@ -22,12 +22,12 @@ export class SignInPageComponent implements OnInit {
   password = '';
   userLocation = '';
 
+  locationPromise: Promise<Object>;
+
   ngOnInit(): void {
     const url = 'https://rosemite.herokuapp.com/api/location/';
 
-    this.http.get(url).subscribe((item: any) => {
-      this.userLocation = `${item.data.geo.region_name}, ${item.data.geo.country_name}`;
-    });
+    this.locationPromise = this.http.get(url).toPromise();
   }
 
   onKeyDown(event): void {
@@ -36,13 +36,17 @@ export class SignInPageComponent implements OnInit {
     }
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
+    const item = (await this.locationPromise) as any;
+
+    this.userLocation = `${item.data.geo.region_name}, ${item.data.geo.country_name}`;
+
     this.auth
       .emailSignin(this.email, this.password)
       .then(() => {
         this.router.navigate(['chat']);
       })
-      .catch((reason) => {
+      .catch(() => {
         this.eventEmitter.showDialog(
           'Invalid Sign In',
           "The Email Or Password doesn't seem to be right. Please Try Again."
@@ -50,7 +54,20 @@ export class SignInPageComponent implements OnInit {
       });
   }
 
-  googleSignin() {
+  delay(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async googleSignin() {
+    this.eventEmitter.showDialog('Please be Patient...', 'Just One Second.');
+    const item = (await this.locationPromise) as any;
+
+    this.userLocation = `${item.data.geo.region_name}, ${item.data.geo.country_name}`;
+
+    await this.delay(200);
+
+    this.eventEmitter.closeDialog();
+
     this.auth.googleSignin(this.userLocation).then(() => {
       this.router.navigate(['chat']);
     });

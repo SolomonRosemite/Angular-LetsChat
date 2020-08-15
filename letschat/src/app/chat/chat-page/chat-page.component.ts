@@ -141,7 +141,6 @@ export class ChatPageComponent implements OnInit {
     }
 
     // TODO: Upload User Image on signup to firebase
-    // TODO: Wait for the location to be fetch and then nav to /chat
 
     let receiverUid = this.chatCardInfo.senderUid;
 

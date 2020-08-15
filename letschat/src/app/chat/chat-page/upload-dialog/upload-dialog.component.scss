@@ -19,6 +19,20 @@ li {
   padding: 0;
 }
 
+.cancel-btn {
+  background-color: rgb(236, 53, 53);
+  text-align: center;
+  color: white;
+  height: 50px;
+}
+.continue-btn {
+  background-color: rgb(53, 236, 53);
+  text-align: center;
+  float: right;
+  color: white;
+  height: 50px;
+}
+
 .column {
   float: left;
 }

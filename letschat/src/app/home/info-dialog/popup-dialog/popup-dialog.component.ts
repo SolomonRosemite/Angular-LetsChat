@@ -11,10 +11,15 @@ import { EventEmitterService } from '../../../services/event/event-emitter.servi
 export class PopupDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<PopupDialogComponent>,
+    private eventEmitterService: EventEmitterService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.eventEmitterService.onClosePopupDialogFunction.subscribe(() => {
+      this.dialogRef.close();
+    });
+  }
 
   close(): void {
     this.dialogRef.close();

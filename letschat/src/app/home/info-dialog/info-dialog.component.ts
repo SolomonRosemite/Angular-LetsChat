@@ -18,10 +18,6 @@ export class InfoDialogComponent implements OnInit {
     this.eventEmitterService.onOpenPopupDialogFunction.subscribe((item) => {
       this.openDialog(item);
     });
-
-    this.eventEmitterService.onClosePopupDialogFunction.subscribe(() => {
-      this.dialog.closeAll();
-    });
   }
 
   openDialog(items: string[]) {
