@@ -113,8 +113,11 @@ export class ChatPageComponent implements OnInit {
     this.finishMessage(message);
   }
 
-  getChatId(uid1: string, uid2: string): string {
-    return uid1.charAt(0) > uid2.charAt(0)
+  getChatId(uid1: string, uid2: string, i = 0): string {
+    if (uid1.charAt(i) === uid2.charAt(i)) {
+      return this.getChatId(uid1, uid2, ++i);
+    }
+    return uid1.charAt(i) > uid2.charAt(i)
       ? `${uid1}-${uid2}`
       : `${uid2}-${uid1}`;
   }
