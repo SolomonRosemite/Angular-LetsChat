@@ -54,6 +54,7 @@ export class EditSettingsComponent implements OnInit {
     const dialogRef = this.dialog.open(EditProfileImageComponent, {
       autoFocus: false,
       maxHeight: '90vh',
+      data: { signUp: false },
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {

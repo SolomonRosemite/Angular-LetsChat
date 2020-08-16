@@ -1,3 +1,4 @@
+import { StorageService } from './../../services/storage/storage.service';
 import { WeatherService } from './../../services/weather/weather.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -5,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/services/Models/user.model';
 import { EventEmitterService } from 'src/app/services/event/event-emitter.service';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { EditProfileImageComponent } from '../user-settings/edit-settings/edit-profile-image/edit-profile-image.component';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -16,7 +19,9 @@ export class SignUpPageComponent implements OnInit {
     private http: HttpClient,
     private auth: AuthService,
     private router: Router,
-    private eventEmitter: EventEmitterService
+    private eventEmitter: EventEmitterService,
+    public dialog: MatDialog,
+    private storage: StorageService
   ) {}
 
   gender: string;
@@ -48,20 +53,6 @@ export class SignUpPageComponent implements OnInit {
     }
   }
 
-  getPhotoUrl(): string {
-    if (!this.gender) {
-      return 'https://i.ibb.co/1d8380F/other.png';
-    }
-
-    if (this.gender == 'other') {
-      return 'https://i.ibb.co/1d8380F/other.png';
-    }
-
-    return this.gender === 'female'
-      ? 'https://i.ibb.co/vPRXQtX/female-avatar.png'
-      : 'https://i.ibb.co/qDMgB1y/male-avatar.png';
-  }
-
   // Validate Data
   onSubmit(): void {
     if (this.name.length < 2) {
@@ -76,7 +67,26 @@ export class SignUpPageComponent implements OnInit {
       this.auth
         .emailSignup(this.email, this.password)
         .then(async (loggedInUser) => {
-          // Todo: Make the user choose a Profile Picture
+          const dialogRef = this.dialog.open(EditProfileImageComponent, {
+            autoFocus: false,
+            maxHeight: '90vh',
+            data: { signUp: true, uid: loggedInUser.user.uid },
+          });
+
+          const result = await dialogRef.afterClosed().toPromise();
+
+          let photoURL;
+
+          console.log(result[1]);
+
+          if (result[1]) {
+            photoURL = await this.storage.updateProfilePicture(
+              result[1],
+              loggedInUser.user.uid
+            );
+          } else {
+            photoURL = 'https://i.ibb.co/vPRXQtX/female-avatar.png';
+          }
 
           const item = (await this.locationPromise) as any;
 
@@ -84,7 +94,7 @@ export class SignUpPageComponent implements OnInit {
 
           const user: User = {
             displayName: this.name,
-            photoURL: this.getPhotoUrl(),
+            photoURL: photoURL,
             location: this.userLocation,
             email: loggedInUser.user.email,
             uid: loggedInUser.user.uid,

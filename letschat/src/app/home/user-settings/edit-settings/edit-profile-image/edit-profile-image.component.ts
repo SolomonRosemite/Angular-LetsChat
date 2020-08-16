@@ -1,9 +1,9 @@
 import { StorageService } from './../../../../services/storage/storage.service';
 import { AuthService } from './../../../../services/auth/auth.service';
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, Inject } from '@angular/core';
 import { User } from 'src/app/services/Models/user.model';
 
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EventEmitterService } from 'src/app/services/event/event-emitter.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import Compressor from 'compressorjs';
@@ -25,10 +25,16 @@ export class EditProfileImageComponent implements OnInit {
     private storage: StorageService,
     public dialogRef: MatDialogRef<EditProfileImageComponent>,
     private ngZone: NgZone,
-    private eventEmitterService: EventEmitterService
+    private eventEmitterService: EventEmitterService,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
+    if (this.data.signUp == true) {
+      this.photoURL = 'https://i.ibb.co/vPRXQtX/female-avatar.png';
+      return;
+    }
+
     this.auth.getUser().then((user) => {
       this.photoURL = user.photoURL;
       this.me = user;
@@ -82,12 +88,20 @@ export class EditProfileImageComponent implements OnInit {
     }
     const thisObject = this;
 
+    let uid: string;
+
+    if (this.me) {
+      uid = this.me.uid;
+    } else {
+      uid = this.data.uid;
+    }
+
     new Compressor(this.dataURLtoFile(this.croppedImage, 'ProfilePicture'), {
       quality: 0.4,
       success(result) {
         const file = thisObject.blobToFile(result, 'ProfilePicture');
         thisObject.storage
-          .uploadProfilePictureTemporary(file, thisObject.me.uid)
+          .uploadProfilePictureTemporary(file, uid)
           .then((fileUrl) => {
             thisObject.ngZone.run(() => {
               thisObject.dialogRef.close([fileUrl, file]);
