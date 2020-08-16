@@ -60,6 +60,7 @@ export class EditProfileImageComponent implements OnInit {
   }
 
   selectImage(event: string): void {
+    // TODO: Show Select Image to the cropper.
     switch (event) {
       case 'male':
         this.female = this.images.female;
@@ -80,7 +81,7 @@ export class EditProfileImageComponent implements OnInit {
 
     if (!file.item(0).type.includes('image')) {
       this.eventEmitterService.showDialog(
-        'Only Images.',
+        'Only Images',
         'Please select an Image to set your Profile Picture.'
       );
       return;
