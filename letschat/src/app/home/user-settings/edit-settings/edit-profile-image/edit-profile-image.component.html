@@ -2,20 +2,37 @@
   <h1>Profile Picture</h1>
 
   <div class="image">
-    <img
-      *ngIf="croppedImage.length == 0"
-      src="{{ photoURL }}"
-      alt="Profile image"
-    />
-    <image-cropper
-      [imageChangedEvent]="imageChangedEvent"
-      [maintainAspectRatio]="true"
-      [imageQuality]="40"
-      [aspectRatio]="1 / 1"
-      format="jpeg"
-      (imageCropped)="imageCropped($event)"
-    ></image-cropper>
+    <section class="col select"
+      [ngStyle]="{'width':
+      data.signUp == true ? '20%' : '0%'}">
+      <ul>
+        <li><img (click)="selectImage('female')" src="{{ female }}" alt="female
+            image"></li>
+        <li><img (click)="selectImage('male')" src="{{ male }}" alt="male
+            image"></li>
+        <li><img (click)="upLoaderImage.click()"
+            src="https://i.ibb.co/gjfr5x5/icons8-hochladen-100.png"
+            alt="image"></li>
+      </ul>
+    </section>
+    <section class="col" style="float: right;" [ngStyle]="{'width':
+      data.signUp == true ? '80%' : '100%'}">
+
+      <img
+        *ngIf="croppedImage.length == 0"
+        src="{{ photoURL }}"
+        alt="Profile image"
+        />
+      <image-cropper
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true"
+        [imageQuality]="40"
+        [aspectRatio]="1 / 1"
+        format="jpeg"
+        (imageCropped)="imageCropped($event)"></image-cropper>
+    </section>
   </div>
+
   <footer>
     <button class="Apply-btn" mat-raised-button (click)="saveImage()">
       Apply
@@ -23,8 +40,7 @@
     <button
       class="Upload-btn"
       mat-raised-button
-      (click)="upLoaderImage.click()"
-    >
+      (click)="upLoaderImage.click()">
       Upload Image
     </button>
     <button class="Cancel-btn" mat-raised-button (click)="close()">
@@ -40,4 +56,4 @@
   #upLoaderImage
   multiple="multiple"
   (change)="fileChangeEvent($event)"
-/>
+  />

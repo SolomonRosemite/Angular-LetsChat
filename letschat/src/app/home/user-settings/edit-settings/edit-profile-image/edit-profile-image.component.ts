@@ -20,6 +20,19 @@ export class EditProfileImageComponent implements OnInit {
   croppedImage: any = '';
 
   photoURL = '';
+
+  images = {
+    female: 'https://i.ibb.co/vPRXQtX/female-avatar.png',
+    femaleSelected: 'https://i.ibb.co/z44RCMN/female-avatar-ticked.png',
+    male: 'https://i.ibb.co/qDMgB1y/male-avatar.png',
+    maleSelected: 'https://i.ibb.co/R6Fy0tn/male-avatar-ticked.png',
+  };
+
+  male = this.images.male;
+  female = this.images.femaleSelected;
+
+  currentlySelected = this.images.female;
+
   constructor(
     private auth: AuthService,
     private storage: StorageService,
@@ -30,6 +43,7 @@ export class EditProfileImageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.data.signUp = true; // TODO: Remove me
     if (this.data.signUp == true) {
       this.photoURL = 'https://i.ibb.co/vPRXQtX/female-avatar.png';
       return;
@@ -45,10 +59,26 @@ export class EditProfileImageComponent implements OnInit {
     this.croppedImage = event.base64;
   }
 
-  fileChangeEvent(event: any): void {
-    const x: FileList = event.target.files;
+  selectImage(event: string): void {
+    switch (event) {
+      case 'male':
+        this.female = this.images.female;
+        this.male = this.images.maleSelected;
+        break;
 
-    if (!x.item(0).type.includes('image')) {
+      case 'female':
+        this.female = this.images.femaleSelected;
+        this.male = this.images.male;
+        break;
+    }
+
+    this.currentlySelected = event;
+  }
+
+  fileChangeEvent(event: any): void {
+    const file: FileList = event.target.files;
+
+    if (!file.item(0).type.includes('image')) {
       this.eventEmitterService.showDialog(
         'Only Images.',
         'Please select an Image to set your Profile Picture.'
@@ -56,7 +86,7 @@ export class EditProfileImageComponent implements OnInit {
       return;
     }
 
-    if (x.item(0).size / 1024 / 1000 > 10) {
+    if (file.item(0).size / 1024 / 1000 > 10) {
       this.eventEmitterService.showDialog(
         'File too big.',
         'Uploaded Image is too Large.'

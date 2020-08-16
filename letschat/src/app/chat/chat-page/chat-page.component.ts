@@ -143,8 +143,6 @@ export class ChatPageComponent implements OnInit {
       }
     }
 
-    // TODO: Upload User Image on signup to firebase
-
     let receiverUid = this.chatCardInfo.senderUid;
 
     if (this.chatCardInfo.senderUid === this.me.uid) {

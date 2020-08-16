@@ -99,6 +99,9 @@ export class EditSettingsComponent implements OnInit {
   }
 
   onKeyDisplayName(event): void {
+    if ((event.target.value as string).length > 16) {
+      return;
+    }
     this.tempUser.displayName = event.target.value;
   }
   onKeyLocation(event): void {

@@ -24,14 +24,6 @@ export class SignUpPageComponent implements OnInit {
     private storage: StorageService
   ) {}
 
-  gender: string;
-
-  genders = [
-    { value: 'female', viewValue: 'Female' },
-    { value: 'male', viewValue: 'Male' },
-    { value: 'other', viewValue: 'Other' },
-  ];
-
   name = '';
   email = '';
   password = '';
@@ -57,8 +49,8 @@ export class SignUpPageComponent implements OnInit {
   onSubmit(): void {
     if (this.name.length < 2) {
       this.message('Name has to be at least 3 letters long.');
-    } else if (this.name.length > 12) {
-      this.message("Name can't be longer then 12 letters long.");
+    } else if (this.name.length > 16) {
+      this.message("Name can't be longer then 16 letters long.");
     } else if (this.password.length < 5) {
       this.message('Password has to be at least 6 Characters long.');
     } else if (this.password !== this.confirmPassword) {
@@ -77,9 +69,7 @@ export class SignUpPageComponent implements OnInit {
 
           let photoURL;
 
-          console.log(result[1]);
-
-          if (result[1]) {
+          if (result) {
             photoURL = await this.storage.updateProfilePicture(
               result[1],
               loggedInUser.user.uid
@@ -90,7 +80,7 @@ export class SignUpPageComponent implements OnInit {
 
           const item = (await this.locationPromise) as any;
 
-          this.userLocation = `${item.data.geo.region_name}, ${item.data.geo.country_name}`;
+          this.userLocation = `${item.city}, ${item.country_name}`;
 
           const user: User = {
             displayName: this.name,
