@@ -76,6 +76,8 @@ export class SignUpPageComponent implements OnInit {
       this.auth
         .emailSignup(this.email, this.password)
         .then(async (loggedInUser) => {
+          // Todo: Make the user choose a Profile Picture
+
           const item = (await this.locationPromise) as any;
 
           this.userLocation = `${item.data.geo.region_name}, ${item.data.geo.country_name}`;
