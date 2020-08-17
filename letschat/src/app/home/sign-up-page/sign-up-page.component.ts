@@ -123,7 +123,7 @@ export class SignUpPageComponent implements OnInit {
 
     const item = (await this.locationPromise) as any;
 
-    this.userLocation = `${item.data.geo.region_name}, ${item.data.geo.country_name}`;
+    this.userLocation = `${item.city}, ${item.country_name}`;
 
     await this.delay(200);
 
