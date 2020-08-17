@@ -1,3 +1,5 @@
+import { StorageService } from './../storage/storage.service';
+import { DownloadService } from './../download/download.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../Models/user.model';
@@ -27,7 +29,9 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private downloadService: DownloadService,
+    private storage: StorageService
   ) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
@@ -80,12 +84,32 @@ export class AuthService {
     const item = await userRef.get().toPromise();
 
     if (item.exists === false) {
+      const url = 'https://cors-anywhere.herokuapp.com/';
+
+      const blob = await this.downloadService
+        .download(url + data.photoURL, true)
+        .toPromise();
+
+      const file = this.blobToFile(blob, 'ProfilePicture');
+
+      data.photoURL = await this.storage.updateProfilePicture(file, data.uid);
+
       data.location = user.location;
 
       return userRef.set(data, { merge: true });
     }
 
     return userRef.set(data, { merge: true });
+  }
+
+  private blobToFile(theBlob: Blob, fileName: string): File {
+    let b: any = theBlob;
+    try {
+      b.lastModified = new Date();
+      b.name = fileName;
+    } catch (_) {}
+
+    return <File>theBlob;
   }
 
   async signOut() {

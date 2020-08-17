@@ -3,7 +3,30 @@ section.body {
 }
 
 div.image {
-  display: block;
+  display: flex;
+  align-items: center;
+
+  section.col {
+    float: left;
+  }
+
+  section.select {
+    height: 100%;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      margin-right: 2em;
+      list-style: none;
+    }
+
+    img {
+      height: 5em;
+      width: 5em;
+      margin-bottom: 1em;
+      cursor: pointer;
+    }
+  }
 }
 
 image-cropper {
@@ -12,6 +35,7 @@ image-cropper {
 }
 
 img {
+  float: right;
   width: 30em;
   height: 30em;
 }

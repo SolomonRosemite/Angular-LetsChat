@@ -1,3 +1,4 @@
+import { StorageService } from './../../services/storage/storage.service';
 import { WeatherService } from './../../services/weather/weather.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -5,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/services/Models/user.model';
 import { EventEmitterService } from 'src/app/services/event/event-emitter.service';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { EditProfileImageComponent } from '../user-settings/edit-settings/edit-profile-image/edit-profile-image.component';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -16,16 +19,10 @@ export class SignUpPageComponent implements OnInit {
     private http: HttpClient,
     private auth: AuthService,
     private router: Router,
-    private eventEmitter: EventEmitterService
+    private eventEmitter: EventEmitterService,
+    public dialog: MatDialog,
+    private storage: StorageService
   ) {}
-
-  gender: string;
-
-  genders = [
-    { value: 'female', viewValue: 'Female' },
-    { value: 'male', viewValue: 'Male' },
-    { value: 'other', viewValue: 'Other' },
-  ];
 
   name = '';
   email = '';
@@ -48,26 +45,12 @@ export class SignUpPageComponent implements OnInit {
     }
   }
 
-  getPhotoUrl(): string {
-    if (!this.gender) {
-      return 'https://i.ibb.co/1d8380F/other.png';
-    }
-
-    if (this.gender == 'other') {
-      return 'https://i.ibb.co/1d8380F/other.png';
-    }
-
-    return this.gender === 'female'
-      ? 'https://i.ibb.co/vPRXQtX/female-avatar.png'
-      : 'https://i.ibb.co/qDMgB1y/male-avatar.png';
-  }
-
   // Validate Data
   onSubmit(): void {
     if (this.name.length < 2) {
       this.message('Name has to be at least 3 letters long.');
-    } else if (this.name.length > 12) {
-      this.message("Name can't be longer then 12 letters long.");
+    } else if (this.name.length > 16) {
+      this.message("Name can't be longer then 16 letters long.");
     } else if (this.password.length < 5) {
       this.message('Password has to be at least 6 Characters long.');
     } else if (this.password !== this.confirmPassword) {
@@ -76,13 +59,32 @@ export class SignUpPageComponent implements OnInit {
       this.auth
         .emailSignup(this.email, this.password)
         .then(async (loggedInUser) => {
+          const dialogRef = this.dialog.open(EditProfileImageComponent, {
+            autoFocus: false,
+            maxHeight: '90vh',
+            data: { signUp: true, uid: loggedInUser.user.uid },
+          });
+
+          const result = await dialogRef.afterClosed().toPromise();
+
+          let photoURL;
+
+          if (result) {
+            photoURL = await this.storage.updateProfilePicture(
+              result[1],
+              loggedInUser.user.uid
+            );
+          } else {
+            photoURL = 'https://i.ibb.co/vPRXQtX/female-avatar.png';
+          }
+
           const item = (await this.locationPromise) as any;
 
-          this.userLocation = `${item.data.geo.region_name}, ${item.data.geo.country_name}`;
+          this.userLocation = `${item.city}, ${item.country_name}`;
 
           const user: User = {
             displayName: this.name,
-            photoURL: this.getPhotoUrl(),
+            photoURL: photoURL,
             location: this.userLocation,
             email: loggedInUser.user.email,
             uid: loggedInUser.user.uid,
@@ -121,7 +123,7 @@ export class SignUpPageComponent implements OnInit {
 
     const item = (await this.locationPromise) as any;
 
-    this.userLocation = `${item.data.geo.region_name}, ${item.data.geo.country_name}`;
+    this.userLocation = `${item.city}, ${item.country_name}`;
 
     await this.delay(200);
 

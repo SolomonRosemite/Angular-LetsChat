@@ -37,10 +37,6 @@ export class SignInPageComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
-    const item = (await this.locationPromise) as any;
-
-    this.userLocation = `${item.data.geo.region_name}, ${item.data.geo.country_name}`;
-
     this.auth
       .emailSignin(this.email, this.password)
       .then(() => {
@@ -62,7 +58,7 @@ export class SignInPageComponent implements OnInit {
     this.eventEmitter.showDialog('Please be Patient...', 'Just One Second.');
     const item = (await this.locationPromise) as any;
 
-    this.userLocation = `${item.data.geo.region_name}, ${item.data.geo.country_name}`;
+    this.userLocation = `${item.city}, ${item.country_name}`;
 
     await this.delay(200);
 

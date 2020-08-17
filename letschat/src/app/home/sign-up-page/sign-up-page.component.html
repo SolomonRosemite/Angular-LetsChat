@@ -74,22 +74,6 @@
             matInput
             />
         </mat-form-field>
-
-        <mat-form-field appearance="fill">
-          <mat-label>Gender</mat-label>
-          <mat-select [(ngModel)]="gender" name="gender">
-            <mat-option *ngFor="let gender of genders" [value]="gender.value">
-              {{ gender.viewValue }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <!-- <mat-label style="color: #000;">Select Gender</mat-label>
-        <mat-select>
-          <mat-option style="color: #000;" *ngFor="let gender of gender"
-            [value]="gender.value">
-            {{gender.viewValue}}
-          </mat-option>
-        </mat-select> -->
       </form>
 
       <button class="signButton" (click)="onSubmit()" mat-raised-button>

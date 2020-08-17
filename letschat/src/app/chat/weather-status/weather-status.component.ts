@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { WeatherService } from './../../services/weather/weather.service';
 import { Component, OnInit, HostListener } from '@angular/core';
@@ -19,20 +20,27 @@ export class WeatherStatusComponent implements OnInit {
 
   updateTrigger = false;
 
+  show = false;
+
   async ngOnInit(): Promise<void> {
     this.screenHeight = window.innerHeight - 150;
 
     const weather = await this.weatherService.getWeather();
 
-    weather[0].subscribe((response: any) => {
-      this.weatherStatus = {
-        city: response.name,
-        sunrise: this.weatherService.convertTime(response.sys.sunrise),
-        temperature: response.main.temp,
-        wind: response.wind.speed,
-        image: this.weatherService.getImage(response.weather[0].icon),
-      };
-    });
+    (weather[0] as Observable<any>)
+      .toPromise()
+      .then((response: any) => {
+        this.show = true;
+
+        this.weatherStatus = {
+          city: response.name,
+          sunrise: this.weatherService.convertTime(response.sys.sunrise),
+          temperature: response.main.temp,
+          wind: response.wind.speed,
+          image: this.weatherService.getImage(response.weather[0].icon),
+        };
+      })
+      .catch((item) => (this.show = false));
 
     this.name = (weather[1] as User).displayName;
     this.loop();

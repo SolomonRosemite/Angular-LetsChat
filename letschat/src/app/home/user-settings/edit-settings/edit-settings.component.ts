@@ -54,13 +54,12 @@ export class EditSettingsComponent implements OnInit {
     const dialogRef = this.dialog.open(EditProfileImageComponent, {
       autoFocus: false,
       maxHeight: '90vh',
+      data: { signUp: false },
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        if (result[0]) {
-          this.tempUser.photoURL = result[0];
-          this.file = result[1];
-        }
+        this.tempUser.photoURL = result[0];
+        this.file = result[1];
       }
     });
   }
@@ -78,7 +77,7 @@ export class EditSettingsComponent implements OnInit {
 
     let photoURL;
 
-    if (this.me.photoURL != this.tempUser.photoURL) {
+    if (this.file) {
       photoURL = await this.storage.updateProfilePicture(
         this.file,
         this.me.uid
@@ -98,6 +97,9 @@ export class EditSettingsComponent implements OnInit {
   }
 
   onKeyDisplayName(event): void {
+    if ((event.target.value as string).length > 16) {
+      return;
+    }
     this.tempUser.displayName = event.target.value;
   }
   onKeyLocation(event): void {
