@@ -58,10 +58,8 @@ export class EditSettingsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        if (result[0]) {
-          this.tempUser.photoURL = result[0];
-          this.file = result[1];
-        }
+        this.tempUser.photoURL = result[0];
+        this.file = result[1];
       }
     });
   }
@@ -79,7 +77,7 @@ export class EditSettingsComponent implements OnInit {
 
     let photoURL;
 
-    if (this.me.photoURL != this.tempUser.photoURL) {
+    if (this.file) {
       photoURL = await this.storage.updateProfilePicture(
         this.file,
         this.me.uid
