@@ -2,11 +2,17 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Message } from '../Models/message.model';
 import { ChatCardInfo } from '../Models/ChatCardInfo.model';
 
+interface DialogLogs {
+  path: string;
+  date: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class EventEmitterService {
   didReloadChat = true;
+  dialogs: DialogLogs[] = [];
 
   // Homepage
   onBottomBarOpenFunction = new EventEmitter();
