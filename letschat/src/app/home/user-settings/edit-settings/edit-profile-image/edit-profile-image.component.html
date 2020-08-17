@@ -3,6 +3,7 @@
 
   <div class="image">
     <section class="col select"
+      *ngIf="data.signUp == true"
       [ngStyle]="{'width':
       data.signUp == true ? '20%' : '0%'}">
       <ul>
@@ -19,7 +20,7 @@
       data.signUp == true ? '80%' : '100%'}">
 
       <img
-        *ngIf="croppedImage.length == 0"
+        *ngIf="!croppedImage || uploading === true"
         src="{{ photoURL }}"
         alt="Profile image"
         />

@@ -1,3 +1,4 @@
+import { DownloadService } from './../../../../services/download/download.service';
 import { StorageService } from './../../../../services/storage/storage.service';
 import { AuthService } from './../../../../services/auth/auth.service';
 import { Component, OnInit, NgZone, Inject } from '@angular/core';
@@ -30,8 +31,7 @@ export class EditProfileImageComponent implements OnInit {
 
   male = this.images.male;
   female = this.images.femaleSelected;
-
-  currentlySelected = this.images.female;
+  uploading = false;
 
   constructor(
     private auth: AuthService,
@@ -39,11 +39,11 @@ export class EditProfileImageComponent implements OnInit {
     public dialogRef: MatDialogRef<EditProfileImageComponent>,
     private ngZone: NgZone,
     private eventEmitterService: EventEmitterService,
+    private download: DownloadService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
-    this.data.signUp = true; // TODO: Remove me
     if (this.data.signUp == true) {
       this.photoURL = 'https://i.ibb.co/vPRXQtX/female-avatar.png';
       return;
@@ -59,21 +59,20 @@ export class EditProfileImageComponent implements OnInit {
     this.croppedImage = event.base64;
   }
 
-  selectImage(event: string): void {
-    // TODO: Show Select Image to the cropper.
+  selectImage(event: string): string {
     switch (event) {
       case 'male':
+        this.photoURL = this.images.male;
         this.female = this.images.female;
         this.male = this.images.maleSelected;
-        break;
+        return this.male;
 
       case 'female':
+        this.photoURL = this.images.female;
         this.female = this.images.femaleSelected;
         this.male = this.images.male;
-        break;
+        return this.female;
     }
-
-    this.currentlySelected = event;
   }
 
   fileChangeEvent(event: any): void {
@@ -95,6 +94,8 @@ export class EditProfileImageComponent implements OnInit {
       return;
     }
 
+    this.data.signUp = false;
+
     this.imageChangedEvent = event;
   }
 
@@ -112,11 +113,14 @@ export class EditProfileImageComponent implements OnInit {
     return new File([u8arr], filename, { type: mime });
   }
 
-  saveImage(): void {
-    if (!this.croppedImage) {
+  async saveImage(): Promise<void> {
+    this.uploading = true;
+
+    if (!this.croppedImage && this.data.signUp === false) {
       this.dialogRef.close();
       return;
     }
+
     const thisObject = this;
 
     let uid: string;
@@ -127,19 +131,39 @@ export class EditProfileImageComponent implements OnInit {
       uid = this.data.uid;
     }
 
-    new Compressor(this.dataURLtoFile(this.croppedImage, 'ProfilePicture'), {
-      quality: 0.4,
-      success(result) {
-        const file = thisObject.blobToFile(result, 'ProfilePicture');
-        thisObject.storage
-          .uploadProfilePictureTemporary(file, uid)
-          .then((fileUrl) => {
-            thisObject.ngZone.run(() => {
-              thisObject.dialogRef.close([fileUrl, file]);
+    if (this.data.signUp === true) {
+      this.croppedImage = await this.download
+        .download(this.photoURL)
+        .toPromise();
+
+      new Compressor(this.croppedImage, {
+        quality: 0.4,
+        success(result) {
+          const file = thisObject.blobToFile(result, 'ProfilePicture');
+          thisObject.storage
+            .uploadProfilePictureTemporary(file, uid)
+            .then((fileUrl) => {
+              thisObject.ngZone.run(() => {
+                thisObject.dialogRef.close([fileUrl, file]);
+              });
             });
-          });
-      },
-    });
+        },
+      });
+    } else {
+      new Compressor(this.dataURLtoFile(this.croppedImage, 'ProfilePicture'), {
+        quality: 0.4,
+        success(result) {
+          const file = thisObject.blobToFile(result, 'ProfilePicture');
+          thisObject.storage
+            .uploadProfilePictureTemporary(file, uid)
+            .then((fileUrl) => {
+              thisObject.ngZone.run(() => {
+                thisObject.dialogRef.close([fileUrl, file]);
+              });
+            });
+        },
+      });
+    }
   }
 
   close(): void {
