@@ -50,6 +50,15 @@ export class EditSettingsComponent implements OnInit {
     });
   }
 
+  resetPassword(): void {
+    this.auth.emailResetPassword(this.me.email).then(() => {
+      this.event.showDialog(
+        'Successful. Please check your Inbox',
+        'A Email was send to you. Please check your Inbox to change your Password'
+      );
+    });
+  }
+
   updateImage(): void {
     const dialogRef = this.dialog.open(EditProfileImageComponent, {
       autoFocus: false,

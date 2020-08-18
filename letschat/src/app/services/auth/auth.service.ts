@@ -54,6 +54,10 @@ export class AuthService {
     return this.afAuth.signInWithEmailAndPassword(email, password);
   }
 
+  emailResetPassword(email: string) {
+    return this.afAuth.sendPasswordResetEmail(email);
+  }
+
   async googleSignin(userLocation: string): Promise<void> {
     const provider = new firebase.auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
@@ -97,6 +101,8 @@ export class AuthService {
       data.location = user.location;
 
       return userRef.set(data, { merge: true });
+    } else {
+      data.photoURL = item.data().photoURL;
     }
 
     return userRef.set(data, { merge: true });
