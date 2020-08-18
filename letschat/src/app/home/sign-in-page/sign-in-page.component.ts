@@ -54,6 +54,30 @@ export class SignInPageComponent implements OnInit {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
+  resetPassword(): void {
+    if (!this.email) {
+      this.eventEmitter.showDialog(
+        'Email Required',
+        'The Email is Required to reset your Password.'
+      );
+      return;
+    }
+    this.auth
+      .emailResetPassword(this.email)
+      .then(() => {
+        this.eventEmitter.showDialog(
+          'Successful. Please check your Inbox',
+          'A Email was send to you. Please check your Inbox to change your Password'
+        );
+      })
+      .catch(() => {
+        this.eventEmitter.showDialog(
+          'Email not found',
+          'Sorry the Email was not found. Please check if your Email is typed in correctly'
+        );
+      });
+  }
+
   async googleSignin() {
     this.eventEmitter.showDialog('Please be Patient...', 'Just One Second.');
     const item = (await this.locationPromise) as any;
