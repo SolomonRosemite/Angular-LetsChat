@@ -67,6 +67,8 @@ export class SignUpPageComponent implements OnInit {
 
           const result = await dialogRef.afterClosed().toPromise();
 
+          this.message('Please be Patient...', 'Just One Second.');
+
           let photoURL;
 
           if (result) {
@@ -91,6 +93,8 @@ export class SignUpPageComponent implements OnInit {
           };
 
           await this.auth.setUserData(user);
+
+          this.eventEmitter.closeDialog();
 
           this.router.navigate(['chat']);
         })
