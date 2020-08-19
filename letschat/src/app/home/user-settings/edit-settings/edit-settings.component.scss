@@ -19,14 +19,23 @@
 button {
   border: none;
   outline: 0;
-  display: inline-block;
+  display: inline;
   padding: 8px;
   color: white;
   background-color: #000;
   text-align: center;
+  margin: 10px;
+  min-width: 40%;
   cursor: pointer;
-  width: 100%;
   font-size: 18px;
+}
+
+button.save {
+  background-color: rgb(53, 236, 53);
+  display: inline-block;
+  margin: 0px;
+  width: 100%;
+  color: white;
 }
 
 a {
@@ -44,7 +53,7 @@ a:hover {
   transition: 0.5s ease;
   opacity: 0.8; // This can be 0 and be hidden
   position: absolute;
-  top: 11.5%;
+  top: 13%;
   margin: 0;
   vertical-align: middle;
   padding: 0;

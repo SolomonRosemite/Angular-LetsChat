@@ -8,6 +8,17 @@ section.items {
   background-color: green;
 }
 
+section.main {
+  width: 25em;
+  max-height: 90vh;
+  background-color: white;
+  overflow-y: auto;
+
+  section.sub {
+    margin-right: 5%;
+  }
+}
+
 ul {
   margin: 0;
   padding: 0;
