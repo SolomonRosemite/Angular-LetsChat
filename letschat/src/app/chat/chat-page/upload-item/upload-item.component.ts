@@ -41,7 +41,7 @@ export class UploadItemComponent implements OnInit {
     this.eventEmitter.onCancelUploads.subscribe(() => this.cancelUpload());
     this.startUpload();
     const name = this.getFilename(this.upload.file.name);
-    this.filename = name[0] + name[0];
+    this.filename = `${name[0]}.${name[1]}`;
   }
 
   cancelUpload(): void {
@@ -70,7 +70,6 @@ export class UploadItemComponent implements OnInit {
     this.percentage = this.task.percentageChanges();
 
     this.snapshot = this.task.snapshotChanges().pipe(
-      // The file's download URL
       finalize(async () => {
         if (this.fileCanceled == true) {
           return;
@@ -85,6 +84,7 @@ export class UploadItemComponent implements OnInit {
           senderUid: this.upload.senderUid,
           receiverUid: this.upload.receiverUid,
 
+          pathRef: (await this.task).ref.fullPath,
           filename: name[0],
           fullFilename: `${name[0]}.${name[1]}`,
           fileFileReferenceUrl: this.downloadURL,
@@ -108,7 +108,12 @@ export class UploadItemComponent implements OnInit {
       return [filename, 'file'];
     }
 
-    return list;
+    const filetype = list[list.length - 1];
+    delete list[list.length - 1];
+
+    const name = list.join('.');
+
+    return [name.substring(0, name.length - 1), filetype];
   }
 
   isActive(snapshot) {

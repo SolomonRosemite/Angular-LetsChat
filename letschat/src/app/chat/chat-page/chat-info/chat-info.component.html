@@ -1,19 +1,16 @@
 <div>
   <div
     class="mat-elevation-z3"
-    style="
-      margin: 0px;
-      padding: 0px;
-      padding-top: 10%;
-      text-align: center;
-      padding-bottom: 5px;
-    "
-  >
+    style="margin: 0px;
+    padding: 0px;
+    padding-top: 10%;
+    text-align: center;
+    padding-bottom: 5px;">
     <div>
       <img
         style="border-radius: 50%; width: 90px; height: 90px;"
         src="{{ user.photoURL }}"
-      />
+        />
 
       <p style="font-size: 20px; margin-top: 20px; font-weight: 500;">
         {{ user.displayName }}
@@ -27,8 +24,8 @@
   <div class="sharedFilesTab" style="text-align: center; width: 100%;">
     <h2 *ngIf="sharedFiles.length != 0">Shared Files</h2>
     <ul>
-      <li *ngFor="let sharedFile of getSharedFiles(); let i = index">
-        <app-file-reference-card [input]="sharedFile"></app-file-reference-card>
+      <li *ngFor="let sharedFile of getSharedFiles(); let i= index">
+        <app-file-reference-card [user]="me" [input]="sharedFile"></app-file-reference-card>
       </li>
     </ul>
     <div class="space"></div>

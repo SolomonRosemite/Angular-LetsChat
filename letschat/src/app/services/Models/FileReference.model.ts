@@ -4,6 +4,7 @@ export interface FileReferenceInterface {
   senderUid: string;
   receiverUid: string;
 
+  pathRef: string;
   filename: string;
   fullFilename: string;
   fileFileReferenceUrl: string;
@@ -16,6 +17,7 @@ export class FileReference {
     this.senderUid = fr.senderUid;
     this.receiverUid = fr.receiverUid;
 
+    this.pathRef = fr.pathRef;
     this.filename = fr.filename;
     this.fullFilename = fr.fullFilename;
     this.fileFileReferenceUrl = fr.fileFileReferenceUrl;
@@ -26,6 +28,7 @@ export class FileReference {
   public senderUid: string;
   public receiverUid: string;
 
+  public pathRef: string;
   public filename: string;
   public fullFilename: string;
   public fileFileReferenceUrl: string;

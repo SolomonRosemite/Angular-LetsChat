@@ -1,7 +1,10 @@
+import { StorageService } from './../../../../services/storage/storage.service';
+import { AuthService } from './../../../../services/auth/auth.service';
 import { DownloadService } from './../../../../services/download/download.service';
 import { FileReference } from './../../../../services/Models/FileReference.model';
 import { Component, OnInit, Input } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { User } from 'src/app/services/Models/user.model';
 
 @Component({
   selector: 'app-file-reference-card',
@@ -11,11 +14,14 @@ import { DatePipe } from '@angular/common';
 export class FileReferenceCardComponent implements OnInit {
   constructor(
     private datepipe: DatePipe,
-    private downloadService: DownloadService
+    private downloadService: DownloadService,
+    private storage: StorageService
   ) {}
 
   @Input()
   input: FileReference;
+  @Input()
+  user: User;
 
   private _fileReference: FileReference;
   public get fileReference(): FileReference {
@@ -29,6 +35,7 @@ export class FileReferenceCardComponent implements OnInit {
         receiverUid: this.input.receiverUid,
         senderUid: this.input.senderUid,
 
+        pathRef: this.input.pathRef,
         fileFileReferenceUrl: this.input.fileFileReferenceUrl,
         filename: this.input.filename,
         fullFilename: this.input.fullFilename,
@@ -76,5 +83,24 @@ export class FileReferenceCardComponent implements OnInit {
 
         URL.revokeObjectURL(objectUrl);
       });
+  }
+
+  public async removeFile(): Promise<void> {
+    if (this.user.uid === this.input.senderUid) {
+      this.storage.removeFile(
+        this.user.uid,
+        this.fileReference.receiverUid,
+        this.fileReference.chatId,
+        this.fileReference.fileFileReferenceUrl,
+        this.fileReference.pathRef
+      );
+      return;
+    }
+
+    this.storage.removeFileForUserOnly(
+      this.user.uid,
+      this.fileReference.chatId,
+      this.fileReference.fileFileReferenceUrl
+    );
   }
 }

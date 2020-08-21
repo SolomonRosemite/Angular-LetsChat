@@ -15,5 +15,10 @@
   </button>
   <button mat-menu-item (click)="downloadFile()">
     Download File
+
+  </button>
+  <button mat-menu-item style="color: red;" (click)="removeFile()">
+    {{fileReference.senderUid === user.uid ? 'Delete File' : 'Delete File for
+    me'}}
   </button>
 </mat-menu>

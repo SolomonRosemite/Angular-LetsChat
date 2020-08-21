@@ -28,7 +28,7 @@
         <mat-form-field
           class="column"
           [ngStyle]="{'width': useSmallScreen ? '40%' : '80%'}"
-          style="font-size: 20px; padding-left: 10px;">
+          style="font-size: 20px; padding-left: .8rem;">
           <mat-label style="color: grey;">Type a Message</mat-label>
           <input
             matInput
@@ -48,9 +48,9 @@
           display: block;">
           <div
             style="float: right;
-            padding-left: 10px;
-            padding-right: 10px;
-            width: 80px;">
+            padding-left: 2%;
+            padding-right: 2%;
+            width: 30%">
             <button
               mat-button
               style="background-color: #69f0ae; color: white; width: 100%;"
@@ -60,7 +60,7 @@
             </button>
           </div>
           <div
-            style="float: right; padding-left: 10px; width: 80px;">
+            style="float: right; padding-left: 2%; width: 25%;">
             <button
               mat-button
               (click)="upLoaderImage.click()"
@@ -69,23 +69,8 @@
               <mat-icon>image</mat-icon>
             </button>
           </div>
-          <input
-            hidden
-            type="file"
-            #upLoaderFile
-            multiple="multiple"
-            (change)="handleFileInput($event.target.files)"
-            />
-          <input
-            hidden
-            type="file"
-            accept="image/png, image/jpeg"
-            #upLoaderImage
-            multiple="multiple"
-            (change)="handleFileInput($event.target.files)"
-            />
           <div
-            style="float: right; padding-left: 10px; width: 80px;">
+            style="float: right; padding-left: 2%; width: 25%;">
             <button
               mat-button
               (click)="upLoaderFile.click()"
@@ -109,4 +94,19 @@
   </div>
 </div>
 
+<input
+  hidden
+  type="file"
+  #upLoaderFile
+  multiple="multiple"
+  (change)="handleFileInput($event.target.files)"
+  />
+<input
+  hidden
+  type="file"
+  accept="image/png, image/jpeg"
+  #upLoaderImage
+  multiple="multiple"
+  (change)="handleFileInput($event.target.files)"
+  />
 <app-info-dialog></app-info-dialog>
