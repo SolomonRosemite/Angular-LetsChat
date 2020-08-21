@@ -1,27 +1,21 @@
 <div>
-  <div
-    class="mat-elevation-z3"
-    style="margin: 0px;
-    padding: 0px;
-    padding-top: 10%;
-    text-align: center;
-    padding-bottom: 5px;">
+  <section
+    class="mat-elevation-z3 top">
     <div>
       <img
-        style="border-radius: 50%; width: 90px; height: 90px;"
         src="{{ user.photoURL }}"
         />
 
-      <p style="font-size: 20px; margin-top: 20px; font-weight: 500;">
+      <p class="displayName">
         {{ user.displayName }}
       </p>
-      <p style="font-size: 15px; margin-bottom: 10px; font-weight: normal;">
+      <p class="location">
         {{ user.location }}
       </p>
     </div>
-  </div>
+  </section>
 
-  <div class="sharedFilesTab" style="text-align: center; width: 100%;">
+  <section class="sharedFilesTab">
     <h2 *ngIf="sharedFiles.length != 0">Shared Files</h2>
     <ul>
       <li *ngFor="let sharedFile of getSharedFiles(); let i= index">
@@ -29,5 +23,5 @@
       </li>
     </ul>
     <div class="space"></div>
-  </div>
+  </section>
 </div>

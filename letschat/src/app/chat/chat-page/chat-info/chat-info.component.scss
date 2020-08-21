@@ -1,24 +1,53 @@
-.sharedFilesTab {
+section.top {
+  margin: 0px;
+  padding: 0px;
+  padding-top: 10%;
+  text-align: center;
+  padding-bottom: 5px;
+
+  img {
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+  }
+
+  p.displayName {
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: 500;
+  }
+
+  p.location {
+    font-size: 15px;
+    margin-bottom: 10px;
+    font-weight: normal;
+  }
+}
+
+section.sharedFilesTab {
   height: 100vh;
   overflow-y: auto;
+
+  text-align: center;
+  width: 100%;
 
   h2 {
     font-size: 27px;
     font-weight: normal;
   }
-}
 
-ul {
-  list-style-position: inside;
-  padding-left: 0;
-}
+  ul {
+    list-style-position: inside;
+    padding-left: 0;
+  }
 
-.space {
-  height: 380px;
-}
+  .space {
+    height: 380px;
+  }
 
-li {
-  list-style-type: none;
+  li {
+    list-style-type: none;
+  }
 }
 
 /* width */
