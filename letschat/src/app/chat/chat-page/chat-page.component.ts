@@ -84,7 +84,7 @@ export class ChatPageComponent implements OnInit {
     if (
       (event != null && event.keyCode != 13) ||
       !this.chatCardInfo ||
-      this.message.length == 0
+      this.message.trim().length == 0
     ) {
       return;
     }
