@@ -1,6 +1,26 @@
-.scroll {
+div.scroll {
   height: 100vh;
   overflow-y: auto;
+
+  margin-top: 30px;
+}
+
+section.search {
+  padding-top: 10px;
+  display: flex;
+  padding-left: 20px;
+
+  mat-icon {
+    color: #b1b1b1;
+    padding-left: 10px;
+  }
+
+  div.textInput {
+    width: 70%;
+    margin-top: -8px;
+    padding-right: 10px;
+    height: 50%;
+  }
 }
 
 .icon-display {
@@ -10,10 +30,10 @@
 ul {
   list-style-position: inside;
   padding-left: 0;
-}
 
-li {
-  list-style-type: none;
+  li {
+    list-style-type: none;
+  }
 }
 
 hr {

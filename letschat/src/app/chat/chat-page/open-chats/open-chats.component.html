@@ -1,15 +1,11 @@
-<div class="scroll" style="margin-top: 5px;">
-  <div style="padding-top: 20px;"></div>
-  <div style="padding-top: 10px; display: flex; padding-left: 20px;">
+<div class="scroll">
+  <section class="search">
     <mat-icon
       class="icon-display"
       aria-hidden="false"
-      aria-label="search icon"
-      style="color: #b1b1b1;">search</mat-icon>
-    <div style="padding-left: 10px;"></div>
+      aria-label="search icon">search</mat-icon>
     <div
-      class="wrap-input100 bg1 rs1-wrap-input100"
-      style="width: 70%; margin-top: -8px; padding-right: 10px; height: 50%;">
+      class="wrap-input100 bg1 rs1-wrap-input100 textInput">
       <input
         class="input100"
         style="font-size: 17px; font-family: Roboto;"
@@ -18,7 +14,7 @@
         placeholder="Search Messenger"
         />
     </div>
-  </div>
+  </section>
   <hr />
   <ul>
     <li *ngFor="let chatCard of foundUsers()">
