@@ -1,16 +1,15 @@
 import { FileReferenceInterface } from './../Models/FileReference.model';
-import { FileReference } from 'src/app/services/Models/FileReference.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 
 import {
   AngularFirestoreDocument,
   DocumentReference,
-  DocumentData,
   AngularFirestoreCollection,
 } from '@angular/fire/firestore';
 import { User } from '../Models/user.model';
 import { Message } from '../Models/message.model';
+import { __awaiter } from 'tslib';
 
 @Injectable({
   providedIn: 'root',
@@ -57,6 +56,40 @@ export class DatabaseService {
     );
 
     return docs;
+  }
+
+  public async deleteMessage(
+    message: Message,
+    uid: string,
+    repeat = true
+  ): Promise<void> {
+    const messages = await this.firestore
+      .collection('messages')
+      .doc(uid)
+      .collection<Message>('chats')
+      .get()
+      .toPromise();
+
+    for (let i = 0; i < messages.docs.length; i++) {
+      const msg = messages.docs[i].data() as Message;
+
+      const date = ((msg.timestamp as unknown) as firebase.firestore.Timestamp)
+        .toDate()
+        .toString();
+
+      if (
+        msg.chatId == message.chatId &&
+        msg.message == message.message &&
+        date === message.timestamp.toString()
+      ) {
+        await messages.docs[i].ref.delete();
+        break;
+      }
+    }
+
+    if (message.senderUid === uid && repeat === true) {
+      this.deleteMessage(message, message.receiverUid, false);
+    }
   }
 
   public updateUser(updatedUser: User): Promise<void> {

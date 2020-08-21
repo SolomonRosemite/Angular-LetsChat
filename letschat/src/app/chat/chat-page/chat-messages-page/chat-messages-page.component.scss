@@ -7,6 +7,7 @@ ul {
   margin: 0;
   padding: 0;
 }
+
 .ColumnIcons {
   padding-top: 10px;
   display: table-cell;
@@ -35,7 +36,7 @@ ul {
   background: rgb(73, 73, 73);
 }
 
-.scrollable {
+.scrollAble {
   height: 82.5vh;
   overflow-y: auto;
 }
@@ -45,13 +46,27 @@ ul {
   list-style-type: none;
 }
 
+.deleteMessage-btn {
+  color: rgb(236, 53, 53);
+}
+
 .chatBubble {
+  margin: 0;
   margin-bottom: 3px;
-  padding: 10px 20px;
+  padding: 3px 15px;
   // padding: 5px 10px;
+  font-size: 15px;
+  font-weight: 400;
   clear: both;
   border-radius: 10px 10px 2px 2px;
 }
+// .chatBubble {
+//   margin-bottom: 3px;
+//   padding: 10px 20px;
+//   // padding: 5px 10px;
+//   clear: both;
+//   border-radius: 10px 10px 2px 2px;
+// }
 
 .chatBubble--rcvd {
   background: #f2f2f2;

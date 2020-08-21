@@ -1,3 +1,4 @@
+import { DatabaseService } from 'src/app/services/database/database.service';
 import { Router, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { EventEmitterService } from 'src/app/services/event/event-emitter.service';
@@ -17,11 +18,13 @@ export class ChatMessagesPageComponent implements OnInit {
   constructor(
     private eventEmitterService: EventEmitterService,
     private auth: AuthService,
-    public ngZone: NgZone
+    public ngZone: NgZone,
+    private database: DatabaseService
   ) {}
 
   me: User;
   receiver: ChatCardInfo;
+  deleteMessageText = '';
 
   messages: Message[] = [];
   allMessages: Message[] = [];
@@ -105,5 +108,9 @@ export class ChatMessagesPageComponent implements OnInit {
     }
 
     this.messages.push(message);
+  }
+
+  deleteMessage(message: Message): void {
+    this.database.deleteMessage(message, this.me.uid);
   }
 }
