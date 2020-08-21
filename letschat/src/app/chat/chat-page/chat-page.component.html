@@ -3,33 +3,26 @@
     <div style="padding-bottom: 60px;">
       <app-chat-navbar style="z-index: 3;"></app-chat-navbar>
     </div>
-    <div
-      class="column"
-      [ngStyle]="{'width': useSmallScreen ? '25%' : '20%'}"
-      style="background-color: white; height: 100%;">
+    <section
+      class="column other"
+      [ngStyle]="{'width': useSmallScreen ? '25%' : '20%'}">
       <div>
         <app-open-chats></app-open-chats>
       </div>
-    </div>
+    </section>
 
-    <div
-      class="column"
+    <section
+      class="column chatSection"
       [ngStyle]="{'width': useSmallScreen ? '50%' : '60%'}"
       style="background-color: white; height: 100%;">
       <app-chat-messages-page></app-chat-messages-page>
       <div
         *ngIf="chatCardInfo"
-        class="chatInput"
-        style="background-color: white;
-        overflow: hidden;
-        display: flex;
-        margin-top: 18px;
-        height: auto;">
+        class="chatInput">
         <mat-form-field
           class="column"
-          [ngStyle]="{'width': useSmallScreen ? '40%' : '80%'}"
-          style="font-size: 20px; padding-left: .8rem;">
-          <mat-label style="color: grey;">Type a Message</mat-label>
+          [ngStyle]="{'width': useSmallScreen ? '40%' : '80%'}">
+          <mat-label>Type a Message</mat-label>
           <input
             matInput
             (keydown)="sendMessage($event)"
@@ -39,58 +32,49 @@
             [value]="message"
             />
         </mat-form-field>
-        <div
-          class="column"
-          style="width: 40%;
-          table-layout: fixed;
-          margin-top: 20px;
-          border-spacing: 10px;
-          display: block;">
+        <section
+          class="column bottom">
+
           <div
-            style="float: right;
-            padding-left: 2%;
-            padding-right: 2%;
-            width: 30%">
+            class="send">
             <button
               mat-button
-              style="background-color: #69f0ae; color: white; width: 100%;"
-              aria-label="icon send button"
+              aria-label="send button"
               (click)="sendMessage(null)">
               <mat-icon>send</mat-icon>
             </button>
           </div>
-          <div
-            style="float: right; padding-left: 2%; width: 25%;">
+
+          <div class="other">
             <button
               mat-button
               (click)="upLoaderImage.click()"
-              style="background-color: #303f9f; color: white; width: 100%;"
-              aria-label="icon image button">
+              aria-label="image button">
               <mat-icon>image</mat-icon>
             </button>
           </div>
+
           <div
-            style="float: right; padding-left: 2%; width: 25%;">
+            class="other">
             <button
               mat-button
               (click)="upLoaderFile.click()"
-              style="background-color: #303f9f; color: white; width: 100%;"
-              aria-label="icon attachment button">
+              aria-label="attachment button">
               <mat-icon>attachment</mat-icon>
             </button>
           </div>
-        </div>
-      </div>
-    </div>
 
-    <div
-      class="column"
-      [ngStyle]="{'width': useSmallScreen ? '25%' : '20%'}"
-      style="background-color: white; height: 100%;">
+        </section>
+      </div>
+    </section>
+
+    <section
+      class="column other"
+      [ngStyle]="{'width': useSmallScreen ? '25%' : '20%'}">
       <div>
         <app-chat-info></app-chat-info>
       </div>
-    </div>
+    </section>
   </div>
 </div>
 

@@ -8,8 +8,62 @@ div.main {
   height: 100%;
 }
 
-.chatInput {
-  position: absolute;
-  bottom: 0;
-  width: 60%;
+section.other {
+  background-color: white;
+  height: 100%;
+}
+
+section.chatSection {
+  .chatInput {
+    position: absolute;
+    bottom: 0;
+    width: 60%;
+
+    background-color: white;
+    overflow: hidden;
+    display: flex;
+    margin-top: 18px;
+    height: auto;
+  }
+
+  mat-form-field {
+    font-size: 20px;
+    padding-left: 0.8rem;
+
+    mat-label {
+      color: grey;
+    }
+  }
+
+  section.bottom {
+    width: 40%;
+    table-layout: fixed;
+    margin-top: 20px;
+    border-spacing: 10px;
+    display: block;
+
+    div.send {
+      float: right;
+      padding-left: 2%;
+      padding-right: 2%;
+      width: 30%;
+
+      button {
+        background-color: #69f0ae;
+        color: white;
+        width: 100%;
+      }
+    }
+
+    div.other {
+      float: right;
+      padding-left: 2%;
+      width: 25%;
+      button {
+        background-color: #303f9f;
+        color: white;
+        width: 100%;
+      }
+    }
+  }
 }
