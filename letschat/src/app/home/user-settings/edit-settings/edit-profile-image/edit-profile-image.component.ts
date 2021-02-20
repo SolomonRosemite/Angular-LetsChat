@@ -23,9 +23,11 @@ export class EditProfileImageComponent implements OnInit {
   photoURL = '';
 
   images = {
-    female: 'https://i.ibb.co/vPRXQtX/female-avatar.png',
+    female:
+      'https://firebasestorage.googleapis.com/v0/b/angular-letschat.appspot.com/o/preset%2FprofilePictures%2Ffemale-avatar.png?alt=media&token=f6043a05-e29b-4010-9cc5-a0adc90a0fb1',
     femaleSelected: 'https://i.ibb.co/z44RCMN/female-avatar-ticked.png',
-    male: 'https://i.ibb.co/qDMgB1y/male-avatar.png',
+    male:
+      'https://firebasestorage.googleapis.com/v0/b/angular-letschat.appspot.com/o/preset%2FprofilePictures%2Fmale-avatar.png?alt=media&token=ed8484f2-d978-4bdb-b517-79dde09ffd92',
     maleSelected: 'https://i.ibb.co/R6Fy0tn/male-avatar-ticked.png',
   };
 

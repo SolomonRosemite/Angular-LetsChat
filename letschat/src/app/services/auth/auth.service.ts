@@ -88,10 +88,10 @@ export class AuthService {
     const item = await userRef.get().toPromise();
 
     if (item.exists === false) {
-      const url = 'https://cors-anywhere.herokuapp.com/';
+      console.log(data.photoURL);
 
       const blob = await this.downloadService
-        .download(url + data.photoURL, true)
+        .download(data.photoURL)
         .toPromise();
 
       const file = this.blobToFile(blob, 'ProfilePicture');

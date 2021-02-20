@@ -7,16 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class DownloadService {
   constructor(private http: HttpClient) {}
 
-  public download(url: string, enableCors = false) {
-    if (enableCors == true) {
-      let headers = new HttpHeaders().set('X-Requested-With', 'XMLHttpRequest');
-
-      return this.http.get(url, {
-        responseType: 'blob',
-        headers: headers,
-      });
-    }
-
+  public download(url: string) {
     return this.http.get(url, {
       responseType: 'blob',
     });
