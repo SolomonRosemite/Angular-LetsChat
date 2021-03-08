@@ -1,0 +1,12 @@
+{
+  "hosting": {
+    "public": "dist/letschat",
+    "ignore": ["**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
