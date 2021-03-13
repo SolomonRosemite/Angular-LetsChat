@@ -34,7 +34,7 @@ export class SignUpPageComponent implements OnInit {
   locationPromise: Promise<Object>;
 
   async ngOnInit(): Promise<void> {
-    const url = 'https://rosemite.herokuapp.com/api/location/';
+    const url = 'https://api.rosemite.cf/location';
 
     this.locationPromise = this.http.get(url).toPromise();
   }
@@ -82,7 +82,11 @@ export class SignUpPageComponent implements OnInit {
 
           const item = (await this.locationPromise) as any;
 
-          this.userLocation = `${item.city}, ${item.country_name}`;
+          if (item.city == null) {
+            this.userLocation = `${item.country_name}`;
+          } else {
+            this.userLocation = `${item.city}, ${item.country_name}`;
+          }
 
           const user: User = {
             displayName: this.name,
@@ -127,7 +131,11 @@ export class SignUpPageComponent implements OnInit {
 
     const item = (await this.locationPromise) as any;
 
-    this.userLocation = `${item.city}, ${item.country_name}`;
+    if (item.city == null) {
+      this.userLocation = `${item.country_name}`;
+    } else {
+      this.userLocation = `${item.city}, ${item.country_name}`;
+    }
 
     await this.delay(200);
 

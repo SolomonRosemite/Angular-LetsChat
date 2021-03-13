@@ -25,7 +25,7 @@ export class SignInPageComponent implements OnInit {
   locationPromise: Promise<Object>;
 
   ngOnInit(): void {
-    const url = 'https://rosemite.herokuapp.com/api/location/';
+    const url = 'https://api.rosemite.cf/location';
 
     this.locationPromise = this.http.get(url).toPromise();
   }
