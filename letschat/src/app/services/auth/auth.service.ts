@@ -87,23 +87,15 @@ export class AuthService {
 
     const item = await userRef.get().toPromise();
 
-    if (item.exists === false) {
-      console.log(data.photoURL);
-
-      const blob = await this.downloadService
-        .download(data.photoURL)
-        .toPromise();
-
-      const file = this.blobToFile(blob, 'ProfilePicture');
-
-      data.photoURL = await this.storage.updateProfilePicture(file, data.uid);
-
-      data.location = user.location;
-
-      return userRef.set(data, { merge: true });
-    } else {
-      data.photoURL = item.data().photoURL;
+    if (item.exists) {
+      return;
     }
+
+    const blob = await this.downloadService.download(data.photoURL).toPromise();
+    const file = this.blobToFile(blob, 'ProfilePicture');
+
+    data.photoURL = await this.storage.updateProfilePicture(file, data.uid);
+    data.location = user.location;
 
     return userRef.set(data, { merge: true });
   }
