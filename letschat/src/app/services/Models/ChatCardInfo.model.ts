@@ -6,14 +6,14 @@ export class ChatCardInfo {
     receiverUid,
     photoURL,
     latestMessage,
-    date: lastSeen,
+    date: date,
   }: ChatCardInfo) {
     this.displayName = displayName;
     this.chatId = chatId;
     this.senderUid = senderUid;
     this.receiverUid = receiverUid;
     this.photoURL = photoURL;
-    this.date = lastSeen;
+    this.date = date;
     this.latestMessage = latestMessage;
   }
 
@@ -22,6 +22,6 @@ export class ChatCardInfo {
   readonly photoURL: string;
   readonly receiverUid: string;
   readonly senderUid: string;
-  date: string;
+  date: Date;
   latestMessage: string;
 }

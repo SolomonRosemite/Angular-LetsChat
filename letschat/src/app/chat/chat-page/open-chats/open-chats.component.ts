@@ -37,7 +37,8 @@ export class OpenChatsComponent implements OnInit {
         messages.forEach((msg) => {
           let addedItem = false;
 
-          const date = this.getDate(msg.timestamp);
+          // const date = this.getDate(msg.timestamp);
+          const date = msg.timestamp;
 
           for (let i = 0; i < this.chatCardsInfo.length; i++) {
             if (this.chatCardsInfo[i].chatId === msg.chatId) {
@@ -78,20 +79,8 @@ export class OpenChatsComponent implements OnInit {
     );
   }
 
-  transform(value: any, format: string): string {
-    return this.datepipe.transform(value, format);
-  }
-
   setSearchValue(event): void {
     this.currentSearch = event.target.value.replace(/\s/g, '');
-  }
-
-  getDate(date: Date): string {
-    if (this.dateIsToday(new Date(date))) {
-      return this.transform(date, 'HH:mm');
-    }
-
-    return this.transform(date, 'HH:mm dd.MM.yyyy');
   }
 
   dateIsToday(date: Date): boolean {
@@ -123,12 +112,6 @@ export class OpenChatsComponent implements OnInit {
   }
 
   private sortByDate(chats: ChatCardInfo[]): ChatCardInfo[] {
-    chats = chats.sort((b, a) =>
-      moment(a.date, 'HH:mm dd/MM/yyyy').diff(
-        moment(b.date, 'HH:mm dd/MM/yyyy')
-      )
-    );
-
-    return chats;
+    return chats.sort((a, b) => b.date.getTime() - a.date.getTime());
   }
 }
