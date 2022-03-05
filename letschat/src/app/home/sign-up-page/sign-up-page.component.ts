@@ -34,7 +34,7 @@ export class SignUpPageComponent implements OnInit {
   locationPromise: Promise<Object>;
 
   async ngOnInit(): Promise<void> {
-    const url = 'https://api.rosemite.cf/location';
+    const url = 'https://api.rosemite.dev/location';
 
     this.locationPromise = this.http.get(url).toPromise();
   }
